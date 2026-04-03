@@ -1,0 +1,148 @@
+{% extends 'accounts/account_base.html' %}
+
+{% load i18n %}
+{% load bootstrap4 %}
+
+
+{% block title %}{% translate 'Support' %} | {{ ticket.subject }}{% endblock title %}
+
+
+{% block page_title1 %}
+<li class="breadcrumb-item text-nowrap">
+  <a href="{% url 'support:tickets' %}">{% translate 'Support' %}</a>
+</li>
+<li class="breadcrumb-item text-nowrap active" aria-current="page">{{ ticket.subject }}</li>
+{% endblock page_title1 %}
+
+{% block page_title2 %}{% translate 'Support' %} | {{ ticket.subject }}{% endblock page_title2 %}
+
+{% block support_active %} active{% endblock support_active %}
+
+
+{% block account_content %}
+
+{# Toolbar #}
+<div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5">
+  <div class="d-flex w-100 text-light text-center mr-3">
+    <div class="font-size-ms px-3">
+      <div class="font-weight-medium">{% translate 'Date Created' %}</div>
+      <div class="opacity-60">{{ ticket.created_at|date:"DATE_FORMAT" }}</div>
+    </div>
+    <div class="font-size-ms px-3">
+      <div class="font-weight-medium">{% translate 'Last Updated' %}</div>
+      <div class="opacity-60">{{ ticket.updated_at|date:"DATE_FORMAT" }}</div>
+    </div>
+    <div class="font-size-ms px-3">
+      <div class="font-weight-medium">{% translate 'Category' %}</div>
+      {% if ticket.category == ticket.Category.WEBSITE_PROBLEM %}
+      <div class="opacity-60">{{ ticket.Category.WEBSITE_PROBLEM.label }}</div>
+      {% elif ticket.category == ticket.Category.COMPLAINT %}
+      <div class="opacity-60">{{ ticket.Category.COMPLAINT.label }}</div>
+      {% elif ticket.category == ticket.Category.INFO_INQUIRY %}
+      <div class="opacity-60">{{ ticket.Category.INFO_INQUIRY.label }}</div>
+      {% elif ticket.category == ticket.Category.OTHER_PROBLEM %}
+      <div class="opacity-60">{{ ticket.Category.OTHER_PROBLEM.label }}</div>
+      {% endif %}
+    </div>
+    <div class="font-size-ms px-3">
+      <div class="font-weight-medium">{% translate 'Priority' %}</div>
+      {% if ticket.priority == ticket.Priority.HIGH %}
+      <span class="badge badge-danger">{{ ticket.Priority.HIGH.label }}</span>
+      {% elif ticket.priority == ticket.Priority.MEDIUM %}
+      <span class="badge badge-info">{{ ticket.Priority.MEDIUM.label }}</span>
+      {% elif ticket.priority == ticket.Priority.LOW %}
+      <span class="badge badge-success">{{ ticket.Priority.LOW.label }}</span>
+      {% endif %}
+    </div>
+    <div class="font-size-ms px-3">
+      <div class="font-weight-medium">{% translate 'Status' %}</div>
+      {% if ticket.status == ticket.Status.OPEN %}
+      <span class="badge badge-success">{{ ticket.Status.OPEN.label }}</span>
+      {% elif ticket.status == ticket.Status.CLOSED %}
+      <span class="badge badge-secondary">{{ ticket.Status.CLOSED.label }}</span>
+      {% endif %}
+    </div>
+  </div>
+  <a class="btn btn-primary btn-sm" href="{% url 'accounts:signout' %}"><i class="czi-sign-out mr-2"></i>{% translate 'Sign out' %}</a>
+</div>
+
+{# Ticket details (visible on mobile) #}
+<div class="d-flex d-lg-none flex-wrap bg-secondary text-center rounded-lg pt-4 px-4 pb-1 mb-4">
+  <div class="font-size-sm px-3 pb-3">
+    <div class="font-weight-medium">{% translate 'Date Created' %}</div>
+    <div class="text-muted">{{ ticket.created_at|date:"DATE_FORMAT" }}</div>
+  </div>
+  <div class="font-size-sm px-3 pb-3">
+    <div class="font-weight-medium">{% translate 'Last Updated' %}</div>
+    <div class="text-muted">{{ ticket.updated_at|date:"DATE_FORMAT" }}</div>
+  </div>
+  <div class="font-size-sm px-3 pb-3">
+    <div class="font-weight-medium">{% translate 'Category' %}</div>
+    {% if ticket.category == ticket.Category.WEBSITE_PROBLEM %}
+    <div class="text-muted">{{ ticket.Category.WEBSITE_PROBLEM.label }}</div>
+    {% elif ticket.category == ticket.Category.COMPLAINT %}
+    <div class="text-muted">{{ ticket.Category.COMPLAINT.label }}</div>
+    {% elif ticket.category == ticket.Category.INFO_INQUIRY %}
+    <div class="text-muted">{{ ticket.Category.INFO_INQUIRY.label }}</div>
+    {% elif ticket.category == ticket.Category.OTHER_PROBLEM %}
+    <div class="text-muted">{{ ticket.Category.OTHER_PROBLEM.label }}</div>
+    {% endif %}
+  </div>
+  <div class="font-size-sm px-3 pb-3">
+    <div class="font-weight-medium">{% translate 'Priority' %}</div>
+    {% if ticket.priority == ticket.Priority.HIGH %}
+    <span class="badge badge-danger">{{ ticket.Priority.HIGH.label }}</span>
+    {% elif ticket.priority == ticket.Priority.MEDIUM %}
+    <span class="badge badge-info">{{ ticket.Priority.MEDIUM.label }}</span>
+    {% elif ticket.priority == ticket.Priority.LOW %}
+    <span class="badge badge-success">{{ ticket.Priority.LOW.label }}</span>
+    {% endif %}
+  </div>
+  <div class="font-size-sm px-3 pb-3">
+    <div class="font-weight-medium">{% translate 'Status' %}</div>
+    {% if ticket.status == ticket.Status.OPEN %}
+    <span class="badge badge-success">{{ ticket.Status.OPEN.label }}</span>
+    {% elif ticket.status == ticket.Status.CLOSED %}
+    <span class="badge badge-secondary">{{ ticket.Status.CLOSED.label }}</span>
+    {% endif %}
+  </div>
+</div>
+
+{% for msg in ticket.message_set.all %}
+<div class="media py-4 border-bottom">
+  <img class="rounded-circle" width="50" src="{{ msg.sender.avatar.url }}" alt="{{ msg.sender.id }}">
+  <div class="media-body pl-3">
+    <h6 class="font-size-md mb-2">{% firstof msg.sender.get_full_name msg.sender.first_name msg.sender.email %}</h6>
+    <p class="font-size-md mb-1">{{ msg.content|linebreaksbr }}</p>
+    <span class="font-size-ms text-muted">
+      <i class="czi-time align-middle mr-2"></i>
+      <script type="text/javascript">
+        var msg_created_at = new Date("{{ msg.created_at|date:"c" }}");
+        document.write(
+          msg_created_at.toLocaleTimeString("{{ LANGUAGE_CODE }}", { timeStyle: 'short' }) +
+          " | " +
+          msg_created_at.toLocaleDateString("{{ LANGUAGE_CODE }}", { dateStyle: 'medium' })
+        );
+      </script>
+    </span>
+  </div>
+</div>
+{% endfor %}
+
+{% if ticket.status == ticket.Status.OPEN %}
+{# Leave message #}
+<h3 class="h5 mt-2 pt-4 pb-2">{% translate 'Leave a Message' %}</h3>
+<form class="needs-validation" method="post" action="{% url 'support:ticket_detail' ticket.id %}" novalidate>
+  {% csrf_token %}
+  {% bootstrap_field message_form.content show_label=False %}
+  <div class="d-flex flex-wrap justify-content-between align-items-center">
+    <div class="custom-control custom-checkbox d-block">
+      <input class="custom-control-input" type="checkbox" id="close-ticket" name="close-ticket">
+      <label class="custom-control-label" for="close-ticket">{% translate 'Submit and close the ticket' %}</label>
+    </div>
+    <button class="btn btn-primary my-2" type="submit">{% translate 'Submit message' %}</button>
+  </div>
+</form>
+{% endif %}
+
+{% endblock account_content %}

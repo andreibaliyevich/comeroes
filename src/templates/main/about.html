@@ -1,0 +1,107 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% translate 'About' %}{% endblock title %}
+
+
+{% block content %}
+
+<main class="container-fluid px-0">
+  <section class="row no-gutters">
+    <div class="col-md-6 bg-position-center bg-size-cover bg-secondary" style="min-height: 15rem; background-image: url({% static 'img/about/01.jpg' %});"><span class="split-section-arrow arrow-left"></span></div>
+    <div class="col-md-6 px-3 px-md-5 py-5">
+      <div class="mx-auto py-lg-5" style="max-width: 35rem;">
+        <h2 class="h3 pb-3">{% translate 'We are glad to welcome you!' %}</h2>
+        <p class="font-size-sm pb-3 text-muted">{% translate 'Our store compares favorably with other book and comic stores precisely because of our approach to business, design, assortment, advertising and communication with customers. We value our clients and try to devote those interested to the immense, but so interesting and diverse world of comics.' %}</p>
+      </div>
+    </div>
+  </section>
+  <section class="row no-gutters">
+    <div class="col-md-6 bg-position-center bg-size-cover bg-secondary order-md-2" style="min-height: 15rem; background-image: url({% static 'img/about/02.jpg' %});"><span class="split-section-arrow arrow-right"></span></div>
+    <div class="col-md-6 px-3 px-md-5 py-5 order-md-1">
+      <div class="mx-auto py-lg-5" style="max-width: 35rem;">
+        <h2 class="h3 pb-3">{% translate 'Our Capabilities' %}</h2>
+        <p class="font-size-sm pb-3 text-muted">{% translate 'We offer a wide range of products. Here you can find comics, toys, clothes, various accessories for yourself, family and friends. There is a system of discounts. Products can be purchased with a special promotional code. Each of our employees will be happy to help you find something to your liking, even if you do not know what exactly you are looking for or where to start your acquaintance with comics.' %}</p>
+      </div>
+    </div>
+  </section>
+  <section class="row no-gutters">
+    <div class="col-md-6 bg-position-center bg-size-cover bg-secondary" style="min-height: 15rem; background-image: url({% static 'img/about/03.jpg' %});"><span class="split-section-arrow arrow-left"></span></div>
+    <div class="col-md-6 px-3 px-md-5 py-5">
+      <div class="mx-auto py-lg-5" style="max-width: 35rem;">
+        <h2 class="h3 pb-3">{% translate 'Our team' %}</h2>
+        <p class="font-size-sm pb-3 text-muted">{% translate 'The specialists working here are keen readers who are constantly expanding their beloved world. We thoroughly know the needs of consumers and follow each new product, published in print media, gifts, souvenirs related to them. Thus, we provide an opportunity for our customers to find any significant thing related to their favorite stories and characters.' %}</p>
+      </div>
+    </div>
+  </section>
+  <hr>
+  {# Section: Team #}
+  <section class="container py-3 py-lg-5 mt-4 mb-3">
+    <h2 class="h3 my-2">{% translate 'Our core team' %}</h2>
+    <p class="font-size-sm text-muted">{% translate 'People behind your great shopping experience' %}</p>
+    <div class="row pt-3">
+      <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+        <div class="media align-items-center"><img class="d-inline-block rounded-circle" src="{% static 'img/about/team01.jpg' %}" width="96" alt="Jonathan Doe">
+          <div class="media-body pl-3">
+            <h6 class="font-size-base pt-1 mb-1">Jonathan Doe</h6>
+            <p class="font-size-ms text-muted mb-0">CEO, Co-founder</p><a class="nav-link-style font-size-ms text-nowrap" href="mailto:johndoe@example.com"><i class="czi-mail mr-2"></i>johndoe@example.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+        <div class="media align-items-center"><img class="d-inline-block rounded-circle" src="{% static 'img/about/team02.jpg' %}" width="96" alt="Barbara Palson">
+          <div class="media-body pl-3">
+            <h6 class="font-size-base pt-1 mb-1">Barbara Palson</h6>
+            <p class="font-size-ms text-muted mb-0">Chief of Marketing</p><a class="nav-link-style font-size-ms text-nowrap" href="mailto:b.palson@example.com"><i class="czi-mail mr-2"></i>b.palson@example.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+        <div class="media align-items-center"><img class="d-inline-block rounded-circle" src="{% static 'img/about/team01.jpg' %}" width="96" alt="William Smith">
+          <div class="media-body pl-3">
+            <h6 class="font-size-base pt-1 mb-1">William Smith</h6>
+            <p class="font-size-ms text-muted mb-0">Financial director</p><a class="nav-link-style font-size-ms text-nowrap" href="mailto:w.smith@example.com"><i class="czi-mail mr-2"></i>w.smith@example.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+        <div class="media align-items-center"><img class="d-inline-block rounded-circle" src="{% static 'img/about/team02.jpg' %}" width="96" alt="Amanda Gallaher">
+          <div class="media-body pl-3">
+            <h6 class="font-size-base pt-1 mb-1">Amanda Gallaher</h6>
+            <p class="font-size-ms text-muted mb-0">Lead UX designer</p><a class="nav-link-style font-size-ms text-nowrap" href="mailto:a.gallaher@example.com"><i class="czi-mail mr-2"></i>a.gallaher@example.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+        <div class="media align-items-center"><img class="d-inline-block rounded-circle" src="{% static 'img/about/team01.jpg' %}" width="96" alt="Benjamin Miller">
+          <div class="media-body pl-3">
+            <h6 class="font-size-base pt-1 mb-1">Benjamin Miller</h6>
+            <p class="font-size-ms text-muted mb-0">Website development</p><a class="nav-link-style font-size-ms text-nowrap" href="mailto:b.miller@example.com"><i class="czi-mail mr-2"></i>b.miller@example.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+        <div class="media align-items-center"><img class="d-inline-block rounded-circle" src="{% static 'img/about/team01.jpg' %}" width="96" alt="Miguel Rodrigez">
+          <div class="media-body pl-3">
+            <h6 class="font-size-base pt-1 mb-1">Miguel Rodrigez</h6>
+            <p class="font-size-ms text-muted mb-0">Content manager</p><a class="nav-link-style font-size-ms text-nowrap" href="mailto:b.miller@example.com"><i class="czi-mail mr-2"></i>m.rodrigez@example.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr>
+  <section class="container py-3 py-lg-5 mt-4 mb-3">
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <p>{% translate 'That person who helps others simply because it should or must be done, and because it is the right thing to do, is indeed without a doubt, a real superhero.' %}</p>
+      </blockquote>
+      <figcaption class="blockquote-footer">{% translate 'Stan Lee' %}</figcaption>
+    </figure>
+  </section>
+</main>
+
+{% endblock content %}

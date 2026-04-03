@@ -1,0 +1,117 @@
+{% extends 'accounts/account_base.html' %}
+
+{% load i18n %}
+{% load bootstrap4 %}
+
+
+{% block title %}{% translate 'Addresses' %}{% endblock title %}
+
+
+{% block modal_content %}
+
+{# Add New Address #}
+<form class="needs-validation modal fade" method="post" action="{% url 'accounts:addresses' %}" id="add-address" tabindex="-1" novalidate>
+  {% csrf_token %}
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% translate 'Add a new address' %}</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            {% bootstrap_field address_form.locality %}
+          </div>
+          <div class="col-sm-6">
+            {% bootstrap_field address_form.street_house %}
+          </div>
+          <div class="col-sm-4">
+            {% bootstrap_field address_form.porch %}
+          </div>
+          <div class="col-sm-4">
+            {% bootstrap_field address_form.level %}
+          </div>
+          <div class="col-sm-4">
+            {% bootstrap_field address_form.apt_office %}
+          </div>
+          <div class="col-12">
+            <div class="custom-control custom-checkbox">
+              {{ address_form.is_primary }}
+              <label class="custom-control-label" for="id_is_primary">{{ address_form.is_primary.label }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">{% translate 'Close' %}</button>
+        <button class="btn btn-primary btn-shadow" type="submit">{% translate 'Add address' %}</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock modal_content %}
+
+
+{% block page_title1 %}
+<li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Addresses' %}</li>
+{% endblock page_title1 %}
+
+{% block page_title2 %}{% translate 'Addresses' %}{% endblock page_title2 %}
+
+{% block addresses_active %} active{% endblock addresses_active %}
+
+
+{% block account_content %}
+
+{# Toolbar #}
+<div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+  <h6 class="font-size-base text-light mb-0">{% translate 'List of your addresses:' %}</h6>
+  <a class="btn btn-primary btn-sm" href="{% url 'accounts:signout' %}"><i class="czi-sign-out mr-2"></i>{% translate 'Sign out' %}</a>
+</div>
+
+{# Addresses list #}
+<div class="table-responsive font-size-md">
+  <table class="table table-hover mb-0">
+    <thead>
+      <tr>
+        <th>{% translate 'Address' %}</th>
+        <th>{% translate 'Actions' %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for address_obj in addresses_list %}
+      <tr>
+        <td class="py-3 align-middle">
+          {{ address_obj.locality }}, {{ address_obj.street_house }}{% if address_obj.porch %}, {% translate 'porch' %} {{ address_obj.porch }}{% endif %}{% if address_obj.level %}, {% translate 'level' %} {{ address_obj.level }}{% endif %}{% if address_obj.apt_office %}, {% translate 'apt / office' %} {{ address_obj.apt_office }}{% endif %}
+
+          {% if address_obj.is_primary %}
+          <span class="align-middle badge badge-info ml-2">{% translate 'Primary' %}</span>
+          {% endif %}
+        </td>
+        <td class="py-3 align-middle">
+          <a class="nav-link-style mr-2" href="{% url 'accounts:address_change' address_obj.id %}" data-toggle="tooltip" title="{% translate 'Edit' %}">
+            <i class="czi-edit"></i>
+          </a>
+          <a class="nav-link-style text-danger" href="{% url 'accounts:address_delete' address_obj.id %}" data-toggle="tooltip" title="{% translate 'Remove' %}">
+            <div class="czi-trash"></div>
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="text-center" colspan="4">{% translate 'You have no addresses yet!' %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<hr class="pb-4">
+<div class="text-sm-right">
+  <a class="btn btn-primary" href="#add-address" data-toggle="modal">{% translate 'Add new address' %}</a>
+</div>
+
+{% endblock account_content %}

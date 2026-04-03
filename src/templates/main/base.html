@@ -1,0 +1,596 @@
+{% load i18n %}
+{% load static %}
+{% load main_extras %}
+
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{% block meta_description %}Online Store{% endblock meta_description %}">
+  <meta name="keywords" content="{% block meta_keywords %}Online Store, e-commerce, market, business{% endblock meta_keywords %}">
+  <meta name="author" content="Andrei Baliyevich">
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <title>{{ SITE_NAME }} | {% block title %}{% endblock title %}</title>
+  {# Styles #}
+  <link rel="stylesheet" media="screen" href="{% static 'css/simplebar.min.css' %}">
+  <link rel="stylesheet" media="screen" href="{% static 'css/tiny-slider.min.css' %}">
+  {% block stylesheet %}{% endblock stylesheet %}
+  <link rel="stylesheet" media="screen" href="{% static 'css/main.min.css' %}">
+  <style type="text/css">
+    * {
+      scrollbar-color: #c0c0c0;
+      scrollbar-width: thin;
+    }
+    ::-webkit-scrollbar {
+      width: 0.5em;
+      height: 0.5em;
+      background-color: #f5f5f5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #c0c0c0;
+      border-radius: 1em;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #fe696a;
+    }
+    #cart-dropdown-items {
+      scrollbar-color: #c0c0c0;
+      scrollbar-width: thin;
+    }
+    #cart-dropdown-items::-webkit-scrollbar {
+      width: 0.2em;
+      height: 0.2em;
+      background-color: #f5f5f5;
+    }
+    #cart-dropdown-items::-webkit-scrollbar-thumb {
+      background-color: #c0c0c0;
+      border-radius: 1em;
+    }
+    #cart-dropdown-items::-webkit-scrollbar-thumb:hover {
+      background-color: #fe696a;
+    }
+    .indicator-top-left, .indicator-center-right, .indicator-center {
+      position: absolute;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: #fe696a;
+    }
+    .indicator-top-left {
+      top: 0.3rem;
+      left: 0.3rem;
+    }
+    .indicator-center-right {
+      top: 50%;
+      right: 1rem;
+      transform: translate(-50%, -50%);
+    }
+    .indicator-center {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  {# Styles end #}
+</head>
+
+<body class="toolbar-enabled">
+
+  {% if messages %}
+  <div class="toast-container toast-top-center">
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    {# Success toast #}
+    <div id="success-toast" class="toast mb-3" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-success text-white">
+        <i class="czi-check-circle mr-2"></i>
+        <h6 class="font-size-sm text-white mb-0 mr-auto">{% translate 'Success!' %}</h6>
+        <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="toast-body text-success">{{ message }}</div>
+    </div>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    {# Danger toast #}
+    <div id="danger-toast" class="toast mb-3" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-danger text-white">
+        <i class="czi-close-circle mr-2"></i>
+        <h6 class="font-size-sm text-white mb-0 mr-auto">{% translate 'Error!' %}</h6>
+        <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="toast-body text-danger">{{ message }}</div>
+    </div>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+    {# Info toast #}
+    <div id="info-toast" class="toast mb-3" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-info text-white">
+        <i class="czi-announcement mr-2"></i>
+        <h6 class="font-size-sm text-white mb-0 mr-auto">{% translate 'Info message!' %}</h6>
+        <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="toast-body text-info">{{ message }}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% block modal_content %}{% endblock modal_content %}
+
+  {% with cart_total_items=cart|length %}
+  {% with cart_total_price=cart.get_total_price|decimal_fractional_currency:user_currency.0 %}
+
+  {# Navbar 3 Level (Light) #}
+  <header class="box-shadow-sm">
+  {# Topbar #}
+  <div class="topbar topbar-dark bg-dark">
+    <div class="container">
+      <div class="topbar-text dropdown d-md-none">
+        <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">
+          <i class="czi-location"></i>{{ user_city }}
+        </a>
+        <ul class="dropdown-menu">
+          {% for city in СITIES %}
+          <li>
+            <a class="dropdown-item" href="{% url 'main:set_city' city.0 %}">{{ city.1 }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="topbar-text text-nowrap d-none d-md-inline-block">
+        <i class="czi-support"></i>
+        <span class="text-muted mr-1">{% translate 'Support' %}</span>
+        <a class="topbar-link" href="tel:80333569070">+375 33 356 9070</a>
+      </div>
+      <div class="cz-carousel cz-controls-static d-none d-md-block">
+        <div class="cz-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false}">
+          <div class="topbar-text">{% translate 'Free shipping for order over $200' %}</div>
+          <div class="topbar-text">{% translate 'We return money within 30 days' %}</div>
+          <div class="topbar-text">{% translate 'Friendly 24/7 customer support' %}</div>
+        </div>
+      </div>
+      <div class="ml-3 text-nowrap">
+        <div class="topbar-text mr-4 dropdown d-none d-md-inline-block">
+          <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="czi-location"></i>{{ user_city }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            {% for city in СITIES %}
+            <li>
+              <a class="dropdown-item pb-1" href="{% url 'main:set_city' city.0 %}">{{ city.1 }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="topbar-text dropdown disable-autohide">
+          <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">
+            <img class="mr-2" width="20" src="{% get_static_prefix %}img/flags/{{ LANGUAGE_CODE }}.png" alt="{{ LANGUAGE_CODE }}">{{ LANGUAGE_CODE|upper }} / {{ user_currency.1 }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="dropdown-item">
+              <select class="custom-select custom-select-sm" onchange="location=this.value;">
+                {% for currency in CURRENCIES %}
+                <option value="{% url 'main:set_currency' currency.0 %}"{% if currency.0 == user_currency.0 %} selected{% endif %}>{{ currency.1 }} {{ currency.0 }}</option>
+                {% endfor %}
+              </select>
+            </li>
+            {% for language in LANGUAGES %}
+            <li>
+              <a class="dropdown-item pb-1" href="{% url 'main:set_language' language.0 %}">
+                <img class="mr-2" width="20" src="{% get_static_prefix %}img/flags/{{ language.0 }}.png" alt="{{ language.1 }}">{{ language.1 }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# Remove "navbar-sticky" class to make navigation bar scrollable with the page. #}
+  <div class="navbar-sticky bg-light">
+    <div class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="{% url 'main:index' %}" style="min-width: 7rem;">
+          <img width="164" src="{% static 'img/logo-navbar.png' %}" alt="{% translate 'Logo' %}">
+        </a>
+        <a class="navbar-brand d-sm-none mr-2" href="{% url 'main:index' %}" style="min-width: 4.625rem;">
+          <img width="36" src="{% static 'img/logo-icon.png' %}" alt="{% translate 'Logo' %}">
+        </a>
+        <div class="input-group-overlay d-none d-lg-block mx-4">
+          <div class="input-group-prepend-overlay">
+            <span class="input-group-text"><i class="czi-search"></i></span>
+          </div>
+          <form action="{% url 'products:search' %}" method="get">
+            <input class="form-control prepended-form-control appended-form-control" type="search" name="q" placeholder="{% translate 'Search for products' %}" value="{{ request.GET.q }}">
+            <div class="input-group-append-overlay">
+              <select class="custom-select" name="category">
+                {% if request.GET.category == 'all' or not request.GET.category %}
+                <option value="all" selected>{% translate 'All categories' %}</option>
+                <option value="comics">{% translate 'Comics' %}</option>
+                <option value="toys">{% translate 'Toys' %}</option>
+                <option value="clothes">{% translate 'Clothes' %}</option>
+                <option value="accessories">{% translate 'Accessories' %}</option>
+                <option value="home_decor">{% translate 'Home Decor' %}</option>
+                {% elif request.GET.category == 'comics' %}
+                <option value="all">{% translate 'All categories' %}</option>
+                <option value="comics" selected>{% translate 'Comics' %}</option>
+                <option value="toys">{% translate 'Toys' %}</option>
+                <option value="clothes">{% translate 'Clothes' %}</option>
+                <option value="accessories">{% translate 'Accessories' %}</option>
+                <option value="home_decor">{% translate 'Home Decor' %}</option>
+                {% elif request.GET.category == 'toys' %}
+                <option value="all">{% translate 'All categories' %}</option>
+                <option value="comics">{% translate 'Comics' %}</option>
+                <option value="toys" selected>{% translate 'Toys' %}</option>
+                <option value="clothes">{% translate 'Clothes' %}</option>
+                <option value="accessories">{% translate 'Accessories' %}</option>
+                <option value="home_decor">{% translate 'Home Decor' %}</option>
+                {% elif request.GET.category == 'clothes' %}
+                <option value="all">{% translate 'All categories' %}</option>
+                <option value="comics">{% translate 'Comics' %}</option>
+                <option value="toys">{% translate 'Toys' %}</option>
+                <option value="clothes" selected>{% translate 'Clothes' %}</option>
+                <option value="accessories">{% translate 'Accessories' %}</option>
+                <option value="home_decor">{% translate 'Home Decor' %}</option>
+                {% elif request.GET.category == 'accessories' %}
+                <option value="all">{% translate 'All categories' %}</option>
+                <option value="comics">{% translate 'Comics' %}</option>
+                <option value="toys">{% translate 'Toys' %}</option>
+                <option value="clothes">{% translate 'Clothes' %}</option>
+                <option value="accessories" selected>{% translate 'Accessories' %}</option>
+                <option value="home_decor">{% translate 'Home Decor' %}</option>
+                {% elif request.GET.category == 'home_decor' %}
+                <option value="all">{% translate 'All categories' %}</option>
+                <option value="comics">{% translate 'Comics' %}</option>
+                <option value="toys">{% translate 'Toys' %}</option>
+                <option value="clothes">{% translate 'Clothes' %}</option>
+                <option value="accessories">{% translate 'Accessories' %}</option>
+                <option value="home_decor" selected>{% translate 'Home Decor' %}</option>
+                {% endif %}
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-tool navbar-stuck-toggler" href="#">
+            <span class="navbar-tool-tooltip">{% translate 'Expand menu' %}</span>
+            <div class="navbar-tool-icon-box">
+              <i class="navbar-tool-icon czi-menu"></i>
+            </div>
+          </a>
+          {% if user.is_authenticated %}
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{% url 'accounts:profile' %}">
+                <div class="navbar-tool-icon-box">
+                  {% if messages_count %}
+                  <span class="indicator-top-left"></span>
+                  {% endif %}
+                  <i class="navbar-tool-icon czi-user"></i>
+                </div>
+                <div class="navbar-tool-text ml-n3">
+                  <small>{% firstof user.first_name user.email %}</small>{% translate 'My Account' %}
+                </div>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="{% url 'orders:orders_list' %}" class="dropdown-item">
+                    <i class="czi-bag opacity-60 mr-2"></i>{% translate 'Orders' %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'wishlist:wishlist' %}" class="dropdown-item">
+                    <i class="czi-heart opacity-60 mr-2"></i>{% translate 'Wishlist' %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'support:tickets' %}" class="dropdown-item">
+                    <i class="czi-help opacity-60 mr-2"></i>{% translate 'Support' %}
+                    {% if messages_count %}
+                    <span class="indicator-center-right"></span>
+                    {% endif %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'accounts:profile' %}" class="dropdown-item">
+                    <i class="czi-user-circle mr-2"></i>{% translate 'Profile' %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'accounts:addresses' %}" class="dropdown-item">
+                    <i class="czi-location mr-2"></i>{% translate 'Addresses' %}
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="dropdown-item">
+                    <i class="czi-card mr-2"></i>{% translate 'Payment methods' %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'accounts:signout' %}" class="dropdown-item">
+                    <i class="czi-sign-out mr-2"></i>{% translate 'Sign out' %}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          {% else %}
+          <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{% url 'accounts:signin' %}">
+            <div class="navbar-tool-icon-box">
+              <i class="navbar-tool-icon czi-user"></i>
+            </div>
+            <div class="navbar-tool-text ml-n3">
+              <small>{% translate 'Hello' %}!</small>{% translate 'Sign In' %}
+            </div>
+          </a>
+          {% endif %}
+          {% block cart_content %}
+          {% include 'cart/navbar_expand.html' %}
+          {% endblock cart_content %}
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          {# Search #}
+          <div class="input-group-overlay d-lg-none my-3">
+            <div class="input-group-prepend-overlay">
+              <span class="input-group-text"><i class="czi-search"></i></span>
+            </div>
+            <input class="form-control prepended-form-control" type="text" placeholder="Search for products">
+          </div>
+          {# Primary menu #}
+          <ul class="navbar-nav">
+            <li class="nav-item{% block home_active %}{% endblock home_active %}">
+              <a class="nav-link" href="{% url 'main:index' %}">{% translate 'Home' %}</a>
+            </li>
+            <li class="nav-item{% block comics_active %}{% endblock comics_active %}">
+              <a class="nav-link" href="{% url 'products:comics' %}">{% translate 'Comics' %}</a>
+            </li>
+            <li class="nav-item{% block toys_active %}{% endblock toys_active %}">
+              <a class="nav-link" href="{% url 'products:toys' %}">{% translate 'Toys' %}</a>
+            </li>
+            <li class="nav-item{% block clothes_active %}{% endblock clothes_active %}">
+              <a class="nav-link" href="{% url 'products:clothes' %}">{% translate 'Clothes' %}</a>
+            </li>
+            <li class="nav-item{% block accessories_active %}{% endblock accessories_active %}">
+              <a class="nav-link" href="{% url 'products:accessories' %}">{% translate 'Accessories' %}</a>
+            </li>
+            <li class="nav-item{% block home_decor_active %}{% endblock home_decor_active %}">
+              <a class="nav-link" href="{% url 'products:home_decor' %}">{% translate 'Home Decor' %}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </header>
+
+  {% block content %}{% endblock content %}
+
+  {# Footer #}
+  <footer class="bg-dark pt-5">
+    <div class="container">
+      <div class="row pb-2">
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-links widget-light pb-2 mb-4">
+            <h3 class="widget-title text-light">{% translate 'Categories of goods' %}</h3>
+            <ul class="widget-list">
+              <li class="widget-list-item"><a class="widget-list-link" href="{% url 'products:comics' %}">{% translate 'Comics' %}</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" href="{% url 'products:toys' %}">{% translate 'Toys' %}</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" href="{% url 'products:clothes' %}">{% translate 'Clothes' %}</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" href="{% url 'products:accessories' %}">{% translate 'Accessories' %}</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" href="{% url 'products:home_decor' %}">{% translate 'Home Decor' %}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="widget widget-links widget-light pb-2 mb-4">
+            <h3 class="widget-title text-light">{% translate 'Information' %}</h3>
+            <ul class="widget-list">
+              <li class="widget-list-item"><a class="widget-list-link" href="#">{% translate 'Main Promotions' %}</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" href="#">{% translate 'Discounts | Promo codes' %}</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" href="#">{% translate 'Gift Promotions' %}</a></li>
+              <li class="widget-list-item"><a class="widget-list-link" href="#">{% translate 'Bonuses' %}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="widget pb-2 mb-4">
+            <h3 class="widget-title text-light pb-1">{% translate 'Stay informed' %}</h3>
+            <form action="{% url 'newsletter:subscriber_add' %}" method="post">
+              {% csrf_token %}
+              <div class="input-group input-group-overlay flex-nowrap">
+                <div class="input-group-prepend-overlay">
+                  <span class="input-group-text text-muted font-size-base">
+                    <i class="czi-mail"></i>
+                  </span>
+                </div>
+                <input class="form-control prepended-form-control" type="email" name="sub_email" id="sub-email" value="" placeholder="{% translate 'Your email' %}" required>
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">{% translate 'Subscribe' %}</button>
+                </div>
+              </div>
+              <small class="form-text text-light opacity-50" id="sub-helper">*{% translate 'Subscribe to our newsletter to receive early discount offers, updates and new products info.' %}</small>
+              <div class="subscribe-status"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pt-5 bg-darker">
+      <div class="container">
+        <div class="row pb-3">
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="media">
+              <i class="czi-rocket text-primary" style="font-size: 2.25rem;"></i>
+              <div class="media-body pl-3">
+                <h6 class="font-size-base text-light mb-1">{% translate 'Fast and free delivery' %}</h6>
+                <p class="mb-0 font-size-ms text-light opacity-50">{% translate 'Free delivery for all orders over $200' %}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="media">
+              <i class="czi-currency-exchange text-primary" style="font-size: 2.25rem;"></i>
+              <div class="media-body pl-3">
+                <h6 class="font-size-base text-light mb-1">{% translate 'Money back guarantee' %}</h6>
+                <p class="mb-0 font-size-ms text-light opacity-50">{% translate 'We return money within 30 days' %}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="media">
+              <i class="czi-support text-primary" style="font-size: 2.25rem;"></i>
+              <div class="media-body pl-3">
+                <h6 class="font-size-base text-light mb-1">{% translate '24/7 customer support' %}</h6>
+                <p class="mb-0 font-size-ms text-light opacity-50">{% translate 'Friendly 24/7 customer support' %}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="media">
+              <i class="czi-card text-primary" style="font-size: 2.25rem;"></i>
+              <div class="media-body pl-3">
+                <h6 class="font-size-base text-light mb-1">{% translate 'Secure online payment' %}</h6>
+                <p class="mb-0 font-size-ms text-light opacity-50">{% translate 'We possess SSL / Secure сertificate' %}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="hr-light pb-4 mb-3">
+        <div class="row pb-2">
+          <div class="col-md-6 text-center text-md-left mb-4">
+            <div class="text-nowrap mb-4">
+              <a class="d-inline-block align-middle mt-n1 mr-3" href="{% url 'main:index' %}">
+                <img class="d-block" width="122" src="{% static 'img/logo-footer.png' %}" alt="{% translate 'Logo' %}">
+              </a>
+              <div class="btn-group dropdown disable-autohide">
+                <button class="btn btn-outline-light border-light btn-sm dropdown-toggle px-2" type="button" data-toggle="dropdown">
+                  <img class="mr-2" width="20" src="{% get_static_prefix %}img/flags/{{ LANGUAGE_CODE }}.png" alt="{{ LANGUAGE_CODE }}">{{ LANGUAGE_CODE|upper }} / {{ user_currency.1 }}
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-item">
+                    <select class="custom-select custom-select-sm" onchange="location=this.value;">
+                      {% for currency in CURRENCIES %}
+                      <option value="{% url 'main:set_currency' currency.0 %}"{% if currency.0 == user_currency.0 %} selected{% endif %}>{{ currency.1 }} {{ currency.0 }}</option>
+                      {% endfor %}
+                    </select>
+                  </li>
+                  {% for language in LANGUAGES %}
+                  <li>
+                    <a class="dropdown-item pb-1" href="{% url 'main:set_language' language.0 %}">
+                      <img class="mr-2" width="20" src="{% get_static_prefix %}img/flags/{{ language.0 }}.png" alt="{{ language.1 }}">{{ language.1 }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="widget widget-links widget-light">
+              <ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
+                <li class="widget-list-item mr-4">
+                  <a class="widget-list-link" href="{% url 'main:about' %}">{% translate 'About' %}</a>
+                </li>
+                <li class="widget-list-item mr-4">
+                  <a class="widget-list-link" href="{% url 'contacts:contacts' %}">{% translate 'Contacts' %}</a>
+                </li>
+                <li class="widget-list-item mr-4">
+                  <a class="widget-list-link" href="{% url 'main:delivery' %}">{% translate 'Delivery' %}</a>
+                </li>
+                <li class="widget-list-item mr-4">
+                  <a class="widget-list-link" href="#">{% translate 'Privacy' %}</a>
+                </li>
+                <li class="widget-list-item mr-4">
+                  <a class="widget-list-link" href="{% url 'support:support' %}">{% translate 'Support' %}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 text-center text-md-right mb-4">
+            <div class="mb-3">
+              <a class="social-btn sb-light sb-vk ml-2 mb-2" href="https://vk.com">
+                <i class="czi-vk"></i>
+              </a>
+              <a class="social-btn sb-light sb-twitter ml-2 mb-2" href="https://twitter.com">
+                <i class="czi-twitter"></i>
+              </a>
+              <a class="social-btn sb-light sb-facebook ml-2 mb-2" href="https://www.facebook.com">
+                <i class="czi-facebook"></i>
+              </a>
+              <a class="social-btn sb-light sb-instagram ml-2 mb-2" href="https://www.instagram.com">
+                <i class="czi-instagram"></i>
+              </a>
+              <a class="social-btn sb-light sb-youtube ml-2 mb-2" href="https://www.youtube.com">
+                <i class="czi-youtube"></i>
+              </a>
+            </div>
+            <img class="d-inline-block" width="187" src="{% static 'img/cards.png' %}" alt="{% translate 'Payment methods' %}">
+          </div>
+        </div>
+        <div class="pb-4 font-size-xs text-light opacity-50 text-center text-md-left">Copyright &copy; 2020-{% now "Y" %} {{ SITE_NAME }}</div>
+      </div>
+    </div>
+  </footer>
+
+  {# Toolbar for handheld devices #}
+  <div class="cz-handheld-toolbar">
+    <div class="d-table table-fixed w-100">
+      {% block toolbar_filters %}{% endblock toolbar_filters %}
+      <a class="d-table-cell cz-handheld-toolbar-item" href="#navbarCollapse" data-toggle="collapse" onclick="window.scrollTo(0, 0)">
+        <span class="cz-handheld-toolbar-icon"><i class="czi-menu"></i></span>
+        <span class="cz-handheld-toolbar-label">{% translate 'Menu' %}</span>
+      </a>
+      <a class="d-table-cell cz-handheld-toolbar-item" href="{% url 'cart:cart_detail' %}">
+        <span id="cart-toolbar-icon" class="cz-handheld-toolbar-icon">
+          <i class="czi-cart"></i>
+          {% if cart_total_items %}
+          <span id="cart-toolbar-badge" class="badge badge-primary badge-pill ml-1">{{ cart_total_items }}</span>
+          {% endif %}
+        </span>
+        <span id="cart-toolbar-total-price" class="cz-handheld-toolbar-label">
+          {{ user_currency.1 }}{{ cart_total_price.0 }}.<small>{{ cart_total_price.1 }}</small>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  {% endwith %}
+  {% endwith %}
+
+  {# Back To Top Button #}
+  <a class="btn-scroll-top" href="#top" data-scroll>
+    <span class="btn-scroll-top-tooltip text-muted font-size-sm mr-2">{% translate 'Top' %}</span>
+    <i class="btn-scroll-top-icon czi-arrow-up"></i>
+  </a>
+
+  {# Scripts #}
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/bs-custom-file-input.min.js' %}"></script>
+  <script src="{% static 'js/simplebar.min.js' %}"></script>
+  <script src="{% static 'js/tiny-slider.min.js' %}"></script>
+  <script src="{% static 'js/smooth-scroll.polyfills.min.js' %}"></script>
+  {% block javascript %}
+  <script src="{% static 'js/Drift.min.js' %}"></script>
+  {% include 'cart/script_base.html' %}
+  {% endblock javascript %}
+  <script src="{% static 'js/main.min.js' %}"></script>
+  {% if messages %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#success-toast").toast("show");
+      $("#danger-toast").toast("show");
+      $("#info-toast").toast("show");
+    });
+  </script>
+  {% endif %}
+  {# Scripts end #}
+</body>
+</html>

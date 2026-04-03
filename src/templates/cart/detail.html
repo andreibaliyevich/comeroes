@@ -1,0 +1,160 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load bootstrap4 %}
+{% load main_extras %}
+
+
+{% block title %}{% translate 'Cart' %}{% endblock title %}
+
+
+{% block cart_content %}
+{% include 'cart/navbar_shrink.html' %}
+{% endblock cart_content %}
+
+
+{% block content %}
+
+{# Page Title #}
+<div class="page-title-overlap bg-dark pt-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item">
+            <a class="text-nowrap" href="{% url 'main:index' %}">
+              <i class="czi-home"></i>{% translate 'Home' %}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Cart' %}</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h3 text-light mb-0">{% translate 'Your cart' %}</h1>
+    </div>
+  </div>
+</div>
+
+{# Page Content #}
+<div class="container pb-5 mb-2 mb-md-4">
+  <div class="row">
+
+    {# List of items #}
+    <section class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">
+        <h2 class="h6 text-light mb-0">{% translate 'Products' %}</h2>
+        <a class="btn btn-outline-primary btn-sm pl-2" href="{% url 'products:shop' %}">
+          <i class="czi-arrow-left mr-2"></i>{% translate 'Continue shopping' %}
+        </a>
+      </div>
+      <div id="cart-info">
+        {% if cart %}
+        <div id="cart-info-items">
+          {% for item in cart %}
+          <div id="cart-info-item-{{ item.product.id }}" class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
+            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left">
+              <a class="d-inline-block mx-auto mr-sm-4" href="{{ item.product.get_absolute_url }}" style="width: 10rem;">
+                <img src="{{ item.product.main_image.url }}" alt="Product">
+              </a>
+              <div class="media-body pt-2">
+                <h3 class="product-title font-size-base mb-2">
+                  <a href="{{ item.product.get_absolute_url }}">
+                    {{ item.product.translated_name }}
+                  </a>
+                </h3>
+                <div class="font-size-lg">
+                  <span class="text-muted mr-2">{% translate 'Price' %}:</span>
+                  <span class="text-accent mr-2">
+                    {% with product_price=item.product.price|decimal_fractional_currency:user_currency.0 %}
+                      {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+                    {% endwith %}
+                  </span>
+                </div>
+                <div class="font-size-lg">
+                  <span class="text-muted mr-2">{% translate 'Total price' %}:</span>
+                  <span id="cart-info-item-total-price-{{ item.product.id }}" class="text-accent mr-2">
+                    {% with item_total_price=item.total_price|decimal_fractional_currency:user_currency.0 %}
+                      {{ user_currency.1 }}{{ item_total_price.0 }}.<small>{{ item_total_price.1 }}</small>
+                    {% endwith %}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">
+              <div class="form-group mb-0">
+                <label class="font-weight-medium" for="cart-info-item-quantity-{{ item.product.id }}">{% translate 'Quantity' %}</label>
+                <input class="form-control item-inputs" type="number" min="1" value="{{ item.quantity }}" onkeyup="if(this.value==''||parseInt(this.value,10)<1){this.value='1'}else{this.value=parseInt(this.value,10)}" data-id="{{ item.product.id }}">
+              </div>
+              <button class="btn btn-link px-0 text-danger" type="button" data-action="cart-remove" data-id="{{ item.product.id }}">
+                <i class="czi-close-circle mr-2"></i>
+                <span class="font-size-sm">{% translate 'Remove' %}</span>
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button id="cart-update" class="btn btn-outline-accent btn-block" type="button">
+          <i class="czi-loading font-size-base mr-2"></i>{% translate 'Update cart' %}
+        </button>
+        {% else %}
+        <div class="h3 text-center my-4 pb-3">{% translate 'Your cart is empty!' %}</div>
+        {% endif %}
+      </div>
+    </section>
+
+    {# Sidebar #}
+    <aside class="col-lg-4 pt-4 pt-lg-0">
+      <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto">
+        <form class="needs-validation pb-4" method="post" action="{% url 'coupons:coupon_apply' %}" novalidate>
+          {% csrf_token %}
+          {% bootstrap_form coupon_aplly_form layout='inline' %}
+          <button class="btn btn-outline-primary btn-block" type="submit">{% translate 'Apply' %}</button>
+        </form>
+        <ul class="list-unstyled font-size-sm py-2 border-bottom">
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Total' %}:</span>
+            <span id="cart-info-total-price" class="text-right">
+              {{ user_currency.1 }}{{ cart_total_price.0 }}.<small>{{ cart_total_price.1 }}</small>
+            </span>
+          </li>
+          {% if cart.coupon %}
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Promo code' %}:</span>
+            <span class="text-right">{{ cart.coupon.code }}</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Discount' %}:</span>
+            <span class="text-right">{{ cart.coupon.discount }}%</span>
+          </li>
+          {% else %}
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Promo code' %}:</span>
+            <span class="text-right">—</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Discount' %}:</span>
+            <span class="text-right">—</span>
+          </li>
+          {% endif %}
+        </ul>
+        <h3 id="cart-info-total-cost" class="font-weight-normal text-center my-4">
+          {% with cart_total_cost=cart.get_total_cost|decimal_fractional_currency:user_currency.0 %}
+            {{ user_currency.1 }}{{ cart_total_cost.0 }}.<small>{{ cart_total_cost.1 }}</small>
+          {% endwith %}
+        </h3>
+        <a class="btn btn-primary btn-shadow btn-block mt-4" href="{% url 'orders:order_create' %}">
+          <i class="czi-card font-size-lg mr-2"></i>{% translate 'To order' %}
+        </a>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+{% endblock content %}
+
+
+{% block javascript %}
+{% include 'cart/script_detail.html' %}
+{% endblock javascript %}

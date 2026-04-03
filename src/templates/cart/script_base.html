@@ -1,0 +1,201 @@
+{% load i18n %}
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  function cartRemove() {
+    const button = $(this);
+    const productId = button.data("id");
+
+    $.ajax({
+      url: "{% url 'cart:cart_remove' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "product_id": productId,
+      },
+
+      success: function(data) {
+        $("#cart-navbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-toolbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+
+        if (data.cart_len == 0) {
+          $("#cart-navbar-label").remove();
+          $("#cart-toolbar-badge").remove();
+
+          $("#cart-dropdown").html(
+            "<div class=\"text-center mt-3\">{% translate 'Your cart is empty!' %}</div>"
+          );
+        } else {
+          $("#cart-navbar-label").text(data.cart_len);
+          $("#cart-toolbar-badge").text(data.cart_len);
+
+          $("#cart-dropdown-item-" + productId).remove();
+
+          $("#cart-dropdown-total-price").html(
+            "{{ user_currency.1 }}" +
+            data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+          );
+        }
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  };
+  $("[data-action='cart-remove']").click(cartRemove);
+
+  function cartAdd() {
+    const button = $(this);
+    const productId = button.data("id");
+    const productAbsoluteUrl = button.data("url");
+    let quantity = $("#quantity-select").val();
+
+    if (quantity === undefined) {
+      quantity = "1";
+    }
+
+    $.ajax({
+      url: "{% url 'cart:cart_add' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "product_id": productId,
+        "absolute_url": productAbsoluteUrl,
+        "quantity": quantity,
+      },
+
+      success: function(data) {
+        quantity = parseInt(quantity, 10);
+
+        $("#cart-navbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-toolbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+
+        if (data.cart_len == quantity) {
+          $("#cart-navbar-icon").append(
+            "<span id=\"cart-navbar-label\" class=\"navbar-tool-label\">" +
+              data.cart_len +
+            "</span>"
+          );
+          $("#cart-toolbar-icon").append(
+            "<span id=\"cart-toolbar-badge\" class=\"badge badge-primary badge-pill ml-1\">" +
+              data.cart_len +
+            "</span>"
+          );
+
+          $("#cart-dropdown").html(
+            "<div id=\"cart-dropdown-items\" style=\"max-height: 15rem; overflow-y: auto; overflow-x: hidden;\">" +
+              "<div id=\"cart-dropdown-item-" + productId + "\" class=\"widget-cart-item pb-2 border-bottom\">" +
+                "<button class=\"close text-danger\" type=\"button\" aria-label=\"Remove\" data-action=\"cart-remove\" data-id=\"" + productId + "\">" +
+                  "<span aria-hidden=\"true\">&times;</span>" +
+                "</button>" +
+                "<div class=\"media align-items-center\">" +
+                  "<a class=\"d-block mr-2\" href=\"" + productAbsoluteUrl + "\">" +
+                    "<img width=\"64\" src=\"" + data.product_main_image_url + "\" alt=\"Product\">" +
+                  "</a>" +
+                  "<div class=\"media-body\">" +
+                    "<h6 class=\"widget-product-title\">" +
+                      "<a href=\"" + productAbsoluteUrl + "\">" +
+                        data.product_name +
+                      "</a>" +
+                    "</h6>" +
+                    "<div class=\"widget-product-meta\">" +
+                      "<span class=\"text-accent mr-2\">" +
+                        "{{ user_currency.1 }}" +
+                        data.product_price[0] + ".<small>" + data.product_price[1] + "</small>" +
+                      "</span>" +
+                      "<span class=\"text-muted\">x</span> " +
+                      "<span id=\"cart-dropdown-item-quantity-" + productId + "\" class=\"text-muted\">" +
+                        data.product_quantity +
+                      "</span>" +
+                    "</div>" +
+                  "</div>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+            "<div class=\"d-flex flex-wrap justify-content-between align-items-center py-3\">" +
+              "<div class=\"font-size-sm mr-2 py-2\">" +
+                "<span class=\"text-muted\">{% translate 'Total' %}:</span>" +
+                "<span id=\"cart-dropdown-total-price\" class=\"text-accent font-size-base ml-1\">" +
+                  "{{ user_currency.1 }}" +
+                  data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>" +
+                "</span>" +
+              "</div>" +
+              "<a class=\"btn btn-outline-secondary btn-sm\" href=\"{% url 'cart:cart_detail' %}\">" +
+                "{% translate 'Expand cart' %}" +
+                "<i class=\"czi-arrow-right ml-1 mr-n1\"></i>" +
+              "</a>" +
+            "</div>" +
+            "<a class=\"btn btn-primary btn-sm btn-block\" href=\"{% url 'orders:order_create' %}\">" +
+              "<i class=\"czi-card mr-2 font-size-base align-middle\"></i>" +
+              "{% translate 'To order' %}" +
+            "</a>"
+          );
+        } else {
+          $("#cart-navbar-label").text(data.cart_len);
+          $("#cart-toolbar-badge").text(data.cart_len);
+
+          $("#cart-dropdown-total-price").html(
+            "{{ user_currency.1 }}" +
+            data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+          );
+
+          if (data.product_quantity == quantity) {
+            $("#cart-dropdown-items").append(
+              "<div id=\"cart-dropdown-item-" + productId + "\" class=\"widget-cart-item pb-2 border-bottom\">" +
+              "<button class=\"close text-danger\" type=\"button\" aria-label=\"Remove\" data-action=\"cart-remove\" data-id=\"" + productId + "\">" +
+                "<span aria-hidden=\"true\">&times;</span>" +
+              "</button>" +
+              "<div class=\"media align-items-center\">" +
+                "<a class=\"d-block mr-2\" href=\"" + productAbsoluteUrl + "\">" +
+                  "<img width=\"64\" src=\"" + data.product_main_image_url + "\" alt=\"Product\">" +
+                "</a>" +
+                "<div class=\"media-body\">" +
+                  "<h6 class=\"widget-product-title\">" +
+                    "<a href=\"" + productAbsoluteUrl + "\">" +
+                      data.product_name +
+                    "</a>" +
+                  "</h6>" +
+                  "<div class=\"widget-product-meta\">" +
+                    "<span class=\"text-accent mr-2\">" +
+                      "{{ user_currency.1 }}" +
+                      data.product_price[0] + ".<small>" + data.product_price[1] + "</small>" +
+                    "</span>" +
+                    "<span class=\"text-muted\">x</span> " +
+                    "<span id=\"cart-dropdown-item-quantity-" + productId + "\" class=\"text-muted\">" +
+                      data.product_quantity +
+                    "</span>" +
+                  "</div>" +
+                "</div>" +
+              "</div>" +
+            "</div>"
+            );
+          } else {
+            $("#cart-dropdown-item-quantity-" + productId).text(data.product_quantity);
+          }
+        }
+        $("[data-action='cart-remove']").click(cartRemove);
+        $("#cart-toast").toast("show");
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  };
+  $("[data-action='cart-add']").click(cartAdd);
+
+});
+</script>

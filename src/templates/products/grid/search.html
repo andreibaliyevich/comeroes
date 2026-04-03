@@ -1,0 +1,27 @@
+{% extends 'products/base/search.html' %}
+
+
+{% block set_view_link %}
+
+<div class="d-none d-sm-flex">
+  <a class="btn btn-icon nav-link-style bg-primary text-light disabled opacity-100 mr-2" href="#">
+    <i class="czi-view-grid"></i>
+  </a>
+  <a class="btn btn-icon nav-link-style" href="{% url 'products:set_view' 'list' %}">
+    <i class="czi-view-list"></i>
+  </a>
+</div>
+
+{% endblock set_view_link %}
+
+
+{% block products_content %}
+
+<div class="row pt-3 mx-n2">
+
+{% include 'products/grid/products.html' with product_class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" %}
+
+</div>
+<hr class="my-3">
+
+{% endblock products_content %}

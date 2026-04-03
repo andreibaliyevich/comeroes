@@ -1,0 +1,31 @@
+{% load i18n %}
+
+
+<h3 style="text-align: center;">{% translate 'Dear User!' %}</h3>
+
+<p>
+  {% translate 'You have subscribed to newsletter from' %} 
+  <a href="{{ SITE_HOST }}">{{ SITE_NAME }}</a>.
+  <br>
+  {% translate 'To confirm your email you need to follow the link:' %}
+  <a href="{{ SITE_HOST }}{% url 'newsletter:subscriber_confirm' sign=sign %}">{% translate 'Confirm Subscribe' %}</a>.
+</p>
+
+<hr>
+<p style="color: #666; font-size: 12px; text-align: center;">
+  <br>
+  <em>Copyright &copy; {% now "Y" %} <a href="{{ SITE_HOST }}">{{ SITE_NAME }}</a></em>
+  <br>
+  <br>
+  <em>{% translate 'This is an automatic letter, do not reply to it.' %}</em>
+  <br>
+  <em>
+    {% translate 'We wish you a nice day and a pleasant shopping at' %}
+    <a href="{{ SITE_HOST }}">{{ SITE_NAME }}</a>.
+  </em>
+  <br>
+  <em>
+    {% translate 'To unsubscribe, click on the link:' %}
+    <a href="{{ SITE_HOST }}{% url 'newsletter:subscriber_delete' sign=sign %}">{% translate 'Unsubscribe' %}</a>.
+  </em>
+</p>

@@ -1,0 +1,111 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block content %}
+
+{# Page Title #}
+<div class="page-title-overlap bg-dark pt-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item">
+            <a class="text-nowrap" href="{% url 'main:index' %}">
+              <i class="czi-home"></i>{% translate 'Home' %}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-nowrap">
+            <a href="{% url 'accounts:profile' %}">{% translate 'Account' %}</a>
+          </li>
+          {% block page_title1 %}{% endblock page_title1 %}
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h3 text-light mb-0">{% block page_title2 %}{% endblock page_title2 %}</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container pb-5 mb-2 mb-md-3">
+  <div class="row">
+    {# Sidebar #}
+    <aside class="col-lg-4 pt-4 pt-lg-0">
+      <div class="cz-sidebar-static rounded-lg box-shadow-lg px-0 pb-0 mb-5 mb-lg-0">
+        <div class="px-4 mb-4">
+          <div class="media align-items-center">
+            <div class="img-thumbnail rounded-circle position-relative" style="width: 6.375rem;">
+              <img class="rounded-circle" src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'img/avatar-default.png' %}{% endif %}" alt="{% translate 'Your Avatar' %}">
+            </div>
+            <div class="media-body pl-3">
+              <h3 class="font-size-base mb-0">{% firstof user.get_full_name user.first_name user.email %}</h3>
+              <span class="text-accent font-size-sm">{{ user.email }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-secondary px-4 py-3">
+          <h3 class="font-size-sm mb-0 text-muted">{% translate 'Dashboard' %}</h3>
+        </div>
+        <ul class="list-unstyled mb-0">
+          <li class="border-bottom mb-0">
+            <a class="nav-link-style d-flex align-items-center px-4 py-3{% block orders_active %}{% endblock orders_active %}" href="{% url 'orders:orders_list' %}">
+              <i class="czi-bag opacity-60 mr-2"></i>{% translate 'Orders' %}
+              <span class="font-size-sm text-muted ml-auto">{{ user.order_set.count }}</span>
+            </a>
+          </li>
+          <li class="border-bottom mb-0">
+            <a class="nav-link-style d-flex align-items-center px-4 py-3{% block wishlist_active %}{% endblock wishlist_active %}" href="{% url 'wishlist:wishlist' %}">
+              <i class="czi-heart opacity-60 mr-2"></i>{% translate 'Wishlist' %}
+              <span id="wishes-count" class="font-size-sm text-muted ml-auto">{{ user.wish_set.count }}</span>
+            </a>
+          </li>
+          <li class="mb-0">
+            <a class="nav-link-style d-flex align-items-center px-4 py-3{% block support_active %}{% endblock support_active %}" href="{% url 'support:tickets' %}">
+              <span class="position-relative">
+                <i class="czi-help opacity-60 mr-2"></i>{% translate 'Support' %}
+                {% if messages_count %}
+                <span class="indicator-center ml-3"></span>
+                {% endif %}
+              </span>
+              <span class="font-size-sm text-muted ml-auto">{{ user.ticket_set.count }}</span>
+            </a>
+          </li>
+        </ul>
+        <div class="bg-secondary px-4 py-3">
+          <h3 class="font-size-sm mb-0 text-muted">{% translate 'Account settings' %}</h3>
+        </div>
+        <ul class="list-unstyled mb-0">
+          <li class="border-bottom mb-0">
+            <a class="nav-link-style d-flex align-items-center px-4 py-3{% block profile_active %}{% endblock profile_active %}" href="{% url 'accounts:profile' %}">
+              <i class="czi-user opacity-60 mr-2"></i>{% translate 'Profile info' %}
+            </a>
+          </li>
+          <li class="border-bottom mb-0">
+            <a class="nav-link-style d-flex align-items-center px-4 py-3{% block addresses_active %}{% endblock addresses_active %}" href="{% url 'accounts:addresses' %}">
+              <i class="czi-location opacity-60 mr-2"></i>{% translate 'Addresses' %}
+            </a>
+          </li>
+          <li class="mb-0">
+            <a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-payment.html">
+              <i class="czi-card opacity-60 mr-2"></i>{% translate 'Payment methods' %}
+            </a>
+          </li>
+          <li class="d-lg-none border-top mb-0">
+            <a class="nav-link-style d-flex align-items-center px-4 py-3" href="{% url 'accounts:signout' %}">
+              <i class="czi-sign-out opacity-60 mr-2"></i>{% translate 'Sign out' %}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <section class="col-lg-8">
+      {% block account_content %}{% endblock account_content %}
+    </section>
+  </div>
+</div>
+
+{% endblock content %}

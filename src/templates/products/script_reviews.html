@@ -1,0 +1,53 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+  $("#button-more-reviews").click(function() {
+    $("#div-more-reviews").css("display", "none");
+  });
+
+  $("[data-action='review-like']").click(function() {
+    const reviewLike = $(this);
+    const reviewId = reviewLike.data("id");
+
+    $.ajax({
+      url: "{% url 'products:review_like' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "review_id": reviewId,
+      },
+
+      success: function(data) {
+        $("#review-like-" + reviewId).text(data.likes_count);
+        $("#review-dislike-" + reviewId).text(data.dislikes_count);
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  });
+
+  $("[data-action='review-dislike']").click(function() {
+    const reviewDislike = $(this);
+    const reviewId = reviewDislike.data("id");
+
+    $.ajax({
+      url: "{% url 'products:review_dislike' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "review_id": reviewId,
+      },
+
+      success: function(data) {
+        $("#review-like-" + reviewId).text(data.likes_count);
+        $("#review-dislike-" + reviewId).text(data.dislikes_count);
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  });
+
+});
+</script>

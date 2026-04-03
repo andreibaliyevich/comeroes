@@ -1,0 +1,2685 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-13 12:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: accounts/admin.py:24
+msgid "Personal info"
+msgstr "Персональная информация"
+
+#: accounts/admin.py:33
+msgid "Permissions"
+msgstr "Права доступа"
+
+#: accounts/admin.py:42
+msgid "Important dates"
+msgstr "Важные даты"
+
+#: accounts/apps.py:8
+msgid "Accounts"
+msgstr "Учетные записи"
+
+#: accounts/forms.py:12 accounts/forms.py:80 accounts/models.py:14
+#: newsletter/models.py:9 orders/models.py:28 templates/accounts/signin.html:30
+msgid "Email address"
+msgstr "Адрес электронной почты"
+
+#: accounts/forms.py:15 templates/accounts/signin.html:37
+msgid "Password"
+msgstr "Пароль"
+
+#: accounts/forms.py:20
+msgid "Confirm password"
+msgstr "Подтверждение пароля"
+
+#: accounts/forms.py:26 accounts/forms.py:112
+msgid "Subscribe me to Newsletter"
+msgstr "Подписаться на рассылку новостей"
+
+#: accounts/forms.py:50
+msgid "Passwords don't match."
+msgstr "Пароли не совпадают."
+
+#: accounts/forms.py:67 accounts/models.py:37
+msgid "Avatar"
+msgstr "Аватар"
+
+#: accounts/forms.py:74
+msgid "This file format is not supported."
+msgstr "Этот формат файла не поддерживается."
+
+#: accounts/forms.py:77 accounts/models.py:19 orders/models.py:26
+msgid "First name"
+msgstr "Имя"
+
+#: accounts/forms.py:78 accounts/models.py:24 orders/models.py:27
+msgid "Last name"
+msgstr "Фамилия"
+
+#: accounts/forms.py:82 accounts/models.py:48 contacts/models.py:154
+#: orders/models.py:37 templates/contacts/contacts.html:216
+msgid "Phone"
+msgstr "Телефон"
+
+#: accounts/forms.py:90
+msgid "January"
+msgstr "Января"
+
+#: accounts/forms.py:91
+msgid "February"
+msgstr "Февраля"
+
+#: accounts/forms.py:92
+msgid "March"
+msgstr "Марта"
+
+#: accounts/forms.py:93
+msgid "April"
+msgstr "Апреля"
+
+#: accounts/forms.py:94
+msgid "May"
+msgstr "Мая"
+
+#: accounts/forms.py:95
+msgid "June"
+msgstr "Июня"
+
+#: accounts/forms.py:96
+msgid "July"
+msgstr "Июля"
+
+#: accounts/forms.py:97
+msgid "August"
+msgstr "Августа"
+
+#: accounts/forms.py:98
+msgid "September"
+msgstr "Сентября"
+
+#: accounts/forms.py:99
+msgid "October"
+msgstr "Октября"
+
+#: accounts/forms.py:100
+msgid "November"
+msgstr "Ноября"
+
+#: accounts/forms.py:101
+msgid "December"
+msgstr "Декабря"
+
+#: accounts/forms.py:104 accounts/models.py:53
+msgid "Date of Birth"
+msgstr "Дата рождения"
+
+#: accounts/forms.py:145
+msgid "Make this address primary"
+msgstr "Сделать этот адрес основным"
+
+#: accounts/managers.py:11
+msgid "The Email must be set."
+msgstr "Электронная почта должна быть установлена."
+
+#: accounts/managers.py:25
+msgid "Superuser must have is_staff=True."
+msgstr "У суперпользователя должно быть is_staff=True."
+
+#: accounts/managers.py:27
+msgid "Superuser must have is_superuser=True."
+msgstr "У суперпользователя должно быть is_superuser=True."
+
+#: accounts/models.py:45 contacts/models.py:151 orders/models.py:34
+msgid "Wrong format!"
+msgstr "Неправильный формат!"
+
+#: accounts/models.py:57
+msgid "Is subscription"
+msgstr "Подписка"
+
+#: accounts/models.py:60 coupons/models.py:18
+msgid "Active"
+msgstr "Активный"
+
+#: accounts/models.py:63
+msgid "Staff status"
+msgstr "Статус персонала"
+
+#: accounts/models.py:67
+msgid "Superuser status"
+msgstr "Статус суперпользователя"
+
+#: accounts/models.py:72
+msgid "Last visit"
+msgstr "Последнее посещение"
+
+#: accounts/models.py:76
+msgid "Last login"
+msgstr "Последний вход"
+
+#: accounts/models.py:80
+msgid "Date joined"
+msgstr "Дата регистрации"
+
+#: accounts/models.py:98 accounts/models.py:108 orders/models.py:23
+#: products/models.py:446 wishlist/models.py:12
+msgid "User"
+msgstr "Пользователь"
+
+#: accounts/models.py:99
+msgid "Users"
+msgstr "Пользователи"
+
+#: accounts/models.py:111
+msgid "Locality"
+msgstr "Населенный пункт"
+
+#: accounts/models.py:114
+msgid "Street, House"
+msgstr "Улица, дом"
+
+#: accounts/models.py:119
+msgid "Porch"
+msgstr "Подъезд"
+
+#: accounts/models.py:124
+msgid "Level"
+msgstr "Этаж"
+
+#: accounts/models.py:129
+msgid "Apt / office"
+msgstr "Кв. / офис"
+
+#: accounts/models.py:133
+msgid "Is Primary"
+msgstr "Основной"
+
+#: accounts/models.py:150 contacts/models.py:19 contacts/models.py:102
+#: orders/models.py:43 templates/accounts/account_addresses.html:81
+msgid "Address"
+msgstr "Адрес"
+
+#: accounts/models.py:151 templates/accounts/account_address_change.html:12
+#: templates/accounts/account_addresses.html:7
+#: templates/accounts/account_addresses.html:60
+#: templates/accounts/account_addresses.html:63
+#: templates/accounts/account_base.html:88 templates/main/base.html:305
+msgid "Addresses"
+msgstr "Адреса"
+
+#: accounts/validators.py:17
+msgid "Error! Size of your image:"
+msgstr "Ошибка! Размер вашего изображения:"
+
+#: accounts/views.py:32
+msgid "You are logged in!"
+msgstr "Вы авторизовались!"
+
+#: accounts/views.py:39
+msgid "Invalid email or password!"
+msgstr "Неверный адрес электронной почты или пароль!"
+
+#: accounts/views.py:58
+msgid "Logged out successfully!"
+msgstr "Выход успешно выполнен!"
+
+#: accounts/views.py:69
+msgid "Register User Done. Check your email."
+msgstr "Регистрация пользователя завершена. Проверьте свою электронную почту."
+
+#: accounts/views.py:85
+msgid "The activation of a user was unsuccessful."
+msgstr "Активация пользователя не удалась."
+
+#: accounts/views.py:91
+msgid "A user with this name was activated earlier."
+msgstr "Пользователь с таким именем был активирован ранее."
+
+#: accounts/views.py:105
+msgid "Your account has been successfully activated."
+msgstr "Ваша учетная запись была успешно активирована."
+
+#: accounts/views.py:120
+msgid "Password Reset Done. Check your email."
+msgstr "Пароль сброшен. Проверьте свою электронную почту."
+
+#: accounts/views.py:129
+msgid "Password Reset Complete. New password set."
+msgstr "Сброс пароля завершен. Новый пароль установлен."
+
+#: accounts/views.py:136
+msgid "Your password has been changed."
+msgstr "Ваш пароль изменен."
+
+#: accounts/views.py:150
+msgid "Your profile information has been changed."
+msgstr "Ваши данные профиля изменены."
+
+#: accounts/views.py:168
+msgid "Your account has been deleted."
+msgstr "Ваша учетная запись удалена."
+
+#: cart/apps.py:8 templates/cart/detail.html:8 templates/cart/detail.html:29
+#: templates/cart/navbar_expand.html:13 templates/cart/navbar_shrink.html:13
+#: templates/orders/create.html:30 templates/orders/create.html:52
+msgid "Cart"
+msgstr "Корзина"
+
+#: cart/views.py:28 products/views.py:859 wishlist/views.py:31
+msgid "Product does not exist!"
+msgstr "Товара не существует!"
+
+#: contacts/admin.py:36 products/admin.py:97 products/admin.py:144
+#: products/admin.py:190 products/admin.py:234 products/admin.py:276
+msgid "Metadata"
+msgstr "Метаданные"
+
+#: contacts/admin.py:39 contacts/apps.py:8 templates/contacts/contacts.html:9
+#: templates/contacts/contacts.html:30 templates/contacts/contacts.html:35
+#: templates/contacts/store_detail.html:31 templates/main/base.html:501
+msgid "Contacts"
+msgstr "Контакты"
+
+#: contacts/admin.py:45 templates/contacts/contacts.html:62
+#: templates/contacts/store_detail.html:65
+msgid "Working hours"
+msgstr "Рабочее время"
+
+#: contacts/models.py:16
+msgid "City"
+msgstr "Город"
+
+#: contacts/models.py:23
+msgid "Location"
+msgstr "Расположение"
+
+#: contacts/models.py:29 contacts/models.py:107 products/models.py:53
+#: products/models.py:90 products/models.py:378 products/models.py:387
+#: templates/products/detail/accessory.html:185
+#: templates/products/detail/clothes.html:185
+#: templates/products/detail/comic_book.html:185
+#: templates/products/detail/home_decor.html:185
+#: templates/products/detail/toy.html:185
+msgid "Description"
+msgstr "Описание"
+
+#: contacts/models.py:34 contacts/models.py:112 products/models.py:58
+#: products/models.py:383
+msgid "Separate keywords with commas."
+msgstr ""
+
+#: contacts/models.py:35 contacts/models.py:113 products/models.py:59
+#: products/models.py:384
+msgid "Keywords"
+msgstr ""
+
+#: contacts/models.py:42 products/models.py:66
+#: templates/contacts/store_detail.html:126
+msgid "Main image"
+msgstr "Основное изображение"
+
+#: contacts/models.py:43 contacts/models.py:133
+msgid "Recommend: 1000 x 667 px."
+msgstr "Рекомендуем: 1000 x 667 пикселей."
+
+#: contacts/models.py:48
+msgid "Phone for customers"
+msgstr "Телефон для клиентов"
+
+#: contacts/models.py:52
+msgid "Phone for support"
+msgstr "Телефон для поддержки"
+
+#: contacts/models.py:55
+msgid "Email for customers"
+msgstr "Электронная почта для клиентов"
+
+#: contacts/models.py:56
+msgid "Email for support"
+msgstr "Электронная почта для поддержки"
+
+#: contacts/models.py:59
+msgid "Start time in weekdays"
+msgstr "Время начала в будние дни"
+
+#: contacts/models.py:61
+msgid "End time in weekdays"
+msgstr "Время окончания в будние дни"
+
+#: contacts/models.py:63
+msgid "Start time in weekend"
+msgstr "Время начала в выходные дни"
+
+#: contacts/models.py:65
+msgid "End time in weekend"
+msgstr "Время окончания в выходные дни"
+
+#: contacts/models.py:67
+msgid "Main"
+msgstr "Главный"
+
+#: contacts/models.py:82 contacts/models.py:94 contacts/models.py:128
+#: orders/models.py:50 products/models.py:425
+msgid "Store"
+msgstr "Магазин"
+
+#: contacts/models.py:83
+msgid "Stores"
+msgstr "Магазины"
+
+#: contacts/models.py:99 products/models.py:160 products/models.py:370
+#: templates/products/detail/comic_book.html:243
+msgid "Language"
+msgstr "Язык"
+
+#: contacts/models.py:117
+msgid "Store Translation"
+msgstr "Перевод магазина"
+
+#: contacts/models.py:118
+msgid "Store Translations"
+msgstr "Переводы магазинов"
+
+#: contacts/models.py:132 products/models.py:405
+msgid "Image"
+msgstr "Изображение"
+
+#: contacts/models.py:137
+msgid "Image of Store"
+msgstr "Изображение магазина"
+
+#: contacts/models.py:138
+msgid "Images of Store"
+msgstr "Изображения магазина"
+
+#: contacts/models.py:144 products/models.py:17 products/models.py:46
+#: products/models.py:373 templates/contacts/contacts.html:202
+msgid "Name"
+msgstr "Название"
+
+#: contacts/models.py:145 templates/contacts/contacts.html:209
+msgid "Email"
+msgstr ""
+
+#: contacts/models.py:160 newsletter/models.py:23 support/models.py:12
+#: templates/contacts/contacts.html:222 templates/support/tickets.html:70
+msgid "Subject"
+msgstr "Тема"
+
+#: contacts/models.py:162 support/models.py:79
+msgid "Content"
+msgstr "Содержание"
+
+#: contacts/models.py:165 newsletter/models.py:35 orders/models.py:94
+#: products/models.py:95 products/models.py:465 support/models.py:50
+#: support/models.py:83 wishlist/models.py:22
+msgid "Created at"
+msgstr "Создано в"
+
+#: contacts/models.py:169 support/models.py:87
+#: templates/contacts/contacts.html:228
+msgid "Message"
+msgstr "Сообщение"
+
+#: contacts/models.py:170 support/models.py:88
+msgid "Messages"
+msgstr "Сообщения"
+
+#: contacts/views.py:19
+msgid "Thank you for your message."
+msgstr "Спасибо за ваше сообщение."
+
+#: coupons/apps.py:8 coupons/models.py:25
+msgid "Coupons"
+msgstr "Купоны"
+
+#: coupons/forms.py:7 templates/cart/detail.html:123
+#: templates/cart/detail.html:132 templates/orders/create.html:152
+#: templates/orders/create.html:161 templates/orders/detail.html:64
+msgid "Promo code"
+msgstr "Промокод"
+
+#: coupons/models.py:8
+msgid "Code"
+msgstr "Код"
+
+#: coupons/models.py:9
+msgid "Valid with"
+msgstr "Действителен с"
+
+#: coupons/models.py:10
+msgid "Valid until"
+msgstr "Действителен до"
+
+#: coupons/models.py:16 orders/models.py:66 templates/cart/detail.html:127
+#: templates/cart/detail.html:136 templates/orders/create.html:156
+#: templates/orders/create.html:165 templates/orders/detail.html:72
+msgid "Discount"
+msgstr "Скидка"
+
+#: coupons/models.py:24 orders/models.py:58
+msgid "Coupon"
+msgstr "Купон"
+
+#: coupons/views.py:27
+msgid "Coupon is not valid."
+msgstr "Купон недействителен."
+
+#: coupons/views.py:30
+msgid "Coupon has been successfully applied."
+msgstr "Купон успешно применен."
+
+#: main/apps.py:8
+msgid "Main app"
+msgstr "Основное приложение"
+
+#: newsletter/admin.py:10
+msgid "Newsletters sent to all subscribers"
+msgstr "Новостные рассылки отправлены всем подписчикам"
+
+#: newsletter/admin.py:11
+msgid "Send selected Newsletters to all subscribers"
+msgstr "Отправить выбранные новостные рассылки всем подписчикам"
+
+#: newsletter/apps.py:8 newsletter/models.py:66
+msgid "Newsletter"
+msgstr "Новостная рассылка"
+
+#: newsletter/models.py:10
+msgid "Confirmed"
+msgstr "Подтвержденный"
+
+#: newsletter/models.py:16
+msgid "Subscriber"
+msgstr "Подписчик"
+
+#: newsletter/models.py:17
+msgid "Subscribers"
+msgstr "Подписчики"
+
+#: newsletter/models.py:26
+msgid "Content (text)"
+msgstr "Содержание (text)"
+
+#: newsletter/models.py:30
+msgid "Content (html)"
+msgstr "Содержание (html)"
+
+#: newsletter/models.py:39 orders/models.py:98 products/models.py:99
+#: support/models.py:54
+msgid "Updated at"
+msgstr "Обновлено в"
+
+#: newsletter/models.py:67
+msgid "Newsletters"
+msgstr "Новостные рассылки"
+
+#: newsletter/views.py:15
+msgid "To complete your subscription, you need to confirm your email."
+msgstr ""
+"Для завершения подписки вам необходимо подтвердить свой адрес электронной "
+"почты."
+
+#: newsletter/views.py:16
+msgid "You are already subscribed to our newsletter."
+msgstr "Вы уже подписаны на нашу рассылку новостей."
+
+#: newsletter/views.py:50
+msgid "The confirm of an email was unsuccessful."
+msgstr "Подтверждение электронного письма не удалось."
+
+#: newsletter/views.py:55 newsletter/views.py:88 newsletter/views.py:93
+msgid "Email has been removed from subscriptions."
+msgstr "Электронная почта была удалена из подписок."
+
+#: newsletter/views.py:58 newsletter/views.py:65
+msgid "The email was confirm earlier."
+msgstr "Электронная почта была подтверждена ранее."
+
+#: newsletter/views.py:62 newsletter/views.py:69
+msgid "You have successfully subscribed to our newsletter."
+msgstr "Вы успешно подписались на нашу рассылку новостей."
+
+#: newsletter/views.py:80
+msgid "The delete of an email was unsuccessful."
+msgstr "Не удалось удалить электронное письмо."
+
+#: newsletter/views.py:85 newsletter/views.py:95
+msgid "Email has been removed from subscriptions earlier."
+msgstr "Электронная почта была удалена из подписок ранее."
+
+#: orders/apps.py:8 orders/models.py:109
+#: templates/accounts/account_base.html:55 templates/main/base.html:282
+#: templates/orders/detail.html:12
+msgid "Orders"
+msgstr "Заказы"
+
+#: orders/models.py:72 templates/orders/detail.html:80
+#: templates/orders/list.html:37
+msgid "Total cost"
+msgstr "Итоговая стоимость"
+
+#: orders/models.py:76 templates/orders/detail.html:103
+#: templates/orders/list.html:49
+msgid "Pending"
+msgstr "В ожидании"
+
+#: orders/models.py:77 templates/orders/detail.html:105
+#: templates/orders/list.html:51
+msgid "Failed"
+msgstr "Не удалось"
+
+#: orders/models.py:78 templates/orders/detail.html:107
+#: templates/orders/list.html:53
+msgid "Processing"
+msgstr "Обработка"
+
+#: orders/models.py:79 templates/orders/detail.html:109
+#: templates/orders/list.html:55
+msgid "Shipped"
+msgstr "Отправленный"
+
+#: orders/models.py:80 templates/orders/detail.html:111
+#: templates/orders/list.html:57
+msgid "Completed"
+msgstr "Завершенный"
+
+#: orders/models.py:81 templates/orders/detail.html:113
+#: templates/orders/list.html:59
+msgid "Delayed"
+msgstr "Отложенный"
+
+#: orders/models.py:82 templates/orders/detail.html:115
+#: templates/orders/list.html:61
+msgid "Canceled"
+msgstr "Отменено"
+
+#: orders/models.py:83 templates/orders/detail.html:117
+#: templates/orders/list.html:63
+msgid "Refunded"
+msgstr "Возвращено"
+
+#: orders/models.py:89 support/models.py:45 templates/orders/detail.html:101
+#: templates/orders/list.html:36 templates/support/ticket_detail.html:58
+#: templates/support/ticket_detail.html:102 templates/support/tickets.html:74
+msgid "Status"
+msgstr "Статус"
+
+#: orders/models.py:108 orders/models.py:118 templates/orders/detail.html:7
+msgid "Order"
+msgstr "Заказ"
+
+#: orders/models.py:123 products/admin.py:87 products/admin.py:134
+#: products/admin.py:180 products/admin.py:224 products/admin.py:266
+#: products/models.py:365 products/models.py:401 products/models.py:420
+#: products/models.py:441 templates/products/detail/accessory.html:43
+#: templates/products/detail/clothes.html:43
+#: templates/products/detail/comic_book.html:43
+#: templates/products/detail/home_decor.html:43
+#: templates/products/detail/toy.html:43 wishlist/models.py:17
+msgid "Product"
+msgstr "Товар"
+
+#: orders/models.py:128 products/models.py:74 templates/cart/detail.html:67
+#: templates/products/base/accessories.html:62
+#: templates/products/base/clothes.html:62
+#: templates/products/base/comics.html:62
+#: templates/products/base/home_decor.html:62
+#: templates/products/base/manufacturer.html:59
+#: templates/products/base/toys.html:62
+msgid "Price"
+msgstr "Цена"
+
+#: orders/models.py:132 templates/cart/detail.html:86
+msgid "Quantity"
+msgstr "Количество"
+
+#: orders/models.py:137 templates/cart/detail.html:75
+msgid "Total price"
+msgstr "Итоговая цена"
+
+#: orders/models.py:144
+msgid "Ordered product"
+msgstr "Заказанный товар"
+
+#: orders/models.py:145
+msgid "Ordered products"
+msgstr "Заказанные товары"
+
+#: products/admin.py:25
+msgid "Price category"
+msgstr "Категория цен"
+
+#: products/admin.py:30
+msgid "Low price"
+msgstr "Низкая цена"
+
+#: products/admin.py:31
+msgid "Average price"
+msgstr "Средняя цена"
+
+#: products/admin.py:32
+msgid "High price"
+msgstr "Высокая цена"
+
+#: products/admin.py:50
+msgid "Old prices have been reset"
+msgstr "Старые цены были сброшены"
+
+#: products/admin.py:51
+msgid "Reset old prices"
+msgstr "Сбросить старые цены"
+
+#: products/admin.py:100 products/admin.py:147 products/admin.py:193
+#: products/admin.py:237 products/admin.py:279
+msgid "Description / Specifications"
+msgstr "Описание / Характеристики"
+
+#: products/apps.py:8 templates/cart/detail.html:46
+msgid "Products"
+msgstr "Товары"
+
+#: products/forms.py:11
+msgid "Popularity"
+msgstr "Популярность"
+
+#: products/forms.py:12
+msgid "New - Old"
+msgstr "Новые - старые"
+
+#: products/forms.py:13
+msgid "Old - New"
+msgstr "Старые - новые"
+
+#: products/forms.py:14
+msgid "Low - High Price"
+msgstr "Низкая - высокая цена"
+
+#: products/forms.py:15
+msgid "High - Low Price"
+msgstr "Высокая - низкая цена"
+
+#: products/forms.py:16
+msgid "A - Z Order"
+msgstr "А - Я порядок"
+
+#: products/forms.py:17
+msgid "Z - A Order"
+msgstr "Я - А порядок"
+
+#: products/forms.py:20
+msgid "Sort by:"
+msgstr "Сортировать по:"
+
+#: products/forms.py:35 products/forms.py:75 products/forms.py:119
+#: products/forms.py:172 products/forms.py:225 products/forms.py:258
+msgid "Min price"
+msgstr "Минимальная цена"
+
+#: products/forms.py:44 products/forms.py:84 products/forms.py:128
+#: products/forms.py:181 products/forms.py:234 products/forms.py:267
+msgid "Max price"
+msgstr "Максимальная цена"
+
+#: products/forms.py:54 products/models.py:168 templates/main/base.html:210
+#: templates/main/base.html:217 templates/main/base.html:224
+#: templates/main/base.html:231 templates/main/base.html:238
+#: templates/main/base.html:245 templates/main/base.html:353
+#: templates/main/base.html:384 templates/main/index.html:79
+#: templates/products/base/comics.html:8 templates/products/base/comics.html:36
+#: templates/products/base/comics.html:41
+#: templates/products/detail/comic_book.html:12
+#: templates/products/detail/comic_book.html:41 templates/products/shop.html:41
+#: templates/products/shop.html:44
+msgid "Comics"
+msgstr "Комиксы"
+
+#: products/forms.py:55 products/models.py:236 templates/main/base.html:211
+#: templates/main/base.html:218 templates/main/base.html:225
+#: templates/main/base.html:232 templates/main/base.html:239
+#: templates/main/base.html:246 templates/main/base.html:356
+#: templates/main/base.html:385 templates/main/index.html:129
+#: templates/products/base/toys.html:8 templates/products/base/toys.html:36
+#: templates/products/base/toys.html:41 templates/products/detail/toy.html:12
+#: templates/products/detail/toy.html:41 templates/products/shop.html:69
+#: templates/products/shop.html:72
+msgid "Toys"
+msgstr "Игрушки"
+
+#: products/forms.py:56 products/models.py:299 products/models.py:300
+#: templates/main/base.html:212 templates/main/base.html:219
+#: templates/main/base.html:226 templates/main/base.html:233
+#: templates/main/base.html:240 templates/main/base.html:247
+#: templates/main/base.html:359 templates/main/base.html:386
+#: templates/main/index.html:178 templates/products/base/clothes.html:8
+#: templates/products/base/clothes.html:36
+#: templates/products/base/clothes.html:41
+#: templates/products/detail/clothes.html:12
+#: templates/products/detail/clothes.html:41 templates/products/shop.html:97
+#: templates/products/shop.html:100
+msgid "Clothes"
+msgstr "Одежда"
+
+#: products/forms.py:57 products/models.py:329 templates/main/base.html:213
+#: templates/main/base.html:220 templates/main/base.html:227
+#: templates/main/base.html:234 templates/main/base.html:241
+#: templates/main/base.html:248 templates/main/base.html:362
+#: templates/main/base.html:387 templates/products/base/accessories.html:8
+#: templates/products/base/accessories.html:36
+#: templates/products/base/accessories.html:41
+#: templates/products/detail/accessory.html:12
+#: templates/products/detail/accessory.html:41 templates/products/shop.html:125
+#: templates/products/shop.html:128
+msgid "Accessories"
+msgstr "Аксессуары"
+
+#: products/forms.py:58 products/models.py:354 products/models.py:355
+#: templates/main/base.html:214 templates/main/base.html:221
+#: templates/main/base.html:228 templates/main/base.html:235
+#: templates/main/base.html:242 templates/main/base.html:249
+#: templates/main/base.html:365 templates/main/base.html:388
+#: templates/products/base/home_decor.html:8
+#: templates/products/base/home_decor.html:36
+#: templates/products/base/home_decor.html:41
+#: templates/products/detail/home_decor.html:12
+#: templates/products/detail/home_decor.html:41
+#: templates/products/shop.html:153 templates/products/shop.html:156
+msgid "Home Decor"
+msgstr "Домашний декор"
+
+#: products/forms.py:61 products/forms.py:94 products/forms.py:138
+#: products/forms.py:191 products/forms.py:244 products/forms.py:277
+#: templates/products/base/accessories.html:95
+#: templates/products/base/clothes.html:95
+#: templates/products/base/comics.html:95
+#: templates/products/base/home_decor.html:95
+#: templates/products/base/manufacturer.html:92
+#: templates/products/base/toys.html:95
+msgid "Categories"
+msgstr "Категории"
+
+#: products/forms.py:105 templates/products/base/comics.html:115
+msgid "Languages"
+msgstr "Языки"
+
+#: products/forms.py:148 templates/products/base/toys.html:115
+msgid "Countries"
+msgstr "Страны"
+
+#: products/forms.py:158 templates/products/base/toys.html:129
+msgid "Materials"
+msgstr "Материалы"
+
+#: products/forms.py:201 templates/products/base/clothes.html:109
+msgid "Sizes"
+msgstr "Размеры"
+
+#: products/forms.py:211 templates/products/base/clothes.html:123
+msgid "Colors"
+msgstr "Цвета"
+
+#: products/forms.py:295
+msgid "Please leave review meaningful and useful."
+msgstr "Пожалуйста, оставьте отзыв информативным и полезным."
+
+#: products/models.py:18 products/models.py:48
+msgid "Slug"
+msgstr "Слаг"
+
+#: products/models.py:22
+msgid "Recommend: 300 x 160 px."
+msgstr "Рекомендуем: 300 х 160 пикселей."
+
+#: products/models.py:23 templates/main/base.html:195
+#: templates/main/base.html:198 templates/main/base.html:471
+msgid "Logo"
+msgstr "Логотип"
+
+#: products/models.py:33 products/models.py:43
+msgid "Manufacturer"
+msgstr "Производитель"
+
+#: products/models.py:34
+msgid "Manufacturers"
+msgstr "Производители"
+
+#: products/models.py:67 products/models.py:406
+msgid "Recommend: 764 x 905 px."
+msgstr "Рекомендуем: 764 x 905 пикселей."
+
+#: products/models.py:80
+msgid "Old price"
+msgstr "Старая цена"
+
+#: products/models.py:87 products/models.py:459
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: products/models.py:114 products/models.py:175 products/models.py:243
+#: products/models.py:307 products/models.py:336
+msgid "Select category"
+msgstr "Выберите категорию"
+
+#: products/models.py:115 products/models.py:176
+msgid "Marvel"
+msgstr "Marvel"
+
+#: products/models.py:116 products/models.py:177
+msgid "DC"
+msgstr "DC"
+
+#: products/models.py:117 products/models.py:178
+msgid "Star Wars"
+msgstr "Звездные войны"
+
+#: products/models.py:124 products/models.py:185 products/models.py:255
+#: products/models.py:321 products/models.py:347 support/models.py:24
+#: templates/products/detail/accessory.html:216
+#: templates/products/detail/clothes.html:216
+#: templates/products/detail/comic_book.html:216
+#: templates/products/detail/home_decor.html:216
+#: templates/products/detail/toy.html:216
+#: templates/support/ticket_detail.html:36
+#: templates/support/ticket_detail.html:80 templates/support/tickets.html:72
+msgid "Category"
+msgstr "Категория"
+
+#: products/models.py:130 templates/products/detail/comic_book.html:222
+msgid "Publication format"
+msgstr "Формат издания"
+
+#: products/models.py:135 templates/products/detail/comic_book.html:226
+msgid "Number of pages"
+msgstr "Количество страниц"
+
+#: products/models.py:140 templates/products/detail/comic_book.html:230
+msgid "Published"
+msgstr "Изданный"
+
+#: products/models.py:144
+msgid "Select binding"
+msgstr "Выберите переплет"
+
+#: products/models.py:145
+msgid "Paperback"
+msgstr "Мягкая обложка"
+
+#: products/models.py:146
+msgid "Hardcover"
+msgstr "Твердый переплет"
+
+#: products/models.py:153 templates/products/detail/comic_book.html:234
+msgid "Binding"
+msgstr "Переплет"
+
+#: products/models.py:167
+msgid "Comic Book"
+msgstr "Комикс"
+
+#: products/models.py:189
+msgid "Select country"
+msgstr "Выберите страну"
+
+#: products/models.py:190
+msgid "USA"
+msgstr "США"
+
+#: products/models.py:191
+msgid "China"
+msgstr "Китай"
+
+#: products/models.py:192
+msgid "Russia"
+msgstr "Россия"
+
+#: products/models.py:199 templates/products/detail/toy.html:224
+msgid "Manufacturer country"
+msgstr "Страна изготовитель"
+
+#: products/models.py:203
+msgid "Select material"
+msgstr "Выберите материал"
+
+#: products/models.py:204
+msgid "Plastic"
+msgstr "Пластик"
+
+#: products/models.py:205
+msgid "Plastic / electronics"
+msgstr "Пластик / электроника"
+
+#: products/models.py:206
+msgid "Plastic / LED"
+msgstr "Пластик / светодиод"
+
+#: products/models.py:207
+msgid "Polyester"
+msgstr "Полиэстер"
+
+#: products/models.py:208
+msgid "Plush"
+msgstr "Плюшевый"
+
+#: products/models.py:215 templates/products/detail/toy.html:232
+msgid "Material"
+msgstr "Материал"
+
+#: products/models.py:221 templates/products/detail/toy.html:238
+msgid "Packing size"
+msgstr "Размер упаковки"
+
+#: products/models.py:222
+msgid "millimetres"
+msgstr "миллиметры"
+
+#: products/models.py:227 templates/products/detail/toy.html:242
+msgid "Weight"
+msgstr "Вес"
+
+#: products/models.py:228
+msgid "gram"
+msgstr "грамм"
+
+#: products/models.py:235
+msgid "Toy"
+msgstr "Игрушка"
+
+#: products/models.py:244
+msgid "T-Shirts"
+msgstr "Футболки"
+
+#: products/models.py:245
+msgid "Jackets & Sweatshirts"
+msgstr "Куртки и кофты"
+
+#: products/models.py:246
+msgid "Robes & Sleepwear"
+msgstr "Халаты и пижамы"
+
+#: products/models.py:247
+msgid "Kids & Baby"
+msgstr "Дети и ребенок"
+
+#: products/models.py:248
+msgid "Tank Tops"
+msgstr "Майки"
+
+#: products/models.py:259
+msgid "Select size"
+msgstr "Выберите размер"
+
+#: products/models.py:260
+msgid "X-Small"
+msgstr "XS"
+
+#: products/models.py:261
+msgid "Small"
+msgstr "S"
+
+#: products/models.py:262 support/models.py:29
+msgid "Medium"
+msgstr "Средний"
+
+#: products/models.py:263
+msgid "Large"
+msgstr "L"
+
+#: products/models.py:264
+msgid "X-Large"
+msgstr "XL"
+
+#: products/models.py:265
+msgid "XX-Large"
+msgstr "XXL"
+
+#: products/models.py:266
+msgid "XXX-Large"
+msgstr "XXXL"
+
+#: products/models.py:273 templates/products/detail/clothes.html:224
+msgid "Size"
+msgstr "Размер"
+
+#: products/models.py:277
+msgid "Select color"
+msgstr "Выберите цвет"
+
+#: products/models.py:278
+msgid "Red"
+msgstr "Красный"
+
+#: products/models.py:279
+msgid "Green"
+msgstr "Зеленый"
+
+#: products/models.py:280
+msgid "Blue"
+msgstr "Синий"
+
+#: products/models.py:281
+msgid "Black"
+msgstr "Черный"
+
+#: products/models.py:282
+msgid "White"
+msgstr "Белый"
+
+#: products/models.py:283
+msgid "Gray"
+msgstr "Серый"
+
+#: products/models.py:284
+msgid "Pink"
+msgstr "Розовый"
+
+#: products/models.py:285
+msgid "Purple"
+msgstr "Пурпурный"
+
+#: products/models.py:292 templates/products/detail/clothes.html:232
+msgid "Color"
+msgstr "Цвет"
+
+#: products/models.py:308
+msgid "Bags & Backpacks"
+msgstr "Сумки и рюкзаки"
+
+#: products/models.py:309
+msgid "Jewelry"
+msgstr "Ювелирные изделия"
+
+#: products/models.py:310
+msgid "Tech Accessories"
+msgstr "Технические аксессуары"
+
+#: products/models.py:311
+msgid "Travel Accessories"
+msgstr "Дорожные аксессуары"
+
+#: products/models.py:312
+msgid "Hats"
+msgstr "Головные уборы"
+
+#: products/models.py:313
+msgid "Scarves"
+msgstr "Шарфы"
+
+#: products/models.py:314
+msgid "Socks"
+msgstr "Носки"
+
+#: products/models.py:328
+msgid "Accessory"
+msgstr "Аксессуар"
+
+#: products/models.py:337
+msgid "Mugs"
+msgstr "Кружки"
+
+#: products/models.py:338
+msgid "Ornaments & Holiday Decor"
+msgstr "Украшения и праздничный декор"
+
+#: products/models.py:339
+msgid "Posters & Prints"
+msgstr "Плакаты и печать"
+
+#: products/models.py:340
+msgid "Stationery"
+msgstr "Канцтовары"
+
+#: products/models.py:390
+msgid "Product Translation"
+msgstr "Перевод товара"
+
+#: products/models.py:391
+msgid "Product Translations"
+msgstr "Переводы товаров"
+
+#: products/models.py:410
+msgid "Product Image"
+msgstr "Изображение продукта"
+
+#: products/models.py:411
+msgid "Product Images"
+msgstr "Изображения продукта"
+
+#: products/models.py:427
+msgid "Count"
+msgstr "Количество"
+
+#: products/models.py:430
+msgid "Warehouse"
+msgstr "Склад"
+
+#: products/models.py:431
+msgid "Warehouses"
+msgstr "Склады"
+
+#: products/models.py:450
+msgid "Choose rating"
+msgstr "Выберите рейтинг"
+
+#: products/models.py:451
+msgid "5 stars"
+msgstr "5 звезд"
+
+#: products/models.py:452
+msgid "4 stars"
+msgstr "4 звезды"
+
+#: products/models.py:453
+msgid "3 stars"
+msgstr "3 звезды"
+
+#: products/models.py:454
+msgid "2 stars"
+msgstr "2 звезды"
+
+#: products/models.py:455
+msgid "1 star"
+msgstr "1 звезда"
+
+#: products/models.py:462
+msgid "Comment"
+msgstr "Комментарий"
+
+#: products/models.py:472
+msgid "Likes"
+msgstr "Лайки"
+
+#: products/models.py:478
+msgid "Dislikes"
+msgstr "Дизлайки"
+
+#: products/models.py:482
+msgid "Review"
+msgstr "Отзыв"
+
+#: products/models.py:483
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: products/views.py:871
+msgid "You have already left a review for this product."
+msgstr "Вы уже оставили отзыв на этот продукт."
+
+#: products/views.py:874
+msgid "Thanks for your review."
+msgstr "Спасибо за ваш отзыв."
+
+#: products/views.py:888 products/views.py:912
+msgid "Review does not exist!"
+msgstr "Отзыв не существует!"
+
+#: store/settings.py:192
+msgid "Brest"
+msgstr "Брест"
+
+#: store/settings.py:193
+msgid "Minsk"
+msgstr "Минск"
+
+#: store/settings.py:194
+msgid "Grodno"
+msgstr "Гродно"
+
+#: store/settings.py:195
+msgid "Gomel"
+msgstr "Гомель"
+
+#: store/settings.py:196
+msgid "Mogilev"
+msgstr "Могилев"
+
+#: store/settings.py:197
+msgid "Vitebsk"
+msgstr "Витебск"
+
+#: support/apps.py:8 templates/accounts/account_base.html:68
+#: templates/main/base.html:142 templates/main/base.html:292
+#: templates/main/base.html:510 templates/support/support.html:8
+#: templates/support/ticket_detail.html:7
+#: templates/support/ticket_detail.html:12
+#: templates/support/ticket_detail.html:17 templates/support/tickets.html:7
+#: templates/support/tickets.html:49 templates/support/tickets.html:52
+msgid "Support"
+msgstr "Поддержка"
+
+#: support/models.py:10
+msgid "Members"
+msgstr "Члены"
+
+#: support/models.py:15
+msgid "Website problem"
+msgstr "Проблема с сайтом"
+
+#: support/models.py:16
+msgid "Complaint"
+msgstr "Жалоба"
+
+#: support/models.py:17
+msgid "Info inquiry"
+msgstr "Информационный запрос"
+
+#: support/models.py:18
+msgid "Other problem"
+msgstr "Другая проблема"
+
+#: support/models.py:28
+msgid "High"
+msgstr "Высокий"
+
+#: support/models.py:30
+msgid "Low"
+msgstr "Низкий"
+
+#: support/models.py:35 templates/support/ticket_detail.html:48
+#: templates/support/ticket_detail.html:92 templates/support/tickets.html:73
+msgid "Priority"
+msgstr "Приоритет"
+
+#: support/models.py:39
+msgid "Open"
+msgstr "Открытый"
+
+#: support/models.py:40
+msgid "Closed"
+msgstr "Закрытый"
+
+#: support/models.py:61 support/models.py:71
+msgid "Ticket"
+msgstr "Билет"
+
+#: support/models.py:62
+msgid "Tickets"
+msgstr "Билеты"
+
+#: support/models.py:76
+msgid "Sender"
+msgstr "Отправитель"
+
+#: support/models.py:80
+msgid "Viewed"
+msgstr "Просмотрено"
+
+#: templates/accounts/account_address_change.html:7
+#: templates/accounts/account_address_change.html:14
+#: templates/accounts/account_address_change.html:17
+msgid "Change Address"
+msgstr "Изменить адрес"
+
+#: templates/accounts/account_address_change.html:26
+msgid "Update you address below:"
+msgstr "Обновите ваш адрес ниже:"
+
+#: templates/accounts/account_address_change.html:27
+#: templates/accounts/account_addresses.html:73
+#: templates/accounts/account_base.html:98
+#: templates/accounts/account_profile.html:25
+#: templates/accounts/account_profile_delete.html:23
+#: templates/accounts/password_change.html:25 templates/main/base.html:315
+#: templates/orders/detail.html:27 templates/orders/list.html:26
+#: templates/support/ticket_detail.html:66 templates/support/tickets.html:62
+#: templates/wishlist/list.html:24
+msgid "Sign out"
+msgstr "Выйти"
+
+#: templates/accounts/account_address_change.html:55
+msgid "Update address"
+msgstr "Обновить адрес"
+
+#: templates/accounts/account_addresses.html:18
+msgid "Add a new address"
+msgstr "Добавить новый адрес"
+
+#: templates/accounts/account_addresses.html:49
+#: templates/products/base/accessories.html:53
+#: templates/products/base/clothes.html:53
+#: templates/products/base/comics.html:53
+#: templates/products/base/home_decor.html:53
+#: templates/products/base/manufacturer.html:50
+#: templates/products/base/toys.html:53 templates/support/tickets.html:19
+#: templates/support/tickets.html:38
+msgid "Close"
+msgstr "Закрыть"
+
+#: templates/accounts/account_addresses.html:50
+msgid "Add address"
+msgstr "Добавить адрес"
+
+#: templates/accounts/account_addresses.html:72
+msgid "List of your addresses:"
+msgstr "Список ваших адресов:"
+
+#: templates/accounts/account_addresses.html:82
+msgid "Actions"
+msgstr "Действия"
+
+#: templates/accounts/account_addresses.html:89
+msgid "porch"
+msgstr "подъезд"
+
+#: templates/accounts/account_addresses.html:89
+msgid "level"
+msgstr "этаж"
+
+#: templates/accounts/account_addresses.html:89
+msgid "apt / office"
+msgstr "кв. / офис"
+
+#: templates/accounts/account_addresses.html:92
+msgid "Primary"
+msgstr "Основной"
+
+#: templates/accounts/account_addresses.html:96
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/accounts/account_addresses.html:99 templates/cart/detail.html:91
+#: templates/wishlist/list.html:56
+msgid "Remove"
+msgstr "Удалить"
+
+#: templates/accounts/account_addresses.html:106
+msgid "You have no addresses yet!"
+msgstr "У вас еще нет адресов!"
+
+#: templates/accounts/account_addresses.html:114
+msgid "Add new address"
+msgstr "Добавить новый адрес"
+
+#: templates/accounts/account_base.html:17 templates/admin/base.html:66
+#: templates/cart/detail.html:26 templates/contacts/contacts.html:27
+#: templates/contacts/store_detail.html:27 templates/main/base.html:350
+#: templates/main/index.html:8 templates/orders/create.html:26
+#: templates/products/base/accessories.html:30
+#: templates/products/base/clothes.html:30
+#: templates/products/base/comics.html:30
+#: templates/products/base/home_decor.html:30
+#: templates/products/base/manufacturer.html:27
+#: templates/products/base/search.html:28 templates/products/base/toys.html:30
+#: templates/products/detail/accessory.html:34
+#: templates/products/detail/clothes.html:34
+#: templates/products/detail/comic_book.html:34
+#: templates/products/detail/home_decor.html:34
+#: templates/products/detail/toy.html:34 templates/products/shop.html:20
+msgid "Home"
+msgstr "Главная"
+
+#: templates/accounts/account_base.html:21
+msgid "Account"
+msgstr "Учетная запись"
+
+#: templates/accounts/account_base.html:41
+#: templates/accounts/account_profile.html:33
+msgid "Your Avatar"
+msgstr "Ваш аватар"
+
+#: templates/accounts/account_base.html:50
+msgid "Dashboard"
+msgstr "Управление"
+
+#: templates/accounts/account_base.html:61 templates/main/base.html:287
+#: templates/wishlist/list.html:7 templates/wishlist/list.html:11
+#: templates/wishlist/list.html:14 wishlist/apps.py:8
+msgid "Wishlist"
+msgstr "Список желаний"
+
+#: templates/accounts/account_base.html:78
+msgid "Account settings"
+msgstr "Настройки учетной записи"
+
+#: templates/accounts/account_base.html:83
+#: templates/accounts/account_profile.html:8
+#: templates/accounts/account_profile.html:12
+#: templates/accounts/account_profile.html:15
+msgid "Profile info"
+msgstr "Информация о профиле"
+
+#: templates/accounts/account_base.html:93 templates/main/base.html:310
+#: templates/main/base.html:533
+msgid "Payment methods"
+msgstr "Способы оплаты"
+
+#: templates/accounts/account_profile.html:24
+msgid "Update you profile details below:"
+msgstr "Обновите данные своего профиля ниже:"
+
+#: templates/accounts/account_profile.html:46
+msgid "Upload JPG or PNG image. The minimum 300 x 300 required."
+msgstr ""
+"Загружайте изображение в формате JPG или PNG. Требуется минимум 300 х 300."
+
+#: templates/accounts/account_profile.html:64
+msgid "Update profile"
+msgstr "Обновить профиль"
+
+#: templates/accounts/account_profile.html:72
+#: templates/accounts/password_change.html:91 templates/admin/base.html:54
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: templates/accounts/account_profile.html:73
+msgid "Delete profile"
+msgstr "Удалить профиль"
+
+#: templates/accounts/account_profile_delete.html:6
+#: templates/accounts/account_profile_delete.html:10
+#: templates/accounts/account_profile_delete.html:13
+msgid "Deleting Profile"
+msgstr "Удаление профиля"
+
+#: templates/accounts/account_profile_delete.html:22
+msgid "This is extremely important."
+msgstr "Это очень важно."
+
+#: templates/accounts/account_profile_delete.html:27
+msgid ""
+"By deleting your account, you will also delete all information associated "
+"with your account."
+msgstr ""
+"Удаляя свою учетную запись, вы также удалите всю информацию, связанную с "
+"вашей учетной записью."
+
+#: templates/accounts/account_profile_delete.html:28
+msgid "Once you delete your account, there is no going back. Please make sure."
+msgstr ""
+"После того, как вы удалите свою учетную запись, пути назад уже не будет. "
+"Пожалуйста, убедитесь."
+
+#: templates/accounts/account_profile_delete.html:31
+msgid "Are you sure you want to delete your account?"
+msgstr "Вы уверены, что хотите удалить свою учетную запись?"
+
+#: templates/accounts/account_profile_delete.html:38
+msgid "Yes"
+msgstr "Да"
+
+#: templates/accounts/account_profile_delete.html:44
+msgid "No"
+msgstr "Нет"
+
+#: templates/accounts/password_change.html:6
+#: templates/accounts/password_change.html:10
+#: templates/accounts/password_change.html:13
+msgid "Password Change"
+msgstr "Изменение пароля"
+
+#: templates/accounts/password_change.html:17
+#: templates/accounts/password_change.html:24
+msgid "Create a new password below:"
+msgstr "Создайте новый пароль ниже:"
+
+#: templates/accounts/password_change.html:36
+msgid "Old password"
+msgstr "Старый пароль"
+
+#: templates/accounts/password_change.html:40
+#: templates/accounts/password_change.html:60
+#: templates/accounts/password_change.html:79
+#: templates/accounts/password_reset_confirm.html:30
+#: templates/accounts/password_reset_confirm.html:49
+#: templates/accounts/signin.html:41 templates/accounts/signup.html:41
+#: templates/accounts/signup.html:54
+msgid "Show password"
+msgstr "Показать пароль"
+
+#: templates/accounts/password_change.html:56
+#: templates/accounts/password_reset_confirm.html:26
+msgid "New password"
+msgstr "Новый пароль"
+
+#: templates/accounts/password_change.html:65
+#: templates/accounts/password_reset_confirm.html:35
+msgid "Your password can’t be too similar to your other personal information."
+msgstr ""
+"Ваш пароль не может быть слишком похож на другую вашу личную информацию."
+
+#: templates/accounts/password_change.html:66
+#: templates/accounts/password_reset_confirm.html:36
+msgid "Your password must contain at least 8 characters."
+msgstr "Ваш пароль должен содержать не менее 8 символов."
+
+#: templates/accounts/password_change.html:67
+#: templates/accounts/password_reset_confirm.html:37
+msgid "Your password can’t be a commonly used password."
+msgstr "Ваш пароль не может быть часто используемым паролем."
+
+#: templates/accounts/password_change.html:68
+#: templates/accounts/password_reset_confirm.html:38
+msgid "Your password can’t be entirely numeric."
+msgstr "Ваш пароль не может быть полностью цифровым."
+
+#: templates/accounts/password_change.html:75
+#: templates/accounts/password_reset_confirm.html:45
+msgid "New password confirmation"
+msgstr "Подтверждение нового пароля"
+
+#: templates/accounts/password_reset.html:6
+#: templates/email/password_reset_email.html:10
+#: templates/email/password_reset_subject.txt:1
+msgid "Password Reset"
+msgstr "Сброс пароля"
+
+#: templates/accounts/password_reset.html:15
+msgid "Forgot your password?"
+msgstr "Забыли свой пароль?"
+
+#: templates/accounts/password_reset.html:16
+msgid ""
+"Change your password in three easy steps. This helps to keep your new "
+"password secure."
+msgstr ""
+"Измените свой пароль в три простых шага. Это помогает сохранить ваш новый "
+"пароль в безопасности."
+
+#: templates/accounts/password_reset.html:18
+msgid "Fill in your email address below."
+msgstr "Заполните ваш адрес электронной почты ниже."
+
+#: templates/accounts/password_reset.html:19
+msgid "We’ll email you a temporary link."
+msgstr "Мы вышлем вам временную ссылку."
+
+#: templates/accounts/password_reset.html:20
+msgid "Go to the link to change your password on our secure website."
+msgstr ""
+"Перейдите по ссылке, чтобы изменить свой пароль на нашем безопасном веб-"
+"сайте."
+
+#: templates/accounts/password_reset.html:26
+msgid "Enter your email address"
+msgstr "Введите ваш адрес электронной почты"
+
+#: templates/accounts/password_reset.html:28
+msgid "Please provide valid email address."
+msgstr "Пожалуйста, укажите действующий адрес электронной почты."
+
+#: templates/accounts/password_reset.html:30
+msgid "Reset password"
+msgstr "Сбросить пароль"
+
+#: templates/accounts/password_reset_confirm.html:6
+#: templates/accounts/password_reset_confirm.html:17
+msgid "Password Reset Confirm"
+msgstr "Подтверждение сброса пароля"
+
+#: templates/accounts/password_reset_confirm.html:18
+msgid "Create a new password."
+msgstr "Создайте новый пароль."
+
+#: templates/accounts/password_reset_confirm.html:61
+msgid "Set new password"
+msgstr "Установить новый пароль"
+
+#: templates/accounts/password_reset_confirm.html:72
+msgid "The link is not valid or unused already!"
+msgstr "Ссылка уже не действительна или не используется!"
+
+#: templates/accounts/signin.html:6 templates/accounts/signin.html:23
+msgid "Sign in"
+msgstr "Авторизация"
+
+#: templates/accounts/signin.html:14 templates/accounts/signup.html:15
+msgid "You are already authorized!"
+msgstr "Вы уже авторизованы!"
+
+#: templates/accounts/signin.html:46
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+#: templates/accounts/signin.html:50 templates/accounts/signup.html:76
+#: templates/main/base.html:327 templates/products/reviews.html:280
+msgid "Sign In"
+msgstr "Войти"
+
+#: templates/accounts/signin.html:54
+msgid "No account?"
+msgstr "Нет аккаунта?"
+
+#: templates/accounts/signin.html:54 templates/accounts/signup.html:72
+msgid "Sign Up"
+msgstr "Зарегистрироваться"
+
+#: templates/accounts/signup.html:7 templates/accounts/signup.html:24
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: templates/accounts/signup.html:25
+msgid ""
+"Registration takes less than a minute but gives you full control over your "
+"orders."
+msgstr ""
+"Регистрация занимает меньше минуты, но дает вам полный контроль над вашими "
+"заказами."
+
+#: templates/accounts/signup.html:76
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"
+
+#: templates/admin/base.html:40
+msgid "Welcome,"
+msgstr ""
+
+#: templates/admin/base.html:45
+msgid "View site"
+msgstr ""
+
+#: templates/admin/base.html:50
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/base.html:56
+msgid "Log out"
+msgstr ""
+
+#: templates/admin/base_site.html:3
+msgid "Django site admin"
+msgstr ""
+
+#: templates/admin/base_site.html:6
+msgid "Django administration"
+msgstr ""
+
+#: templates/cart/detail.html:34
+msgid "Your cart"
+msgstr "Ваша корзина"
+
+#: templates/cart/detail.html:48
+msgid "Continue shopping"
+msgstr "Продолжить покупки"
+
+#: templates/cart/detail.html:98
+msgid "Update cart"
+msgstr "Обновить корзину"
+
+#: templates/cart/detail.html:101 templates/cart/navbar_expand.html:71
+#: templates/cart/script_base.html:34 templates/cart/script_detail.html:41
+msgid "Your cart is empty!"
+msgstr "Ваша корзина пуста!"
+
+#: templates/cart/detail.html:112
+msgid "Apply"
+msgstr "Применить"
+
+#: templates/cart/detail.html:116 templates/cart/navbar_expand.html:56
+#: templates/cart/script_base.html:131 templates/orders/create.html:145
+msgid "Total"
+msgstr "Итого"
+
+#: templates/cart/detail.html:147 templates/cart/navbar_expand.html:68
+#: templates/cart/script_base.html:144
+msgid "To order"
+msgstr "Заказать"
+
+#: templates/cart/navbar_expand.html:62 templates/cart/script_base.html:138
+msgid "Expand cart"
+msgstr "Развернуть корзину"
+
+#: templates/cart/toast_added_to_cart.html:8
+msgid "Added to cart!"
+msgstr "Добавлено в корзину!"
+
+#: templates/cart/toast_added_to_cart.html:13
+msgid "This product has been added to your cart."
+msgstr "Этот товар добавлен в вашу корзину."
+
+#: templates/contacts/contacts.html:47
+msgid "Main store address"
+msgstr "Адрес основного магазина"
+
+#: templates/contacts/contacts.html:52 templates/contacts/store_detail.html:55
+msgid "Click to see map"
+msgstr "Нажмите, чтобы увидеть карту"
+
+#: templates/contacts/contacts.html:65 templates/contacts/store_detail.html:68
+msgid "Mon"
+msgstr "Пн"
+
+#: templates/contacts/contacts.html:65 templates/contacts/store_detail.html:68
+msgid "Fri"
+msgstr "Пт"
+
+#: templates/contacts/contacts.html:70 templates/contacts/store_detail.html:73
+msgid "Sat"
+msgstr "Сб"
+
+#: templates/contacts/contacts.html:70 templates/contacts/store_detail.html:73
+msgid "Sun"
+msgstr "Вс"
+
+#: templates/contacts/contacts.html:82 templates/contacts/store_detail.html:85
+msgid "Phone numbers"
+msgstr "Телефонные номера"
+
+#: templates/contacts/contacts.html:85 templates/contacts/contacts.html:103
+#: templates/contacts/store_detail.html:88
+#: templates/contacts/store_detail.html:106
+msgid "For customers"
+msgstr "Для клиентов"
+
+#: templates/contacts/contacts.html:89 templates/contacts/contacts.html:107
+#: templates/contacts/store_detail.html:92
+#: templates/contacts/store_detail.html:110
+msgid "Tech support"
+msgstr "Техническая поддержка"
+
+#: templates/contacts/contacts.html:100
+#: templates/contacts/store_detail.html:103
+msgid "Email addresses"
+msgstr "Адреса электронной почты"
+
+#: templates/contacts/contacts.html:119
+msgid "Our Stores"
+msgstr "Наши магазины"
+
+#: templates/contacts/contacts.html:139
+msgid "Find us"
+msgstr "Найдите нас"
+
+#: templates/contacts/contacts.html:148
+msgid "Call us"
+msgstr "Позвоните нам"
+
+#: templates/contacts/contacts.html:155
+msgid "Write us"
+msgstr "Напишите нам"
+
+#: templates/contacts/contacts.html:195
+msgid "Drop us a line"
+msgstr "Напишите нам"
+
+#: templates/contacts/contacts.html:201
+msgid "Your name"
+msgstr "Ваше имя"
+
+#: templates/contacts/contacts.html:203
+msgid "Please fill in you name!"
+msgstr "Пожалуйста, введите свое имя!"
+
+#: templates/contacts/contacts.html:208
+msgid "Your Email"
+msgstr "Ваш E-mail"
+
+#: templates/contacts/contacts.html:210
+msgid "Please provide valid email address!"
+msgstr "Пожалуйста, укажите действующий адрес электронной почты!"
+
+#: templates/contacts/contacts.html:215
+msgid "Your phone"
+msgstr "Ваш телефон"
+
+#: templates/contacts/contacts.html:217
+msgid "Please provide valid phone number!"
+msgstr "Пожалуйста, укажите действующий номер телефона!"
+
+#: templates/contacts/contacts.html:223
+msgid "Provide short title of your request"
+msgstr "Укажите краткое название вашего запроса"
+
+#: templates/contacts/contacts.html:229
+msgid "Please describe in detail your request"
+msgstr "Пожалуйста, подробно опишите ваш запрос"
+
+#: templates/contacts/contacts.html:230
+msgid "Please write a message!"
+msgstr "Пожалуйста, напишите сообщение!"
+
+#: templates/contacts/contacts.html:232
+msgid "Send message"
+msgstr "Отправить сообщение"
+
+#: templates/contacts/store_detail.html:9
+#: templates/contacts/store_detail.html:33
+#: templates/contacts/store_detail.html:38
+msgid "Store info"
+msgstr "Информация о магазине"
+
+#: templates/contacts/store_detail.html:50
+msgid "Store address"
+msgstr "Адрес магазина"
+
+#: templates/email/newsletter_footer.html:11
+#: templates/email/newsletter_footer_text.html:6
+#: templates/email/password_reset_email.html:22
+#: templates/email/password_reset_email_text.html:14
+#: templates/email/signup_activation_email.html:23
+#: templates/email/signup_activation_email_text.html:14
+#: templates/email/subscriber_confirm_content.html:23
+#: templates/email/subscriber_confirm_content_text.html:14
+msgid "We wish you a nice day and a pleasant shopping at"
+msgstr "Мы желаем вам хорошего дня и приятных покупок на"
+
+#: templates/email/newsletter_footer.html:16
+#: templates/email/newsletter_footer_text.html:8
+#: templates/email/subscriber_confirm_content.html:28
+#: templates/email/subscriber_confirm_content_text.html:16
+msgid "To unsubscribe, click on the link:"
+msgstr "Чтобы отказаться от подписки, перейдите по ссылке:"
+
+#: templates/email/newsletter_footer.html:17
+#: templates/email/subscriber_confirm_content.html:29
+msgid "Unsubscribe"
+msgstr "Отписаться"
+
+#: templates/email/password_reset_email.html:4
+#: templates/email/password_reset_email_text.html:4
+#: templates/email/signup_activation_email.html:4
+#: templates/email/signup_activation_email_text.html:4
+#: templates/email/subscriber_confirm_content.html:4
+#: templates/email/subscriber_confirm_content_text.html:4
+msgid "Dear User!"
+msgstr "Дорогой Пользователь!"
+
+#: templates/email/password_reset_email.html:7
+#: templates/email/password_reset_email_text.html:6
+msgid "Someone asked for password reset for email"
+msgstr "Кто-то попросил сбросить пароль для электронной почты"
+
+#: templates/email/password_reset_email.html:9
+#: templates/email/password_reset_email_text.html:7
+msgid "If it was you, then follow the link below:"
+msgstr "Если это были вы, то перейдите по ссылке ниже:"
+
+#: templates/email/password_reset_email.html:19
+#: templates/email/password_reset_email_text.html:13
+#: templates/email/signup_activation_email.html:20
+#: templates/email/signup_activation_email_text.html:13
+#: templates/email/subscriber_confirm_content.html:20
+#: templates/email/subscriber_confirm_content_text.html:13
+msgid "This is an automatic letter, do not reply to it."
+msgstr "Это автоматическое письмо, не отвечайте на него."
+
+#: templates/email/signup_activation_email.html:7
+#: templates/email/signup_activation_email_text.html:6
+msgid "Thank you for registering in the"
+msgstr "Спасибо за регистрацию в"
+
+#: templates/email/signup_activation_email.html:10
+#: templates/email/signup_activation_email_text.html:7
+msgid ""
+"You need to complete the activation in order to verify your identity. To do "
+"this, please follow the link:"
+msgstr ""
+"Вам необходимо завершить активацию, чтобы подтвердить свою личность. Для "
+"этого перейдите по ссылке:"
+
+#: templates/email/signup_activation_email.html:11
+msgid "Confirm Email"
+msgstr "Подтвердить Email"
+
+#: templates/email/signup_activation_subject.txt:1
+msgid "User Activation"
+msgstr "Активация пользователя"
+
+#: templates/email/subscriber_confirm_content.html:7
+#: templates/email/subscriber_confirm_content_text.html:6
+msgid "You have subscribed to newsletter from"
+msgstr "Вы подписались на рассылку новостей от"
+
+#: templates/email/subscriber_confirm_content.html:10
+#: templates/email/subscriber_confirm_content_text.html:7
+msgid "To confirm your email you need to follow the link:"
+msgstr "Для подтверждения электронной почты вам необходимо перейти по ссылке:"
+
+#: templates/email/subscriber_confirm_content.html:11
+msgid "Confirm Subscribe"
+msgstr "Подтвердить подписку"
+
+#: templates/email/subscriber_confirm_subject.txt:1
+msgid "Email confirmation"
+msgstr "Подтверждение электронного адреса"
+
+#: templates/errors/400.html:6
+msgid "Error 400"
+msgstr ""
+
+#: templates/errors/403.html:6
+msgid "Error 403"
+msgstr ""
+
+#: templates/errors/404.html:6
+msgid "Error 404"
+msgstr ""
+
+#: templates/errors/500.html:6
+msgid "Error 500"
+msgstr ""
+
+#: templates/main/about.html:7 templates/main/base.html:498
+msgid "About"
+msgstr "О нас"
+
+#: templates/main/about.html:17
+msgid "We are glad to welcome you!"
+msgstr "Мы рады вас приветствовать!"
+
+#: templates/main/about.html:18
+msgid ""
+"Our store compares favorably with other book and comic stores precisely "
+"because of our approach to business, design, assortment, advertising and "
+"communication with customers. We value our clients and try to devote those "
+"interested to the immense, but so interesting and diverse world of comics."
+msgstr ""
+"Наш магазин выгодно отличается от других магазинов книг и комиксов именно "
+"благодаря нашему подходу к бизнесу, дизайну, ассортименту, рекламе и общению "
+"с покупателями. Мы дорожим своими клиентами и стараемся посвятить всех "
+"желающих в необъятный, но такой интересный и разнообразный мир комиксов."
+
+#: templates/main/about.html:26
+msgid "Our Capabilities"
+msgstr "Наши возможности"
+
+#: templates/main/about.html:27
+msgid ""
+"We offer a wide range of products. Here you can find comics, toys, clothes, "
+"various accessories for yourself, family and friends. There is a system of "
+"discounts. Products can be purchased with a special promotional code. Each "
+"of our employees will be happy to help you find something to your liking, "
+"even if you do not know what exactly you are looking for or where to start "
+"your acquaintance with comics."
+msgstr ""
+"Мы предлагаем широкий ассортимент продукции. Здесь можно найти комиксы, "
+"игрушки, одежду, различные аксессуары для себя, семьи и друзей. Есть система "
+"скидок. Товары можно приобрести по специальному промокоду. Каждый наш "
+"сотрудник будет рад помочь вам найти что-то по душе, даже если вы не знаете, "
+"что именно ищете или с чего начать знакомство с комиксами."
+
+#: templates/main/about.html:35
+msgid "Our team"
+msgstr "Наша команда"
+
+#: templates/main/about.html:36
+msgid ""
+"The specialists working here are keen readers who are constantly expanding "
+"their beloved world. We thoroughly know the needs of consumers and follow "
+"each new product, published in print media, gifts, souvenirs related to "
+"them. Thus, we provide an opportunity for our customers to find any "
+"significant thing related to their favorite stories and characters."
+msgstr ""
+"Специалисты работающие здесь — это увлечённые читатели, постоянно "
+"расширяющие любимый мир. Мы досконально знаем запросы потребителей и следим "
+"за каждой новинкой, выходящей в печатных изданиях, подарков, сувениров, "
+"связанных с ними. Таким образом, мы предоставляем возможность своим "
+"покупателям, найти любую значимую вещь, связанную с полюбившимися историями "
+"и персонажами."
+
+#: templates/main/about.html:43
+msgid "Our core team"
+msgstr "Наша основная команда"
+
+#: templates/main/about.html:44
+msgid "People behind your great shopping experience"
+msgstr "Люди, стоящие за вашим отличным покупательским опытом"
+
+#: templates/main/about.html:100
+msgid ""
+"That person who helps others simply because it should or must be done, and "
+"because it is the right thing to do, is indeed without a doubt, a real "
+"superhero."
+msgstr ""
+"Тот, кто помогает другим только потому, что так надо и так правильно, и "
+"есть, без сомнения, настоящий супергерой."
+
+#: templates/main/about.html:102
+msgid "Stan Lee"
+msgstr "Стэн Ли"
+
+#: templates/main/base.html:88
+msgid "Success!"
+msgstr "Успех!"
+
+#: templates/main/base.html:98
+msgid "Error!"
+msgstr "Ошибка!"
+
+#: templates/main/base.html:108
+msgid "Info message!"
+msgstr "Информационное сообщение!"
+
+#: templates/main/base.html:147
+msgid "Free shipping for order over $200"
+msgstr "Бесплатная доставка при заказе от $200"
+
+#: templates/main/base.html:148 templates/main/base.html:443
+msgid "We return money within 30 days"
+msgstr "Возвращаем деньги в течении 30 дней"
+
+#: templates/main/base.html:149 templates/main/base.html:452
+msgid "Friendly 24/7 customer support"
+msgstr "Дружелюбная круглосуточная служба поддержки клиентов"
+
+#: templates/main/base.html:205 templates/products/base/search.html:39
+msgid "Search for products"
+msgstr "Поиск товаров"
+
+#: templates/main/base.html:209 templates/main/base.html:216
+#: templates/main/base.html:223 templates/main/base.html:230
+#: templates/main/base.html:237 templates/main/base.html:244
+msgid "All categories"
+msgstr "Все категории"
+
+#: templates/main/base.html:260
+msgid "Expand menu"
+msgstr "Развернуть меню"
+
+#: templates/main/base.html:276
+msgid "My Account"
+msgstr "Мой аккаунт"
+
+#: templates/main/base.html:300
+msgid "Profile"
+msgstr "Профиль"
+
+#: templates/main/base.html:327
+msgid "Hello"
+msgstr "Привет"
+
+#: templates/main/base.html:382
+msgid "Categories of goods"
+msgstr "Категории товаров"
+
+#: templates/main/base.html:394
+msgid "Information"
+msgstr "Информация"
+
+#: templates/main/base.html:396
+msgid "Main Promotions"
+msgstr "Главные акции"
+
+#: templates/main/base.html:397
+msgid "Discounts | Promo codes"
+msgstr "Скидки | Промокоды"
+
+#: templates/main/base.html:398
+msgid "Gift Promotions"
+msgstr "Подарочные акции"
+
+#: templates/main/base.html:399
+msgid "Bonuses"
+msgstr "Бонусы"
+
+#: templates/main/base.html:405
+msgid "Stay informed"
+msgstr "Будьте в курсе"
+
+#: templates/main/base.html:414
+msgid "Your email"
+msgstr "Ваш e-mail"
+
+#: templates/main/base.html:416
+msgid "Subscribe"
+msgstr "Подписаться"
+
+#: templates/main/base.html:419
+msgid ""
+"Subscribe to our newsletter to receive early discount offers, updates and "
+"new products info."
+msgstr ""
+"Подпишитесь на нашу рассылку, чтобы получать ранние предложения скидок, "
+"обновления и информацию о новых продуктах."
+
+#: templates/main/base.html:433
+msgid "Fast and free delivery"
+msgstr "Быстрая и бесплатная доставка"
+
+#: templates/main/base.html:434
+msgid "Free delivery for all orders over $200"
+msgstr "Бесплатная доставка для всех заказов свыше $200"
+
+#: templates/main/base.html:442
+msgid "Money back guarantee"
+msgstr "Гарантия возврата денег"
+
+#: templates/main/base.html:451
+msgid "24/7 customer support"
+msgstr "24/7 служба поддержки клиентов"
+
+#: templates/main/base.html:460
+msgid "Secure online payment"
+msgstr "Безопасная онлайн-оплата"
+
+#: templates/main/base.html:461
+msgid "We possess SSL / Secure сertificate"
+msgstr "У нас есть сертификат SSL / Secure"
+
+#: templates/main/base.html:504 templates/main/delivery.html:7
+#: templates/orders/create.html:76
+msgid "Delivery"
+msgstr "Доставка"
+
+#: templates/main/base.html:507
+msgid "Privacy"
+msgstr ""
+
+#: templates/main/base.html:547
+msgid "Menu"
+msgstr "Меню"
+
+#: templates/main/base.html:568
+msgid "Top"
+msgstr "Верх"
+
+#: templates/main/delivery.html:17
+msgid "Fast delivery"
+msgstr "Быстрая доставка"
+
+#: templates/main/delivery.html:18
+msgid ""
+"Delivery times are from 1 to 4 working days. The courier brings the parcel "
+"and hands you the order in person, or to the pick-up point, having "
+"previously notified you of his arrival. If the courier does not find you on "
+"the spot, the delivery is postponed to another day. The dispatch of the "
+"goods is carried out in 1-2 days after you receive the notification by e-"
+"mail. If there is no notification for a long time, please contact us by "
+"phone or by writing to us by e-mail."
+msgstr ""
+"Сроки доставки от 1 до 4 рабочих дней. Курьер приносит посылку и вручает вам "
+"заказ лично или в пункт выдачи, предварительно уведомив вас о своем "
+"прибытии. Если курьер не найдет вас на месте, доставка переносится на другой "
+"день. Отправка товара осуществляется через 1-2 дня после получения "
+"уведомления по электронной почте. Если уведомления не поступают в течение "
+"длительного времени, свяжитесь с нами по телефону или написав нам по "
+"электронной почте."
+
+#: templates/main/delivery.html:26
+msgid "Cost of delivery"
+msgstr "Стоимость доставки"
+
+#: templates/main/delivery.html:27
+msgid ""
+"We deliver comics all over the country. The movement of your parcel can be "
+"tracked in your Personal Account on our website. Free delivery to our stores "
+"is available on our website when ordering from 50 rubles. Free delivery is "
+"also available for residents of Minsk. Free delivery to remote regions is "
+"carried out from 500 rubles."
+msgstr ""
+"Мы доставляем комиксы по всей стране. За перемещением вашей посылки можно "
+"следить в Личном кабинете на нашем сайте. Бесплатная доставка в наши "
+"магазины доступна на нашем сайте при заказе от 50 руб. Бесплатная доставка "
+"также доступна для жителей Минска. Бесплатная доставка в отдаленные регионы "
+"осуществляется от 500 руб."
+
+#: templates/main/delivery.html:35
+msgid "Storage of goods"
+msgstr "Хранение товаров"
+
+#: templates/main/delivery.html:36
+msgid ""
+"Attention! The period of free ordering of goods in the store is 7 days. "
+"After the expiration of the storage period, your product will be put up for "
+"sale. Be careful and track your parcels by order number from your personal "
+"account. Please note that when you receive your parcel, you will need an "
+"order number."
+msgstr ""
+"Внимание! Срок бесплатного заказа товаров в магазине - 7 дней. По истечении "
+"срока хранения ваш товар будет выставлен на продажу. Будьте внимательны и "
+"отслеживайте свои посылки по номеру заказа из личного кабинета. Обратите "
+"внимание, что при получении посылки вам понадобится номер заказа."
+
+#: templates/main/index.html:25 templates/main/index.html:42
+#: templates/main/index.html:58
+msgid "Shang-Chi and"
+msgstr "Шан-Чи и"
+
+#: templates/main/index.html:26 templates/main/index.html:43
+#: templates/main/index.html:59
+msgid "the Legend of the Ten Rings"
+msgstr "Легенда десяти колец"
+
+#: templates/main/index.html:27 templates/main/index.html:44
+#: templates/main/index.html:60
+msgid "Gear up for the epic new journey with clothing, action figures & more."
+msgstr ""
+"Приготовьтесь к новому эпическому путешествию с одеждой, фигурками и многим "
+"другим."
+
+#: templates/main/index.html:29 templates/main/index.html:46
+#: templates/main/index.html:62
+msgid "Shop Now"
+msgstr "Купить сейчас"
+
+#: templates/main/index.html:81
+msgid "View Comics"
+msgstr "Посмотреть комиксы"
+
+#: templates/main/index.html:131
+msgid "View Toys"
+msgstr "Посмотреть игрушки"
+
+#: templates/main/index.html:180
+msgid "View Clothes"
+msgstr "Посмотреть одежду"
+
+#: templates/main/index.html:221
+msgid "Shop by brand"
+msgstr "Купить по бренду"
+
+#: templates/main/index.html:240
+msgid "Read the blog"
+msgstr "Читать блог"
+
+#: templates/main/index.html:241
+msgid "Latest store news"
+msgstr "Последние новости магазина"
+
+#: templates/main/index.html:249
+msgid "Follow on Instagram"
+msgstr "Следуйте в Instagram"
+
+#: templates/main/index_product.html:7
+#: templates/products/detail/accessory.html:150
+#: templates/products/detail/clothes.html:150
+#: templates/products/detail/comic_book.html:150
+#: templates/products/detail/home_decor.html:150
+#: templates/products/detail/toy.html:150
+#: templates/products/grid/products.html:10
+#: templates/products/list/products.html:9
+#: templates/products/other_products.html:15
+#: templates/products/other_products.html:103
+msgid "Sale"
+msgstr "Распродажа"
+
+#: templates/main/index_product.html:10
+#: templates/products/detail/accessory.html:133
+#: templates/products/detail/clothes.html:133
+#: templates/products/detail/comic_book.html:133
+#: templates/products/detail/home_decor.html:133
+#: templates/products/detail/toy.html:133
+#: templates/products/grid/products.html:13
+#: templates/products/list/products.html:12
+#: templates/products/other_products.html:17
+#: templates/products/other_products.html:105
+msgid "Add to wishlist"
+msgstr "Добавить в список желаний"
+
+#: templates/main/pagination.html:11 templates/main/pagination.html:15
+msgid "Prev"
+msgstr "Предыдущая"
+
+#: templates/main/pagination.html:42 templates/main/pagination.html:46
+msgid "Next"
+msgstr "Следующая"
+
+#: templates/orders/complete.html:6
+msgid "Checkout Complete"
+msgstr "Оформление заказа завершено"
+
+#: templates/orders/complete.html:20
+msgid "Thank you for your order!"
+msgstr "Спасибо за ваш заказ!"
+
+#: templates/orders/complete.html:21
+msgid "Your order has been placed and will be processed as soon as possible."
+msgstr "Ваш заказ размещен и будет обработан в кратчайшие сроки."
+
+#: templates/orders/complete.html:22
+msgid "Your order number, which is"
+msgstr "Номер вашего заказа:"
+
+#: templates/orders/complete.html:23
+msgid "You will be receiving an email shortly with confirmation of your order."
+msgstr "Вскоре вы получите электронное письмо с подтверждением вашего заказа."
+
+#: templates/orders/complete.html:23
+msgid "You can"
+msgstr "Вы можете"
+
+#: templates/orders/complete.html:25
+msgid "Go back shopping"
+msgstr "Вернуться к покупкам"
+
+#: templates/orders/complete.html:29
+msgid "View order info"
+msgstr "Посмотреть информацию о заказе"
+
+#: templates/orders/create.html:8 templates/orders/create.html:32
+#: templates/orders/create.html:37
+msgid "Checkout"
+msgstr "Оформление заказа"
+
+#: templates/orders/create.html:56
+msgid "Data"
+msgstr "Данные"
+
+#: templates/orders/create.html:60
+msgid "Payment"
+msgstr "Оплата"
+
+#: templates/orders/create.html:66
+msgid "Your details"
+msgstr "Ваши данные"
+
+#: templates/orders/create.html:100 templates/orders/create.html:186
+msgid "Back to Cart"
+msgstr "Вернуться в корзину"
+
+#: templates/orders/create.html:101 templates/orders/create.html:187
+msgid "Back"
+msgstr "Назад"
+
+#: templates/orders/create.html:106 templates/orders/create.html:192
+msgid "Proceed to Payment"
+msgstr "Перейти к оплате"
+
+#: templates/orders/create.html:107 templates/orders/create.html:193
+msgid "Continue"
+msgstr "Продолжить"
+
+#: templates/orders/create.html:119
+msgid "Order summary"
+msgstr "Итог заказа"
+
+#: templates/orders/detail.html:14 templates/orders/detail.html:17
+msgid "Order info"
+msgstr "Информация о заказе"
+
+#: templates/orders/detail.html:26
+msgid "Details of your order"
+msgstr "Детали вашего заказа"
+
+#: templates/orders/detail.html:30
+msgid "Ordered goods"
+msgstr "Заказанные товары"
+
+#: templates/orders/detail.html:61
+msgid "Cost info"
+msgstr "Информация о стоимости"
+
+#: templates/orders/detail.html:90
+msgid "Details of order"
+msgstr "Детали заказа"
+
+#: templates/orders/detail.html:93 templates/orders/list.html:34
+msgid "Order #"
+msgstr "Заказ №"
+
+#: templates/orders/detail.html:97 templates/orders/list.html:35
+msgid "Date Purchased"
+msgstr "Дата покупки"
+
+#: templates/orders/list.html:7 templates/orders/list.html:11
+#: templates/orders/list.html:14
+msgid "Orders History"
+msgstr "История заказов"
+
+#: templates/orders/list.html:18 templates/orders/list.html:25
+msgid "List of your orders:"
+msgstr "Список ваших заказов:"
+
+#: templates/orders/list.html:74
+msgid "You have no orders yet!"
+msgstr "У вас еще нет заказов!"
+
+#: templates/products/base/accessories.html:34
+#: templates/products/base/clothes.html:34
+#: templates/products/base/comics.html:34
+#: templates/products/base/home_decor.html:34
+#: templates/products/base/manufacturer.html:31
+#: templates/products/base/search.html:32 templates/products/base/toys.html:34
+#: templates/products/detail/accessory.html:38
+#: templates/products/detail/clothes.html:38
+#: templates/products/detail/comic_book.html:38
+#: templates/products/detail/home_decor.html:38
+#: templates/products/detail/toy.html:38 templates/products/shop.html:7
+#: templates/products/shop.html:23 templates/products/shop.html:28
+msgid "Shop"
+msgstr "Магазин"
+
+#: templates/products/base/accessories.html:54
+#: templates/products/base/clothes.html:54
+#: templates/products/base/comics.html:54
+#: templates/products/base/home_decor.html:54
+#: templates/products/base/manufacturer.html:51
+#: templates/products/base/toys.html:54
+msgid "Close sidebar"
+msgstr "Закрыть боковую панель"
+
+#: templates/products/base/accessories.html:107
+#: templates/products/base/clothes.html:136
+#: templates/products/base/comics.html:127
+#: templates/products/base/home_decor.html:107
+#: templates/products/base/manufacturer.html:104
+#: templates/products/base/toys.html:141
+msgid "Reset"
+msgstr "Сбросить"
+
+#: templates/products/base/accessories.html:108
+#: templates/products/base/clothes.html:137
+#: templates/products/base/comics.html:128
+#: templates/products/base/home_decor.html:108
+#: templates/products/base/manufacturer.html:105
+#: templates/products/base/toys.html:142
+msgid "Show"
+msgstr "Показать"
+
+#: templates/products/base/accessories.html:126
+#: templates/products/base/clothes.html:155
+#: templates/products/base/comics.html:146
+#: templates/products/base/home_decor.html:126
+#: templates/products/base/manufacturer.html:123
+#: templates/products/base/search.html:82 templates/products/base/toys.html:160
+#, python-format
+msgid "of %(count)s products"
+msgstr "из %(count)s продуктов"
+
+#: templates/products/base/accessories.html:174
+#: templates/products/base/clothes.html:203
+#: templates/products/base/comics.html:194
+#: templates/products/base/home_decor.html:174
+#: templates/products/base/manufacturer.html:171
+#: templates/products/base/toys.html:208
+msgid "Filters"
+msgstr "Фильтры"
+
+#: templates/products/base/comics.html:97 templates/products/base/search.html:8
+#: templates/products/base/search.html:34 templates/products/base/toys.html:97
+msgid "Search"
+msgstr "Поиск"
+
+#: templates/products/detail/accessory.html:130
+#: templates/products/detail/clothes.html:130
+#: templates/products/detail/comic_book.html:130
+#: templates/products/detail/home_decor.html:130
+#: templates/products/detail/toy.html:130 templates/products/reviews.html:11
+#, python-format
+msgid "%(count)s Reviews"
+msgstr "%(count)s отзыв(ов)"
+
+#: templates/products/detail/accessory.html:156
+#: templates/products/detail/clothes.html:156
+#: templates/products/detail/comic_book.html:156
+#: templates/products/detail/home_decor.html:156
+#: templates/products/detail/toy.html:156
+msgid "Product available"
+msgstr "Продукт доступен"
+
+#: templates/products/detail/accessory.html:160
+#: templates/products/detail/clothes.html:160
+#: templates/products/detail/comic_book.html:160
+#: templates/products/detail/home_decor.html:160
+#: templates/products/detail/toy.html:160
+msgid "Product not available"
+msgstr "Продукт недоступен"
+
+#: templates/products/detail/accessory.html:174
+#: templates/products/detail/clothes.html:174
+#: templates/products/detail/comic_book.html:174
+#: templates/products/detail/home_decor.html:174
+#: templates/products/detail/toy.html:174
+#: templates/products/grid/products.html:87
+#: templates/products/list/products.html:86
+msgid "Add to Cart"
+msgstr "Добавить в корзину"
+
+#: templates/products/detail/accessory.html:203
+#: templates/products/detail/clothes.html:203
+#: templates/products/detail/comic_book.html:203
+#: templates/products/detail/home_decor.html:203
+#: templates/products/detail/toy.html:203
+msgid "Product info"
+msgstr "Информация о продукте"
+
+#: templates/products/detail/accessory.html:289
+#: templates/products/detail/clothes.html:305
+#: templates/products/detail/comic_book.html:319
+#: templates/products/detail/home_decor.html:289
+#: templates/products/detail/toy.html:313
+msgid "Share"
+msgstr "Поделиться"
+
+#: templates/products/detail/toy.html:238
+msgid "mm"
+msgstr "мм"
+
+#: templates/products/detail/toy.html:242
+msgid "g"
+msgstr "г"
+
+#: templates/products/grid/products.html:98
+#: templates/products/list/products.html:98
+msgid "No products"
+msgstr "Нет товаров"
+
+#: templates/products/grid/products.html:99
+#: templates/products/list/products.html:99
+msgid "There are no products for this request!"
+msgstr "Нет товаров по этому запросу!"
+
+#: templates/products/other_products.html:7
+msgid "You may also like"
+msgstr "Вам также может понравиться"
+
+#: templates/products/other_products.html:95
+msgid "Other products"
+msgstr "Другие товары"
+
+#: templates/products/reviews.html:51
+msgid "Overall rating"
+msgstr "Общий рейтинг"
+
+#: templates/products/reviews.html:136
+msgid "View all reviews"
+msgstr "Посмотреть все отзывы"
+
+#: templates/products/reviews.html:266
+msgid "Write a review"
+msgstr "Написать отзыв"
+
+#: templates/products/reviews.html:270
+msgid "Submit a Review"
+msgstr "Отправить отзыв"
+
+#: templates/products/reviews.html:279
+msgid "To leave a comment, you need to"
+msgstr "Чтобы оставить комментарий, вам необходимо"
+
+#: templates/products/shop.html:57 templates/products/shop.html:85
+#: templates/products/shop.html:113 templates/products/shop.html:141
+#: templates/products/shop.html:169
+msgid "View all"
+msgstr "Посмотреть все"
+
+#: templates/products/shop.html:180
+msgid "Brands"
+msgstr "Бренды"
+
+#: templates/support/ticket_detail.html:28
+#: templates/support/ticket_detail.html:72
+msgid "Date Created"
+msgstr "Дата создания"
+
+#: templates/support/ticket_detail.html:32
+#: templates/support/ticket_detail.html:76
+msgid "Last Updated"
+msgstr "Последнее обновление"
+
+#: templates/support/ticket_detail.html:134
+msgid "Leave a Message"
+msgstr "Оставьте сообщение"
+
+#: templates/support/ticket_detail.html:141
+msgid "Submit and close the ticket"
+msgstr "Отправить и закрыть билет"
+
+#: templates/support/ticket_detail.html:143
+msgid "Submit message"
+msgstr "Отправить сообщение"
+
+#: templates/support/tickets.html:18 templates/support/tickets.html:119
+msgid "Submit new ticket"
+msgstr "Отправить новый билет"
+
+#: templates/support/tickets.html:22
+msgid "We normally respond tickets within 2 business days."
+msgstr "Обычно мы отвечаем на билеты в течение 2 рабочих дней."
+
+#: templates/support/tickets.html:33
+msgid "Describe your issue"
+msgstr "Опишите вашу проблему"
+
+#: templates/support/tickets.html:39
+msgid "Submit Ticket"
+msgstr "Отправить билет"
+
+#: templates/support/tickets.html:61
+msgid "List of support tickets:"
+msgstr "Список обращений в службу поддержки:"
+
+#: templates/support/tickets.html:71
+msgid "Date Created | Updated"
+msgstr "Дата создания | обновления"
+
+#: templates/support/tickets.html:111
+msgid "You have no tickets yet!"
+msgstr "У вас еще нет билетов!"
+
+#: templates/wishlist/list.html:23
+msgid "List of items you added to wishlist:"
+msgstr "Список предметов, которые вы добавили в список желаний:"
+
+#: templates/wishlist/list.html:61 templates/wishlist/list.html:89
+msgid "You have no wishes yet!"
+msgstr "У вас пока нет желаний!"
+
+#: templates/wishlist/toast_added_to_wishlist.html:8
+msgid "Added to wishlist!"
+msgstr "Добавлено в список желаний!"
+
+#: wishlist/models.py:26
+msgid "Wish"
+msgstr "Желание"
+
+#: wishlist/models.py:27
+msgid "Wishes"
+msgstr "Пожелания"
+
+#: wishlist/views.py:34
+msgid "This product has already been added to your wishlist."
+msgstr "Этот продукт уже добавлен в ваш список желаний."
+
+#: wishlist/views.py:38
+msgid "This product has been added to your wishlist."
+msgstr "Этот продукт добавлен в ваш список желаний."
+
+#: wishlist/views.py:50 wishlist/views.py:58
+msgid "Wish does not exist!"
+msgstr "Желания не существует!"

@@ -1,0 +1,31 @@
+{% load i18n %}
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  function wishAdd() {
+    const button = $(this);
+    const productId = button.data("id");
+
+    $.ajax({
+      url: "{% url 'wishlist:wish_add' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "product_id": productId,
+      },
+
+      success: function(data) {
+        $("#wish-toast-body").text(data.message);
+        $("#wish-toast").toast("show");
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  };
+  $("[data-action='wish-add']").click(wishAdd);
+
+});
+</script>

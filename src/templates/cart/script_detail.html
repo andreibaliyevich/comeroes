@@ -1,0 +1,112 @@
+{% load i18n %}
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  function cartRemove() {
+    const button = $(this);
+    const productId = button.data("id");
+
+    $.ajax({
+      url: "{% url 'cart:cart_remove' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "product_id": productId,
+      },
+
+      success: function(data) {
+        $("#cart-navbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-toolbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-info-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-info-total-cost").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_cost[0] + ".<small>" + data.cart_total_cost[1] + "</small>"
+        );
+
+        if (data.cart_len == 0) {
+          $("#cart-navbar-label").remove();
+          $("#cart-toolbar-badge").remove();
+          $("#cart-info").html(
+            "<div class=\"h3 text-center my-4 pb-3\">{% translate 'Your cart is empty!' %}</div>"
+          );
+        } else {
+          $("#cart-navbar-label").text(data.cart_len);
+          $("#cart-toolbar-badge").text(data.cart_len);
+          $("#cart-info-item-" + productId).remove();
+        }
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  };
+  $("[data-action='cart-remove']").click(cartRemove);
+
+  function cartUpdate() {
+    const itemInputs = $(".item-inputs");
+
+    let itemIds = [];
+    let itemQuantities = [];
+
+    for (let i = 0; i < itemInputs.length; i++) {
+      itemIds.push(itemInputs[i].dataset.id);
+      itemQuantities.push(itemInputs[i].value);
+    }
+
+    $.ajax({
+      url: "{% url 'cart:cart_update' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "item_ids": itemIds.join(" "),
+        "item_quantities": itemQuantities.join(" "),
+      },
+
+      success: function(data) {
+        $("#cart-navbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-toolbar-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-info-total-price").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_price[0] + ".<small>" + data.cart_total_price[1] + "</small>"
+        );
+        $("#cart-info-total-cost").html(
+          "{{ user_currency.1 }}" +
+          data.cart_total_cost[0] + ".<small>" + data.cart_total_cost[1] + "</small>"
+        );
+
+        $("#cart-navbar-label").text(data.cart_len);
+        $("#cart-toolbar-badge").text(data.cart_len);
+
+        for (let i = 0; i < itemInputs.length; i++) {
+          $("#cart-info-item-total-price-" + itemIds[i]).html(
+            "{{ user_currency.1 }}" +
+            data.item_total_prices[i][0] + ".<small>" + data.item_total_prices[i][1] + "</small>"
+          );
+        }
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  };
+  $("#cart-update").click(cartUpdate);
+
+});
+</script>

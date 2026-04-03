@@ -1,0 +1,108 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load main_extras %}
+
+
+{% block title %}{% translate 'Search' %} | {{ request.GET.q }}{% endblock title %}
+
+
+{% block stylesheet %}
+<link rel="stylesheet" media="screen" href="{% static 'css/nouislider.min.css' %}">
+<link rel="stylesheet" media="screen" href="{% static 'css/drift-basic.min.css' %}">
+{% endblock stylesheet %}
+
+
+{% block content %}
+
+{# Page Title (Shop Alt) #}
+<div class="bg-dark pt-4 pb-5">
+  <div class="container pt-2 pb-3 pt-lg-3 pb-lg-4">
+    <div class="d-lg-flex justify-content-between pb-3">
+      <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+            <li class="breadcrumb-item">
+              <a class="text-nowrap" href="{% url 'main:index' %}">
+                <i class="czi-home"></i>{% translate 'Home' %}
+              </a>
+            </li>
+            <li class="breadcrumb-item text-nowrap">
+              <a href="{% url 'products:shop' %}">{% translate 'Shop' %}</a>
+            </li>
+            <li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Search' %}</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+        <h1 class="h3 text-light mb-0">{% translate 'Search for products' %}</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# Page Content #}
+<div class="container pb-5 mb-2 mb-md-4">
+  <div class="bg-light box-shadow-lg rounded-lg p-4 mt-n5 mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+
+      <div class="d-flex">
+        {% if objects_page.has_previous %}
+        <a class="nav-link-style mr-3" href="{% query_transform page=objects_page.previous_page_number %}">
+          <i class="czi-arrow-left"></i>
+        </a>
+        {% else %}
+        <a class="nav-link-style disabled mr-3" href="#">
+          <i class="czi-arrow-left"></i>
+        </a>
+        {% endif %}
+        <span class="font-size-md">
+          {{ objects_page.number }} / {{ objects_page.paginator.num_pages }}
+        </span>
+        {% if objects_page.has_next %}
+        <a class="nav-link-style ml-3" href="{% query_transform page=objects_page.next_page_number %}">
+          <i class="czi-arrow-right"></i>
+        </a>
+        {% else %}
+        <a class="nav-link-style disabled ml-3" href="#">
+          <i class="czi-arrow-right"></i>
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="d-flex flex-wrap">
+        <div class="form-inline flex-nowrap">
+          <label class="opacity-75 text-nowrap mr-2 d-none d-sm-block" for="sorting">{{ sorting_form.type_sort.label }}</label>
+          <select class="form-control custom-select" id="sorting" onchange="location=this.value;">
+            {% for value, text in sorting_form.type_sort.field.choices %}
+            <option value="{% url 'products:set_sort' value %}"{% if sorting_form.type_sort.value == value %} selected{% endif %}>{{ text }}</option>
+            {% endfor %}
+          </select>
+          <span class="font-size-sm opacity-75 text-nowrap ml-2 d-none d-md-block">{% blocktrans with count=objects_page.paginator.count %}of {{ count }} products{% endblocktrans %}</span>
+        </div>
+      </div>
+
+      {% block set_view_link %}{% endblock set_view_link %}
+
+    </div>
+  </div>
+
+  {% block products_content %}{% endblock products_content %}
+
+  {% include 'main/pagination.html' %}
+
+</div>
+
+{% include 'cart/toast_added_to_cart.html' %}
+{% include 'wishlist/toast_added_to_wishlist.html' %}
+
+{% endblock content %}
+
+
+{% block javascript %}
+<script src="{% static 'js/nouislider.min.js' %}"></script>
+<script src="{% static 'js/Drift.min.js' %}"></script>
+{% include 'cart/script_base.html' %}
+{% include 'wishlist/script_wish_add.html' %}
+{% endblock javascript %}

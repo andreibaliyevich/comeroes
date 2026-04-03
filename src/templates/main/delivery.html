@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% translate 'Delivery' %}{% endblock title %}
+
+
+{% block content %}
+
+<main class="container-fluid px-0">
+  <section class="row no-gutters">
+    <div class="col-md-6 bg-position-center bg-size-cover bg-secondary" style="min-height: 15rem; background-image: url({% static 'img/delivery/01.jpg' %});"><span class="split-section-arrow arrow-left"></span></div>
+    <div class="col-md-6 px-3 px-md-5 py-5">
+      <div class="mx-auto py-lg-5" style="max-width: 35rem;">
+        <h2 class="h3 pb-3">{% translate 'Fast delivery' %}</h2>
+        <p class="font-size-sm pb-3 text-muted">{% translate 'Delivery times are from 1 to 4 working days. The courier brings the parcel and hands you the order in person, or to the pick-up point, having previously notified you of his arrival. If the courier does not find you on the spot, the delivery is postponed to another day. The dispatch of the goods is carried out in 1-2 days after you receive the notification by e-mail. If there is no notification for a long time, please contact us by phone or by writing to us by e-mail.' %}</p>
+      </div>
+    </div>
+  </section>
+  <section class="row no-gutters">
+    <div class="col-md-6 bg-position-center bg-size-cover bg-secondary order-md-2" style="min-height: 15rem; background-image: url({% static 'img/delivery/02.jpg' %});"><span class="split-section-arrow arrow-right"></span></div>
+    <div class="col-md-6 px-3 px-md-5 py-5 order-md-1">
+      <div class="mx-auto py-lg-5" style="max-width: 35rem;">
+        <h2 class="h3 pb-3">{% translate 'Cost of delivery' %}</h2>
+        <p class="font-size-sm pb-3 text-muted">{% translate 'We deliver comics all over the country. The movement of your parcel can be tracked in your Personal Account on our website. Free delivery to our stores is available on our website when ordering from 50 rubles. Free delivery is also available for residents of Minsk. Free delivery to remote regions is carried out from 500 rubles.' %}</p>
+      </div>
+    </div>
+  </section>
+  <section class="row no-gutters">
+    <div class="col-md-6 bg-position-center bg-size-cover bg-secondary" style="min-height: 15rem; background-image: url({% static 'img/delivery/03.jpg' %});"><span class="split-section-arrow arrow-left"></span></div>
+    <div class="col-md-6 px-3 px-md-5 py-5">
+      <div class="mx-auto py-lg-5" style="max-width: 35rem;">
+        <h2 class="h3 pb-3">{% translate 'Storage of goods' %}</h2>
+        <p class="font-size-sm pb-3 text-muted">{% translate 'Attention! The period of free ordering of goods in the store is 7 days. After the expiration of the storage period, your product will be put up for sale. Be careful and track your parcels by order number from your personal account. Please note that when you receive your parcel, you will need an order number.' %}</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock content %}

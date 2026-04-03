@@ -1,0 +1,218 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load main_extras %}
+
+
+{% block title %}{% translate 'Toys' %}{% endblock title %}
+
+
+{% block stylesheet %}
+<link rel="stylesheet" media="screen" href="{% static 'css/nouislider.min.css' %}">
+<link rel="stylesheet" media="screen" href="{% static 'css/drift-basic.min.css' %}">
+{% endblock stylesheet %}
+
+
+{% block toys_active %} active{% endblock toys_active %}
+
+
+{% block content %}
+
+{# Page Title (Shop) #}
+<div class="page-title-overlap bg-dark pt-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item">
+            <a class="text-nowrap" href="{% url 'main:index' %}">
+              <i class="czi-home"></i>{% translate 'Home' %}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-nowrap">
+            <a href="{% url 'products:shop' %}">{% translate 'Shop' %}</a>
+          </li>
+          <li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Toys' %}</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h3 text-light mb-0">{% translate 'Toys' %}</h1>
+    </div>
+  </div>
+</div>
+
+{# Page Content #}
+<div class="container pb-5 mb-2 mb-md-4">
+  <div class="row">
+    {# Sidebar #}
+    <aside class="col-lg-4">
+      <div class="cz-sidebar rounded-lg box-shadow-lg" id="shop-sidebar">
+        <div class="cz-sidebar-header box-shadow-sm">
+          <button class="close ml-auto" type="button" data-dismiss="sidebar" aria-label="{% translate 'Close' %}">
+            <span class="d-inline-block font-size-xs font-weight-normal align-middle">{% translate 'Close sidebar' %}</span>
+            <span class="d-inline-block align-middle ml-2" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form>
+          <div class="cz-sidebar-body" data-simplebar data-simplebar-auto-hide="true">
+            {# Price range #}
+            <div class="widget mb-4 pb-4 border-bottom">
+              <h3 class="widget-title">{% translate 'Price' %}</h3>
+              {% if user_currency.0 == 'BYN' %}
+              <div class="cz-range-slider" data-start-min="{% firstof product_filter.min_price.value '0' %}" data-start-max="{% firstof product_filter.max_price.value '300' %}" data-min="0" data-max="300" data-step="1">
+              {% elif user_currency.0 == 'USD' %}
+              <div class="cz-range-slider" data-start-min="{% firstof product_filter.min_price.value '0' %}" data-start-max="{% firstof product_filter.max_price.value '100' %}" data-min="0" data-max="100" data-step="1">
+              {% elif user_currency.0 == 'EUR' %}
+              <div class="cz-range-slider" data-start-min="{% firstof product_filter.min_price.value '0' %}" data-start-max="{% firstof product_filter.max_price.value '100' %}" data-min="0" data-max="100" data-step="1">
+              {% elif user_currency.0 == 'RUB' %}
+              <div class="cz-range-slider" data-start-min="{% firstof product_filter.min_price.value '0' %}" data-start-max="{% firstof product_filter.max_price.value '5000' %}" data-min="0" data-max="5000" data-step="10">
+              {% endif %}
+                <div class="cz-range-slider-ui"></div>
+                <div class="d-flex pb-1">
+                  <div class="w-50 pr-2 mr-2">
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">{{ user_currency.1 }}</span>
+                      </div>
+                      {{ product_filter.min_price }}
+                    </div>
+                  </div>
+                  <div class="w-50 pl-2">
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">{{ user_currency.1 }}</span>
+                      </div>
+                      {{ product_filter.max_price }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {# Filter by Categories #}
+            <div class="widget cz-filter mb-4 pb-4 border-bottom">
+              <h3 class="widget-title">{% translate 'Categories' %}</h3>
+              <div class="input-group-overlay input-group-sm mb-2">
+                <input class="cz-filter-search form-control form-control-sm appended-form-control" type="text" placeholder="{% translate 'Search' %}">
+                <div class="input-group-append-overlay">
+                  <span class="input-group-text"><i class="czi-search"></i></span>
+                </div>
+              </div>
+              <ul class="widget-list cz-filter-list list-unstyled pt-1" style="max-height: 12rem;" data-simplebar data-simplebar-auto-hide="false">
+                {% for category in product_filter.categories %}
+                <li class="cz-filter-item d-flex justify-content-between align-items-center mb-1">
+                  <div class="custom-control custom-checkbox">
+                    {{ category.tag }}
+                    <label class="custom-control-label cz-filter-item-text" for="{{ category.id_for_label }}">{{ category.choice_label }}</label>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {# Filter by Countries #}
+            <div class="widget cz-filter mb-4 pb-4 border-bottom">
+              <h3 class="widget-title">{% translate 'Countries' %}</h3>
+              <ul class="widget-list list-unstyled pt-1" style="max-height: 12rem;" data-simplebar data-simplebar-auto-hide="false">
+                {% for country in product_filter.countries %}
+                <li class="cz-filter-item d-flex justify-content-between align-items-center mb-1">
+                  <div class="custom-control custom-checkbox">
+                    {{ country.tag }}
+                    <label class="custom-control-label cz-filter-item-text" for="{{ country.id_for_label }}">{{ country.choice_label }}</label>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {# Filter by Materials #}
+            <div class="widget cz-filter mb-4 pb-4 border-bottom">
+              <h3 class="widget-title">{% translate 'Materials' %}</h3>
+              <ul class="widget-list list-unstyled pt-1" style="max-height: 12rem;" data-simplebar data-simplebar-auto-hide="false">
+                {% for material in product_filter.materials %}
+                <li class="cz-filter-item d-flex justify-content-between align-items-center mb-1">
+                  <div class="custom-control custom-checkbox">
+                    {{ material.tag }}
+                    <label class="custom-control-label cz-filter-item-text" for="{{ material.id_for_label }}">{{ material.choice_label }}</label>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <a class="btn btn-secondary btn-sm" href="{% url 'products:toys' %}">{% translate 'Reset' %}</a>
+            <button class="btn btn-primary btn-sm" type="submit">{% translate 'Show' %}</button>
+          </div>
+        </form>
+      </div>
+    </aside>
+
+    {# Content #}
+    <section class="col-lg-8">
+      {# Toolbar #}
+      <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
+        <div class="d-flex flex-wrap">
+          <div class="form-inline flex-nowrap mr-3 mr-sm-4 pb-3">
+            <label class="text-light opacity-75 text-nowrap mr-2 d-none d-sm-block" for="sorting">{{ sorting_form.type_sort.label }}</label>
+            <select class="form-control custom-select" id="sorting" onchange="location=this.value;">
+              {% for value, text in sorting_form.type_sort.field.choices %}
+              <option value="{% url 'products:set_sort' value %}"{% if sorting_form.type_sort.value == value %} selected{% endif %}>{{ text }}</option>
+              {% endfor %}
+            </select>
+            <span class="font-size-sm text-light opacity-75 text-nowrap ml-2 d-none d-md-block">{% blocktrans with count=objects_page.paginator.count %}of {{ count }} products{% endblocktrans %}</span>
+          </div>
+        </div>
+        <div class="d-flex pb-3">
+          {% if objects_page.has_previous %}
+          <a class="nav-link-style nav-link-light mr-3" href="{% query_transform page=objects_page.previous_page_number %}">
+            <i class="czi-arrow-left"></i>
+          </a>
+          {% else %}
+          <a class="nav-link-style disabled mr-3" href="#">
+            <i class="czi-arrow-left"></i>
+          </a>
+          {% endif %}
+          <span class="font-size-md text-light">
+            {{ objects_page.number }} / {{ objects_page.paginator.num_pages }}
+          </span>
+          {% if objects_page.has_next %}
+          <a class="nav-link-style nav-link-light ml-3" href="{% query_transform page=objects_page.next_page_number %}">
+            <i class="czi-arrow-right"></i>
+          </a>
+          {% else %}
+          <a class="nav-link-style disabled ml-3" href="#">
+            <i class="czi-arrow-right"></i>
+          </a>
+          {% endif %}
+        </div>
+
+        {% block set_view_link %}{% endblock set_view_link %}
+
+      </div>
+
+      {% block products_content %}{% endblock products_content %}
+
+      {% include 'main/pagination.html' %}
+
+    </section>
+  </div>
+</div>
+
+{% include 'cart/toast_added_to_cart.html' %}
+{% include 'wishlist/toast_added_to_wishlist.html' %}
+
+{% endblock content %}
+
+
+{% block toolbar_filters %}
+<a class="d-table-cell cz-handheld-toolbar-item" href="#shop-sidebar" data-toggle="sidebar">
+  <span class="cz-handheld-toolbar-icon"><i class="czi-filter-alt"></i></span>
+  <span class="cz-handheld-toolbar-label">{% translate 'Filters' %}</span>
+</a>
+{% endblock toolbar_filters %}
+
+
+{% block javascript %}
+<script src="{% static 'js/nouislider.min.js' %}"></script>
+<script src="{% static 'js/Drift.min.js' %}"></script>
+{% include 'cart/script_base.html' %}
+{% include 'wishlist/script_wish_add.html' %}
+{% endblock javascript %}

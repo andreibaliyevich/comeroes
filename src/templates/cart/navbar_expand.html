@@ -1,0 +1,75 @@
+{% load i18n %}
+{% load main_extras %}
+
+
+<div class="navbar-tool dropdown ml-3">
+  <a id="cart-navbar-icon" class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{% url 'cart:cart_detail' %}">
+    <i class="navbar-tool-icon czi-cart"></i>
+    {% if cart_total_items %}
+    <span id="cart-navbar-label" class="navbar-tool-label">{{ cart_total_items }}</span>
+    {% endif %}
+  </a>
+  <a class="navbar-tool-text" href="{% url 'cart:cart_detail' %}">
+    <small>{% translate 'Cart' %}</small>
+    <span id="cart-navbar-total-price">
+      {{ user_currency.1 }}{{ cart_total_price.0 }}.<small>{{ cart_total_price.1 }}</small>
+    </span>
+  </a>
+  {# Cart dropdown #}
+  <div class="dropdown-menu dropdown-menu-right" style="width: 23rem;">
+    <div id="cart-dropdown" class="widget widget-cart px-3 pt-2 pb-3">
+      {% if cart_total_items %}
+      <div id="cart-dropdown-items" style="max-height: 15rem; overflow-y: auto; overflow-x: hidden;">
+        {% for item in cart %}
+        <div id="cart-dropdown-item-{{ item.product.id }}" class="widget-cart-item pb-2 border-bottom">
+          <button class="close text-danger" type="button" aria-label="Remove" data-action="cart-remove" data-id="{{ item.product.id }}">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="media align-items-center">
+            <a class="d-block mr-2" href="{{ item.product.get_absolute_url }}">
+              <img width="64" src="{{ item.product.main_image.url }}" alt="Product">
+            </a>
+            <div class="media-body">
+              <h6 class="widget-product-title">
+                <a href="{{ item.product.get_absolute_url }}">
+                  {{ item.product.translated_name }}
+                </a>
+              </h6>
+              <div class="widget-product-meta">
+                <span class="text-accent mr-2">
+                  {% with product_price=item.product.price|decimal_fractional_currency:user_currency.0 %}
+                    {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+                  {% endwith %}
+                </span>
+                <span class="text-muted">x</span>
+                <span id="cart-dropdown-item-quantity-{{ item.product.id }}" class="text-muted">
+                  {{ item.quantity }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
+        <div class="font-size-sm mr-2 py-2">
+          <span class="text-muted">{% translate 'Total' %}:</span>
+          <span id="cart-dropdown-total-price" class="text-accent font-size-base ml-1">
+            {{ user_currency.1 }}{{ cart_total_price.0 }}.<small>{{ cart_total_price.1 }}</small>
+          </span>
+        </div>
+        <a class="btn btn-outline-secondary btn-sm" href="{% url 'cart:cart_detail' %}">
+          {% translate 'Expand cart' %}
+          <i class="czi-arrow-right ml-1 mr-n1"></i>
+        </a>
+      </div>
+      <a class="btn btn-primary btn-sm btn-block" href="{% url 'orders:order_create' %}">
+        <i class="czi-card mr-2 font-size-base align-middle"></i>
+        {% translate 'To order' %}
+      </a>
+      {% else %}
+      <div class="text-center mt-3">{% translate 'Your cart is empty!' %}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>

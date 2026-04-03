@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+
+
+{% block title %}{% translate 'Checkout Complete' %}{% endblock title %}
+
+
+{% block cart_content %}
+{% include 'cart/navbar_shrink.html' %}
+{% endblock cart_content %}
+
+
+{% block content %}
+
+<div class="container pb-5 mb-sm-4">
+  <div class="pt-5">
+    <div class="card py-3 mt-sm-3">
+      <div class="card-body text-center">
+        <h2 class="h4 pb-3">{% translate 'Thank you for your order!' %}</h2>
+        <p class="font-size-sm mb-2">{% translate 'Your order has been placed and will be processed as soon as possible.' %}</p>
+        <p class="font-size-sm mb-2">{% translate 'Your order number, which is' %} <span class='font-weight-medium'>{{ order_id }}.</span></p>
+        <p class="font-size-sm">{% translate 'You will be receiving an email shortly with confirmation of your order.' %} <u>{% translate 'You can' %}:</u></p>
+        <a class="btn btn-secondary mt-3 mr-3" href="{% url 'products:shop' %}">
+          {% translate 'Go back shopping' %}
+        </a>
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary mt-3" href="{{ order_absolute_url }}">
+          {% translate 'View order info' %}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

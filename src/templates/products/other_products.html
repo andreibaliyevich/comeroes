@@ -1,0 +1,179 @@
+{% load i18n %}
+{% load main_extras %}
+
+
+{# Product carousel (You may also like) #}
+<div class="container pt-5">
+  <h2 class="h3 text-center pb-4">{% translate 'You may also like' %}</h2>
+  <div class="cz-carousel cz-controls-static cz-controls-outside">
+    <div class="cz-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">
+      {% for product in similar_products %}
+      {# Product #}
+      <div>
+        <div class="card product-card card-static">
+          {% if product.old_price %}
+          <span class="badge badge-danger badge-shadow">{% translate 'Sale' %}</span>
+          {% endif %}
+          <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="{% translate 'Add to wishlist' %}">
+            <i class="czi-heart"></i>
+          </button>
+          <a class="card-img-top d-block overflow-hidden" href="{{ product.get_absolute_url }}">
+            <img src="{{ product.main_image.url }}" alt="{{ product.id }}">
+          </a>
+          <div class="card-body py-2">
+            <a class="product-meta d-block font-size-xs pb-1" href="{{ product.manufacturer.get_absolute_url }}">{{ product.manufacturer.name }}</a>
+            <h3 class="product-title font-size-sm">
+              <a href="{{ product.get_absolute_url }}">
+                {{ product.translated_name }}
+              </a>
+            </h3>
+            <div class="d-flex justify-content-between">
+              <div class="product-price">
+                <span class="text-accent">
+                  {% with product_price=product.price|decimal_fractional_currency:user_currency.0 %}
+                    {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+                  {% endwith %}
+                </span>
+                {% if product.old_price %}
+                <del class="font-size-sm text-muted">
+                  {% with product_old_price=product.old_price|decimal_fractional_currency:user_currency.0 %}
+                    {{ user_currency.1 }}{{ product_old_price.0 }}.<small>{{ product_old_price.1 }}</small>
+                  {% endwith %}
+                </del>
+                {% endif %}
+              </div>
+              <div class="star-rating">
+                {% if product.rating >= 4.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                {% elif product.rating >= 3.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                {% elif product.rating >= 2.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% elif product.rating >= 1.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% elif product.rating >= 0.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% else %}
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{# Product carousel (Other products) #}
+<div class="container py-5 my-md-3">
+  <h2 class="h3 text-center pb-4">{% translate 'Other products' %}</h2>
+  <div class="cz-carousel cz-controls-static cz-controls-outside">
+    <div class="cz-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">
+      {% for product in other_products %}
+      {# Product #}
+      <div>
+        <div class="card product-card card-static">
+          {% if product.old_price %}
+          <span class="badge badge-danger badge-shadow">{% translate 'Sale' %}</span>
+          {% endif %}
+          <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="{% translate 'Add to wishlist' %}">
+            <i class="czi-heart"></i>
+          </button>
+          <a class="card-img-top d-block overflow-hidden" href="{{ product.get_absolute_url }}">
+            <img src="{{ product.main_image.url }}" alt="{{ product.id }}">
+          </a>
+          <div class="card-body py-2">
+            <a class="product-meta d-block font-size-xs pb-1" href="{{ product.manufacturer.get_absolute_url }}">{{ product.manufacturer.name }}</a>
+            <h3 class="product-title font-size-sm">
+              <a href="{{ product.get_absolute_url }}">
+                {{ product.translated_name }}
+              </a>
+            </h3>
+            <div class="d-flex justify-content-between">
+              <div class="product-price">
+                <span class="text-accent">
+                  {% with product_price=product.price|decimal_fractional_currency:user_currency.0 %}
+                    {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+                  {% endwith %}
+                </span>
+                {% if product.old_price %}
+                <del class="font-size-sm text-muted">
+                  {% with product_old_price=product.old_price|decimal_fractional_currency:user_currency.0 %}
+                    {{ user_currency.1 }}{{ product_old_price.0 }}.<small>{{ product_old_price.1 }}</small>
+                  {% endwith %}
+                </del>
+                {% endif %}
+              </div>
+              <div class="star-rating">
+                {% if product.rating >= 4.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                {% elif product.rating >= 3.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                {% elif product.rating >= 2.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% elif product.rating >= 1.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% elif product.rating >= 0.5 %}
+                <i class="sr-star czi-star-filled active"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% else %}
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                <i class="sr-star czi-star"></i>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

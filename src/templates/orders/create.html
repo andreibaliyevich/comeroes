@@ -1,0 +1,232 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load bootstrap4 %}
+{% load main_extras %}
+
+
+{% block title %}{% translate 'Checkout' %}{% endblock title %}
+
+
+{% block cart_content %}
+{% include 'cart/navbar_shrink.html' %}
+{% endblock cart_content %}
+
+
+{% block content %}
+
+{# Page Title #}
+<div class="page-title-overlap bg-dark pt-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item">
+            <a class="text-nowrap" href="{% url 'main:index' %}">
+              <i class="czi-home"></i>{% translate 'Home' %}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-nowrap">
+            <a href="{% url 'cart:cart_detail' %}">{% translate 'Cart' %}</a>
+          </li>
+          <li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Checkout' %}</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h3 text-light mb-0">{% translate 'Checkout' %}</h1>
+    </div>
+  </div>
+</div>
+
+{# Page Content #}
+<div class="container pb-5 mb-2 mb-md-4">
+
+  <div class="row">
+    <section class="col-lg-8">
+
+      {# Steps #}
+      <div class="steps steps-light pt-2 pb-3 mb-5">
+        <a class="step-item active" href="{% url 'cart:cart_detail' %}">
+          <div class="step-progress"><span class="step-count">1</span></div>
+          <div class="step-label"><i class="czi-cart"></i>{% translate 'Cart' %}</div>
+        </a>
+        <a class="step-item active current" href="#">
+          <div class="step-progress"><span class="step-count">2</span></div>
+          <div class="step-label"><i class="czi-user-circle"></i>{% translate 'Data' %}</div>
+        </a>
+        <div class="step-item" href="#">
+          <div class="step-progress"><span class="step-count">3</span></div>
+          <div class="step-label"><i class="czi-card"></i>{% translate 'Payment' %}</div>
+        </div>
+      </div>
+
+      <form id="order-form" method="post" action="{% url 'orders:order_create' %}">
+        {% csrf_token %}
+        <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">{% translate 'Your details' %}</h2>
+        <div class="row">
+          <div class="col-sm-6">{% bootstrap_field order_create_form.first_name %}</div>
+          <div class="col-sm-6">{% bootstrap_field order_create_form.last_name %}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">{% bootstrap_field order_create_form.email %}</div>
+          <div class="col-sm-6">{% bootstrap_field order_create_form.phone %}</div>
+        </div>
+
+        <h6 class="mb-3 py-3 border-bottom">{% translate 'Delivery' %}</h6>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="custom-control custom-radio">
+              <input class="custom-control-input" type="radio" id="delivery-address" name="delivery" checked>
+              <label class="custom-control-label" for="delivery-address">{{ order_create_form.address.label }}</label>
+            </div>
+            {% bootstrap_field order_create_form.address show_label=False %}
+          </div>
+          <div class="col-sm-6">
+            <div class="custom-control custom-radio">
+              <input class="custom-control-input" type="radio" id="delivery-store" name="delivery">
+              <label class="custom-control-label" for="delivery-store">{{ order_create_form.store.label }}</label>
+            </div>
+            {% bootstrap_field order_create_form.store show_label=False %}
+          </div>
+        </div>
+      </form>
+
+      {# Navigation (desktop) #}
+      <div class="d-none d-lg-flex pt-4 mt-3">
+        <div class="w-50 pr-3">
+          <a class="btn btn-secondary btn-block" href="{% url 'cart:cart_detail' %}">
+            <i class="czi-arrow-left mt-sm-0 mr-1"></i>
+            <span class="d-none d-sm-inline">{% translate 'Back to Cart' %}</span>
+            <span class="d-inline d-sm-none">{% translate 'Back' %}</span>
+          </a>
+        </div>
+        <div class="w-50 pl-2">
+          <button class="btn btn-primary btn-block" type="submit" form="order-form">
+            <span class="d-none d-sm-inline">{% translate 'Proceed to Payment' %}</span>
+            <span class="d-inline d-sm-none">{% translate 'Continue' %}</span>
+            <i class="czi-arrow-right mt-sm-0 ml-1"></i>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    {# Sidebar #}
+    <aside class="col-lg-4 pt-4 pt-lg-0">
+      <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto">
+        <div class="widget mb-3">
+          <h2 class="widget-title text-center">{% translate 'Order summary' %}</h2>
+          {% for item in cart %}
+          <div class="media align-items-center pb-2 border-bottom">
+            <a class="d-block mr-2" href="{{ item.product.get_absolute_url }}">
+              <img src="{{ item.product.main_image.url }}" width="64" height="64" alt="{{ item.product.id }}">
+            </a>
+            <div class="media-body">
+              <h6 class="widget-product-title">
+                <a href="{{ item.product.get_absolute_url }}">
+                  {{ item.product.translated_name }}
+                </a>
+              </h6>
+              <div class="widget-product-meta">
+                <span class="text-accent mr-2">
+                  {% with product_price=item.product.price|decimal_fractional_currency:user_currency.0 %}
+                    {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+                  {% endwith %}
+                </span>
+                <span class="text-muted">x {{ item.quantity }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <ul class="list-unstyled font-size-sm py-2 border-bottom">
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Total' %}:</span>
+            <span class="text-right">
+              {{ user_currency.1 }}{{ cart_total_price.0 }}.<small>{{ cart_total_price.1 }}</small>
+            </span>
+          </li>
+          {% if cart.coupon %}
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Promo code' %}:</span>
+            <span class="text-right">{{ cart.coupon.code }}</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Discount' %}:</span>
+            <span class="text-right">{{ cart.coupon.discount }}%</span>
+          </li>
+          {% else %}
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Promo code' %}:</span>
+            <span class="text-right">—</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center">
+            <span class="mr-2">{% translate 'Discount' %}:</span>
+            <span class="text-right">—</span>
+          </li>
+          {% endif %}
+        </ul>
+        <h3 class="font-weight-normal text-center my-4">
+          {% with cart_total_cost=cart.get_total_cost|decimal_fractional_currency:user_currency.0 %}
+            {{ user_currency.1 }}{{ cart_total_cost.0 }}.<small>{{ cart_total_cost.1 }}</small>
+          {% endwith %}
+        </h3>
+      </div>
+    </aside>
+  </div>
+  
+  {# Navigation (mobile) #}
+  <div class="row d-lg-none">
+    <div class="col-lg-8">
+      <div class="d-flex pt-4 mt-3">
+        <div class="w-50 pr-3">
+          <a class="btn btn-secondary btn-block" href="{% url 'cart:cart_detail' %}">
+            <i class="czi-arrow-left mt-sm-0 mr-1"></i>
+            <span class="d-none d-sm-inline">{% translate 'Back to Cart' %}</span>
+            <span class="d-inline d-sm-none">{% translate 'Back' %}</span>
+          </a>
+        </div>
+        <div class="w-50 pl-2">
+          <button class="btn btn-primary btn-block" type="submit" form="order-form">
+            <span class="d-none d-sm-inline">{% translate 'Proceed to Payment' %}</span>
+            <span class="d-inline d-sm-none">{% translate 'Continue' %}</span>
+            <i class="czi-arrow-right mt-sm-0 ml-1"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock content %}
+
+
+{% block javascript %}
+{% include 'cart/script_detail.html' %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+  $("#id_address").prop("required", true);
+  $("#id_store").prop("disabled", true);
+
+  $("#delivery-address").click(function() {
+    $("#id_address").prop("disabled", false);
+    $("#id_address").prop("required", true);
+    $("#id_store").prop("disabled", true);
+    $("#id_store").prop("required", false);
+    $("#id_store").val("");
+  });
+
+  $("#delivery-store").click(function() {
+    $("#id_store").prop("disabled", false);
+    $("#id_store").prop("required", true);
+    $("#id_address").prop("disabled", true);
+    $("#id_address").prop("required", false);
+    $("#id_address").val("");
+  });
+
+});
+</script>
+{% endblock javascript %}

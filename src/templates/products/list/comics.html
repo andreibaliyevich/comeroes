@@ -1,0 +1,22 @@
+{% extends 'products/base/comics.html' %}
+
+
+{% block set_view_link %}
+
+<div class="d-none d-sm-flex pb-3">
+  <a class="btn btn-icon nav-link-style nav-link-light mr-2" href="{% url 'products:set_view' 'grid' %}">
+    <i class="czi-view-grid"></i>
+  </a>
+  <a class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100" href="#">
+    <i class="czi-view-list"></i>
+  </a>
+</div>
+
+{% endblock set_view_link %}
+
+
+{% block products_content %}
+
+{% include 'products/list/products.html' %}
+
+{% endblock products_content %}

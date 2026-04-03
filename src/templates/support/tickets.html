@@ -1,0 +1,122 @@
+{% extends 'accounts/account_base.html' %}
+
+{% load i18n %}
+{% load bootstrap4 %}
+
+
+{% block title %}{% translate 'Support' %}{% endblock title %}
+
+
+{% block modal_content %}
+
+{# Open Ticket Modal #}
+<form class="needs-validation modal fade" method="post" action="{% url 'support:tickets' %}" id="open-ticket" tabindex="-1" novalidate>
+  {% csrf_token %}
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% translate 'Submit new ticket' %}</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="{% translate 'Close' %}"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted font-size-sm">{% translate 'We normally respond tickets within 2 business days.' %}</p>
+        {% bootstrap_field ticket_form.subject %}
+        <div class="row">
+          <div class="col-sm-6">
+            {% bootstrap_field ticket_form.category %}
+          </div>
+          <div class="col-sm-6">
+            {% bootstrap_field ticket_form.priority %}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="id_content">{% translate 'Describe your issue' %}</label>
+          {% bootstrap_field message_form.content show_label=False %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">{% translate 'Close' %}</button>
+        <button class="btn btn-primary" type="submit">{% translate 'Submit Ticket' %}</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock modal_content %}
+
+
+{% block page_title1 %}
+<li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Support' %}</li>
+{% endblock page_title1 %}
+
+{% block page_title2 %}{% translate 'Support' %}{% endblock page_title2 %}
+
+{% block support_active %} active{% endblock support_active %}
+
+
+{% block account_content %}
+
+{# Toolbar #}
+<div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+  <h6 class="font-size-base text-light mb-0">{% translate 'List of support tickets:' %}</h6>
+  <a class="btn btn-primary btn-sm" href="{% url 'accounts:signout' %}"><i class="czi-sign-out mr-2"></i>{% translate 'Sign out' %}</a>
+</div>
+
+{# Tickets list #}
+<div class="table-responsive font-size-md">
+  <table class="table table-hover mb-0">
+    <thead>
+      <tr>
+        <th>{% translate 'Subject' %}</th>
+        <th>{% translate 'Date Created | Updated' %}</th>
+        <th>{% translate 'Category' %}</th>
+        <th>{% translate 'Priority' %}</th>
+        <th>{% translate 'Status' %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in objects_page.object_list %}
+      <tr>
+        <td class="position-relative py-3">
+          {% if ticket.msg_not_viewed_count %}
+          <span class="indicator-center"></span>
+          {% endif %}
+          <a class="nav-link-style font-weight-medium ml-3" href="{% url 'support:ticket_detail' ticket.id %}">{{ ticket.subject }}</a>
+        </td>
+        <td class="py-3">{{ ticket.created_at|date:"DATE_FORMAT" }} | {{ ticket.updated_at|date:"DATE_FORMAT" }}</td>
+        {% if ticket.category == ticket.Category.WEBSITE_PROBLEM %}
+        <td class="py-3">{{ ticket.Category.WEBSITE_PROBLEM.label }}</td>
+        {% elif ticket.category == ticket.Category.COMPLAINT %}
+        <td class="py-3">{{ ticket.Category.COMPLAINT.label }}</td>
+        {% elif ticket.category == ticket.Category.INFO_INQUIRY %}
+        <td class="py-3">{{ ticket.Category.INFO_INQUIRY.label }}</td>
+        {% elif ticket.category == ticket.Category.OTHER_PROBLEM %}
+        <td class="py-3">{{ ticket.Category.OTHER_PROBLEM.label }}</td>
+        {% endif %}
+        {% if ticket.priority == ticket.Priority.HIGH %}
+        <td class="py-3"><span class="badge badge-danger m-0">{{ ticket.Priority.HIGH.label }}</span></td>
+        {% elif ticket.priority == ticket.Priority.MEDIUM %}
+        <td class="py-3"><span class="badge badge-info m-0">{{ ticket.Priority.MEDIUM.label }}</span></td>
+        {% elif ticket.priority == ticket.Priority.LOW %}
+        <td class="py-3"><span class="badge badge-success m-0">{{ ticket.Priority.LOW.label }}</span></td>
+        {% endif %}
+        {% if ticket.status == ticket.Status.OPEN %}
+        <td class="py-3"><span class="badge badge-success m-0">{{ ticket.Status.OPEN.label }}</span></td>
+        {% elif ticket.status == ticket.Status.CLOSED %}
+        <td class="py-3"><span class="badge badge-secondary m-0">{{ ticket.Status.CLOSED.label }}</span></td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="text-center" colspan="4">{% translate 'You have no tickets yet!' %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<hr class="mb-4">
+<div class="text-right">
+  <button class="btn btn-primary" data-toggle="modal" data-target="#open-ticket">{% translate 'Submit new ticket' %}</button>
+</div>
+
+{% endblock account_content %}

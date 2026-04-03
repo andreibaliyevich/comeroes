@@ -1,0 +1,351 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load thumbnail %}
+{% load main_extras %}
+
+
+{% block meta_description %}{{ product.translated_meta_description }}{% endblock meta_description %}
+{% block meta_keywords %}{{ product.translated_meta_keywords }}{% endblock meta_keywords %}
+
+{% block title %}{% translate 'Comics' %} | {{ product.translated_name }}{% endblock title %}
+
+
+{% block stylesheet %}
+<link rel="stylesheet" media="screen" href="{% static 'css/drift-basic.min.css' %}">
+<link rel="stylesheet" media="screen" href="{% static 'css/lightgallery.min.css' %}">
+{% endblock stylesheet %}
+
+
+{% block comics_active %} active{% endblock comics_active %}
+
+
+{% block content %}
+
+{# Page Title (Shop) #}
+<div class="page-title-overlap bg-dark pt-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item">
+            <a class="text-nowrap" href="{% url 'main:index' %}">
+              <i class="czi-home"></i>{% translate 'Home' %}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-nowrap">
+            <a href="{% url 'products:shop' %}">{% translate 'Shop' %}</a>
+          </li>
+          <li class="breadcrumb-item text-nowrap">
+            <a href="{% url 'products:comics' %}">{% translate 'Comics' %}</a>
+          </li>
+          <li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Product' %}</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h3 text-light mb-0">{{ product.translated_name }}</h1>
+    </div>
+  </div>
+</div>
+
+{# Page Content #}
+<div class="container">
+  {# Gallery + details #}
+  <div class="bg-light box-shadow-lg rounded-lg px-4 py-3">
+    <div class="px-lg-3">
+      <div class="row">
+        {# Product gallery #}
+        <div class="col-lg-7 pr-lg-0 pt-lg-4">
+          <div class="cz-product-gallery">
+            <div class="cz-preview order-sm-2">
+              <div class="cz-preview-item active" id="main-image-{{ product.id }}">
+                <img class="cz-image-zoom" src="{{ product.main_image.url }}" data-zoom="{{ product.main_image.url }}" alt="Product image">
+                <div class="cz-image-zoom-pane"></div>
+              </div>
+              {% for product_image in product_images %}
+              <div class="cz-preview-item" id="image-{{ product_image.id }}">
+                <img class="cz-image-zoom" src="{{ product_image.image.url }}" data-zoom="{{ product_image.image.url }}" alt="Product image">
+                <div class="cz-image-zoom-pane"></div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="cz-thumblist order-sm-1">
+              <a class="cz-thumblist-item active" href="#main-image-{{ product.id }}">
+                <img src="{{ product.main_image|thumbnail_url:'default' }}" alt="Product thumb">
+              </a>
+              {% for product_image in product_images %}
+              <a class="cz-thumblist-item" href="#image-{{ product_image.id }}">
+                <img src="{{ product_image.image|thumbnail_url:'default' }}" alt="Product thumb">
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {# Product details #}
+        <div class="col-lg-5 pt-4 pt-lg-0">
+          <div class="product-details ml-auto pb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <a href="#reviews" data-scroll>
+                <div class="star-rating">
+                  {% if product.rating >= 4.5 %}
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  {% elif product.rating >= 3.5 %}
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star"></i>
+                  {% elif product.rating >= 2.5 %}
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  {% elif product.rating >= 1.5 %}
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  {% elif product.rating >= 0.5 %}
+                  <i class="sr-star czi-star-filled active"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  {% else %}
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  <i class="sr-star czi-star"></i>
+                  {% endif %}
+                </div>
+                <span class="d-inline-block font-size-sm text-body align-middle mt-1 ml-1">{% blocktrans with count=reviews.count %}{{ count }} Reviews{% endblocktrans %}</span>
+              </a>
+              {% if user.is_authenticated %}
+              <button class="btn-wishlist mr-0 mr-lg-n3" type="button" data-toggle="tooltip" title="{% translate 'Add to wishlist' %}" data-action="wish-add" data-id="{{ product.id }}">
+                <i class="czi-heart"></i>
+              </button>
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              <span class="h3 font-weight-normal text-accent mr-1">
+                {% with product_price=product.price|decimal_fractional_currency:user_currency.0 %}
+                  {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+                {% endwith %}
+              </span>
+              {% if product.old_price %}
+              <del class="text-muted font-size-lg mr-3">
+                {% with product_old_price=product.old_price|decimal_fractional_currency:user_currency.0 %}
+                  {{ user_currency.1 }}{{ product_old_price.0 }}.<small>{{ product_old_price.1 }}</small>
+                {% endwith %}
+              </del>
+              <span class="badge badge-danger badge-shadow align-middle mt-n2">{% translate 'Sale' %}</span>
+              {% endif %}
+            </div>
+            <div class="position-relative mr-n4 mb-5">
+              {% if product_available %}
+              <div class="product-badge product-available mt-n1">
+                <i class="czi-security-check"></i>{% translate 'Product available' %}
+              </div>
+              {% else %}
+              <div class="product-badge product-not-available mt-n1">
+                <i class="czi-security-prohibition"></i>{% translate 'Product not available' %}
+              </div>
+              {% endif %}
+            </div>
+            <div class="mb-grid-gutter">
+              <div class="form-group d-flex align-items-center">
+                <select id="quantity-select" class="custom-select mr-3" style="width: 5rem;">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <button class="btn btn-primary btn-shadow btn-block" type="button" data-action="cart-add" data-id="{{ product.id }}" data-url="{{ product.get_absolute_url }}">
+                  <i class="czi-cart font-size-lg mr-2"></i>{% translate 'Add to Cart' %}
+                </button>
+              </div>
+            </div>
+            {# Product panels #}
+            <div class="accordion mb-4" id="productPanels">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="accordion-heading">
+                    <a href="#description" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="description">
+                      <i class="czi-document text-muted font-size-lg align-middle mt-n1 mr-2"></i>
+                      {% translate 'Description' %}
+                      <span class="accordion-indicator">
+                        <i data-feather="chevron-up"></i>
+                      </span>
+                    </a>
+                  </h3>
+                </div>
+                <div class="collapse show" id="description" data-parent="#productPanels">
+                  <div class="card-body font-size-sm pl-4">
+                    {{ product.translated_description|linebreaks }}
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="accordion-heading">
+                    <a href="#productInfo" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="productInfo">
+                      <i class="czi-announcement text-muted font-size-lg align-middle mt-n1 mr-2"></i>
+                      {% translate 'Product info' %}
+                      <span class="accordion-indicator">
+                        <i data-feather="chevron-up"></i>
+                      </span>
+                    </a>
+                  </h3>
+                </div>
+                <div class="collapse" id="productInfo" data-parent="#productPanels">
+                  <div class="card-body">
+                    <ul class="font-size-sm pl-4">
+                      {% if product.category %}
+                        {% for category in product.CATEGORY_CHOICES %}
+                          {% if product.category == category.0 %}
+                            <li>{% translate 'Category' %}: {{ category.1 }}</li>
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+
+                      {% if product.publication_format %}
+                      <li>{% translate 'Publication format' %}: {{ product.publication_format }}</li>
+                      {% endif %}
+
+                      {% if product.number_pages %}
+                      <li>{% translate 'Number of pages' %}: {{ product.number_pages }}</li>
+                      {% endif %}
+
+                      {% if product.published %}
+                      <li>{% translate 'Published' %}: {{ product.published }}</li>
+                      {% endif %}
+
+                      {% if product.binding %}
+                      <li>{% translate 'Binding' %}: 
+                      {% for binding in product.BINDING_CHOICES %}
+                        {% if binding.0 == product.binding %}
+                          {{ binding.1 }}
+                        {% endif %}
+                      {% endfor %}
+                      </li>
+                      {% endif %}
+                      
+                      <li>{% translate 'Language' %}:
+                        {% for language in LANGUAGES %}
+                          {% if language.0 == product.language %}
+                            {{ language.1 }}
+                          {% endif %}
+                        {% endfor %}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="accordion-heading"><a class="collapsed" href="#shippingOptions" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="czi-delivery text-muted lead align-middle mt-n1 mr-2"></i>Shipping options<span class="accordion-indicator"><i data-feather="chevron-up"></i></span></a></h3>
+                </div>
+                <div class="collapse" id="shippingOptions" data-parent="#productPanels">
+                  <div class="card-body font-size-sm">
+                    <div class="d-flex justify-content-between border-bottom pb-2">
+                      <div>
+                        <div class="font-weight-semibold text-dark">Courier</div>
+                        <div class="font-size-sm text-muted">2 - 4 days</div>
+                      </div>
+                      <div>$26.50</div>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                      <div>
+                        <div class="font-weight-semibold text-dark">Local shipping</div>
+                        <div class="font-size-sm text-muted">up to one week</div>
+                      </div>
+                      <div>$10.00</div>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                      <div>
+                        <div class="font-weight-semibold text-dark">Flat rate</div>
+                        <div class="font-size-sm text-muted">5 - 7 days</div>
+                      </div>
+                      <div>$33.85</div>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                      <div>
+                        <div class="font-weight-semibold text-dark">UPS ground shipping</div>
+                        <div class="font-size-sm text-muted">4 - 6 days</div>
+                      </div>
+                      <div>$18.00</div>
+                    </div>
+                    <div class="d-flex justify-content-between pt-2">
+                      <div>
+                        <div class="font-weight-semibold text-dark">Local pickup from store</div>
+                        <div class="font-size-sm text-muted">&mdash;</div>
+                      </div>
+                      <div>$0.00</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="accordion-heading"><a class="collapsed" href="#localStore" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="localStore"><i class="czi-location text-muted font-size-lg align-middle mt-n1 mr-2"></i>Find in local store<span class="accordion-indicator"><i data-feather="chevron-up"></i></span></a></h3>
+                </div>
+                <div class="collapse" id="localStore" data-parent="#productPanels">
+                  <div class="card-body">
+                    <select class="custom-select">
+                      <option value>Select your country</option>
+                      <option value="Argentina">Argentina</option>
+                      <option value="Belgium">Belgium</option>
+                      <option value="France">France</option>
+                      <option value="Germany">Germany</option>
+                      <option value="Spain">Spain</option>
+                      <option value="UK">United Kingdom</option>
+                      <option value="USA">USA</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {# Sharing #}
+            <h6 class="d-inline-block align-middle font-size-base my-2 mr-2">{% translate 'Share' %}:</h6>
+            <a class="share-btn sb-vk mr-2 my-2" href="https://vk.com/share.php?url={{ request.build_absolute_uri }}&title={{ product.translated_name }}&noparse=true" target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              <i class="czi-vk"></i>VK
+            </a>
+            <a class="share-btn sb-facebook mr-2 my-2" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              <i class="czi-facebook"></i>Facebook
+            </a>
+            <a class="share-btn sb-twitter my-2" href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ product.translated_name }}" target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+              <i class="czi-twitter"></i>Twitter
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'products/reviews.html' %}
+{% include 'products/other_products.html' %}
+{% include 'cart/toast_added_to_cart.html' %}
+{% include 'wishlist/toast_added_to_wishlist.html' %}
+
+{% endblock content %}
+
+
+{% block javascript %}
+<script src="{% static 'js/Drift.min.js' %}"></script>
+<script src="{% static 'js/lightgallery.min.js' %}"></script>
+<script src="{% static 'js/lg-video.min.js' %}"></script>
+{% include 'cart/script_base.html' %}
+{% include 'wishlist/script_wish_add.html' %}
+{% include 'products/script_reviews.html' %}
+{% endblock javascript %}

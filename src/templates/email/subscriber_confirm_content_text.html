@@ -1,0 +1,17 @@
+{% load i18n %}
+
+
+{% translate 'Dear User!' %}
+
+{% translate 'You have subscribed to newsletter from' %} {{ SITE_NAME }} ({{ SITE_HOST }}).
+{% translate 'To confirm your email you need to follow the link:' %}
+{{ SITE_HOST }}{% url 'newsletter:subscriber_confirm' sign=sign %}.
+
+
+Copyright &copy; {% now "Y" %} {{ SITE_NAME }} ({{ SITE_HOST }})
+
+{% translate 'This is an automatic letter, do not reply to it.' %}
+{% translate 'We wish you a nice day and a pleasant shopping at' %} {{ SITE_NAME }} ({{ SITE_HOST }}).
+
+{% translate 'To unsubscribe, click on the link:' %}
+{{ SITE_HOST }}{% url 'newsletter:subscriber_delete' sign=sign %}.

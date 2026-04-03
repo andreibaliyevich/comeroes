@@ -1,0 +1,104 @@
+{% extends 'accounts/account_base.html' %}
+
+{% load i18n %}
+{% load main_extras %}
+
+
+{% block title %}{% translate 'Wishlist' %}{% endblock title %}
+
+
+{% block page_title1 %}
+<li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Wishlist' %}</li>
+{% endblock page_title1 %}
+
+{% block page_title2 %}{% translate 'Wishlist' %}{% endblock page_title2 %}
+
+{% block wishlist_active %} active{% endblock wishlist_active %}
+
+
+{% block account_content %}
+
+{# Toolbar #}
+<div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+  <h6 class="font-size-base text-light mb-0">{% translate 'List of items you added to wishlist:' %}</h6>
+  <a class="btn btn-primary btn-sm" href="{% url 'accounts:signout' %}"><i class="czi-sign-out mr-2"></i>{% translate 'Sign out' %}</a>
+</div>
+
+{# Wishlist #}
+<div id="wishlist">
+  {% for wish_obj in wishes_list %}
+  <div id="wish-{{ wish_obj.id }}" class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
+    <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left">
+      <a class="d-inline-block mx-auto mr-sm-4" href="{% url 'products:product_detail' wish_obj.product.id %}" style="width: 5rem;">
+        <img src="{{ wish_obj.product.main_image.url }}" alt="{{ wish_obj.product.id }}">
+      </a>
+      <div class="media-body pt-2">
+        <h3 class="product-title font-size-base mb-2">
+          <a href="{% url 'products:product_detail' wish_obj.product.id %}">
+            {% if LANGUAGE_CODE == 'en' %}
+              {{ wish_obj.product.name }}
+            {% elif LANGUAGE_CODE == 'ru' %}
+              {{ wish_obj.product.name_ru }}
+            {% elif LANGUAGE_CODE == 'be' %}
+              {{ wish_obj.product.name_be }}
+            {% endif %}
+          </a>
+        </h3>
+        <div class="font-size-lg text-accent pt-2">
+          {% with product_price=wish_obj.product.price|decimal_fractional_currency:user_currency.0 %}
+            {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+    <div class="pt-2 pl-sm-3 mx-auto mx-sm-0 text-center">
+      <button class="btn btn-outline-danger btn-sm" type="button" data-action="wish-remove" data-id="{{ wish_obj.id }}">
+        <i class="czi-trash mr-2"></i>{% translate 'Remove' %}
+      </button>
+    </div>
+  </div>
+  {% empty %}
+  <div class="h3 text-center my-4 pb-3">{% translate 'You have no wishes yet!' %}</div>
+  {% endfor %}
+</div>
+
+{% endblock account_content %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+  function wishRemove() {
+    const button = $(this);
+    const wishId = button.data("id");
+
+    $.ajax({
+      url: "{% url 'wishlist:wish_remove' %}",
+      type: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "wish_id": wishId,
+      },
+
+      success: function(data) {
+        $("#wishes-count").text(data.wishes_count);
+
+        if (data.wishes_count == 0) {
+          $("#wishlist").html(
+            "<div class=\"h3 text-center my-4 pb-3\">{% translate 'You have no wishes yet!' %}</div>"
+          );
+        } else {
+          $("#wish-" + wishId).remove();
+        }
+      },
+      error: function(xhr, errmsg, err) {
+        alert(errmsg + xhr.status + " (" + err + "): " + xhr.responseText);
+      }
+    });
+  };
+  $("[data-action='wish-remove']").click(wishRemove);
+
+});
+</script>
+{% endblock javascript %}

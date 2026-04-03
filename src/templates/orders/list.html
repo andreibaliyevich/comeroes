@@ -1,0 +1,84 @@
+{% extends 'accounts/account_base.html' %}
+
+{% load i18n %}
+{% load main_extras %}
+
+
+{% block title %}{% translate 'Orders History' %}{% endblock title %}
+
+
+{% block page_title1 %}
+<li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Orders History' %}</li>
+{% endblock page_title1 %}
+
+{% block page_title2 %}{% translate 'Orders History' %}{% endblock page_title2 %}
+
+{% block orders_active %} active{% endblock orders_active %}
+
+{% block toolbar_title %}{% translate 'List of your orders:' %}{% endblock toolbar_title %}
+
+
+{% block account_content %}
+
+{# Toolbar #}
+<div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+  <h6 class="font-size-base text-light mb-0">{% translate 'List of your orders:' %}</h6>
+  <a class="btn btn-primary btn-sm" href="{% url 'accounts:signout' %}"><i class="czi-sign-out mr-2"></i>{% translate 'Sign out' %}</a>
+</div>
+
+{# Orders list #}
+<div class="table-responsive font-size-md">
+  <table class="table table-hover mb-0">
+    <thead>
+      <tr>
+        <th>{% translate 'Order #' %}</th>
+        <th>{% translate 'Date Purchased' %}</th>
+        <th>{% translate 'Status' %}</th>
+        <th>{% translate 'Total cost' %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in objects_page.object_list %}
+      <tr>
+        <td class="py-3">
+          <a class="nav-link-style font-weight-medium font-size-sm" href="{{ order.get_absolute_url }}">{{ order.id }}</a>
+        </td>
+        <td class="py-3">{{ order.created_at|date:"DATE_FORMAT" }}</td>
+        <td class="py-3">
+          {% if order.status == '1' %}
+          <span class="badge badge-info m-0">{% translate 'Pending' %}</span>
+          {% elif order.status == '2' %}
+          <span class="badge badge-danger m-0">{% translate 'Failed' %}</span>
+          {% elif order.status == '3' %}
+          <span class="badge badge-info m-0">{% translate 'Processing' %}</span>
+          {% elif order.status == '4' %}
+          <span class="badge badge-accent">{% translate 'Shipped' %}</span>
+          {% elif order.status == '5' %}
+          <span class="badge badge-success m-0">{% translate 'Completed' %}</span>
+          {% elif order.status == '6' %}
+          <span class="badge badge-warning m-0">{% translate 'Delayed' %}</span>
+          {% elif order.status == '7' %}
+          <span class="badge badge-danger m-0">{% translate 'Canceled' %}</span>
+          {% elif order.status == '8' %}
+          <span class="badge badge-secondary m-0">{% translate 'Refunded' %}</span>
+          {% endif %}
+        </td>
+        <td class="py-3">
+          {% with order_total_cost=order.total_cost|decimal_fractional_currency:user_currency.0 %}
+            {{ user_currency.1 }}{{ order_total_cost.0 }}.<small>{{ order_total_cost.1 }}</small>
+          {% endwith %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="text-center" colspan="4">{% translate 'You have no orders yet!' %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<hr class="pb-4">
+
+{% include 'main/pagination.html' %}
+
+{% endblock account_content %}

@@ -1,0 +1,192 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% translate 'Shop' %}{% endblock title %}
+
+
+{% block content %}
+
+{# Page Title (Light) #}
+<div class="bg-secondary py-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item">
+            <a class="text-nowrap" href="{% url 'main:index' %}">
+              <i class="czi-home"></i>{% translate 'Home' %}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Shop' %}</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h3 mb-0">{% translate 'Shop' %}</h1>
+    </div>
+  </div>
+</div>
+
+{# Page Content #}
+<div class="container pb-4 pb-sm-5">
+  {# Categories grid #}
+  <div class="row pt-5">
+    {# Comics #}
+    <div class="col-md-4 col-sm-6 mb-3">
+      <div class="card border-0">
+        <a class="d-block overflow-hidden rounded-lg" href="{% url 'products:comics' %}">
+          <img class="d-block w-100" src="{% static 'img/shop/comics.jpg' %}" alt="{% translate 'Comics' %}">
+        </a>
+        <div class="card-body">
+          <h2 class="h5">{% translate 'Comics' %}</h2>
+          <ul class="list-unstyled font-size-sm mb-0">
+            {% for category in comicbook_categories  %}
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:comics' %}?min_price=0&max_price={% if user_currency.0 == 'BYN' %}300{% elif user_currency.0 == 'USD' %}100{% elif user_currency.0 == 'EUR' %}100{% elif user_currency.0 == 'RUB' %}5000{% endif %}&categories={{ category.0 }}">
+                <i class="czi-arrow-right-circle mr-2"></i>{{ category.1 }}
+              </a>
+              <span class="font-size-ms text-muted">{{ category.2 }}</span>
+            </li>
+            {% endfor %}
+            <li><hr></li>
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:comics' %}">
+                <i class="czi-arrow-right-circle mr-2"></i>{% translate 'View all' %}
+              </a>
+              <span class="font-size-ms text-muted">{{ comics_count }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {# Toys #}
+    <div class="col-md-4 col-sm-6 mb-3">
+      <div class="card border-0">
+        <a class="d-block overflow-hidden rounded-lg" href="{% url 'products:toys' %}">
+          <img class="d-block w-100" src="{% static 'img/shop/toys.jpg' %}" alt="{% translate 'Toys' %}">
+        </a>
+        <div class="card-body">
+          <h2 class="h5">{% translate 'Toys' %}</h2>
+          <ul class="list-unstyled font-size-sm mb-0">
+            {% for category in toy_categories  %}
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:toys' %}?min_price=0&max_price={% if user_currency.0 == 'BYN' %}300{% elif user_currency.0 == 'USD' %}100{% elif user_currency.0 == 'EUR' %}100{% elif user_currency.0 == 'RUB' %}5000{% endif %}&categories={{ category.0 }}">
+                <i class="czi-arrow-right-circle mr-2"></i>{{ category.1 }}
+              </a>
+              <span class="font-size-ms text-muted">{{ category.2 }}</span>
+            </li>
+            {% endfor %}
+            <li><hr></li>
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:toys' %}">
+                <i class="czi-arrow-right-circle mr-2"></i>{% translate 'View all' %}
+              </a>
+              <span class="font-size-ms text-muted">{{ toys_count }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {# Clothes #}
+    <div class="col-md-4 col-sm-6 mb-3">
+      <div class="card border-0">
+        <a class="d-block overflow-hidden rounded-lg" href="{% url 'products:clothes' %}">
+          <img class="d-block w-100" src="{% static 'img/shop/clothes.jpg' %}" alt="{% translate 'Clothes' %}">
+        </a>
+        <div class="card-body">
+          <h2 class="h5">{% translate 'Clothes' %}</h2>
+          <ul class="list-unstyled font-size-sm mb-0">
+            {% for category in clothes_categories  %}
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:clothes' %}?min_price=0&max_price={% if user_currency.0 == 'BYN' %}300{% elif user_currency.0 == 'USD' %}100{% elif user_currency.0 == 'EUR' %}100{% elif user_currency.0 == 'RUB' %}5000{% endif %}&categories={{ category.0 }}">
+                <i class="czi-arrow-right-circle mr-2"></i>{{ category.1 }}
+              </a>
+              <span class="font-size-ms text-muted">{{ category.2 }}</span>
+            </li>
+            {% endfor %}
+            <li><hr></li>
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:clothes' %}">
+                <i class="czi-arrow-right-circle mr-2"></i>{% translate 'View all' %}
+              </a>
+              <span class="font-size-ms text-muted">{{ clothes_count }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {# Accessories #}
+    <div class="col-md-4 col-sm-6 mb-3">
+      <div class="card border-0">
+        <a class="d-block overflow-hidden rounded-lg" href="{% url 'products:accessories' %}">
+          <img class="d-block w-100" src="{% static 'img/shop/accessories.jpg' %}" alt="{% translate 'Accessories' %}">
+        </a>
+        <div class="card-body">
+          <h2 class="h5">{% translate 'Accessories' %}</h2>
+          <ul class="list-unstyled font-size-sm mb-0">
+            {% for category in accessory_categories  %}
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:accessories' %}?min_price=0&max_price={% if user_currency.0 == 'BYN' %}300{% elif user_currency.0 == 'USD' %}100{% elif user_currency.0 == 'EUR' %}100{% elif user_currency.0 == 'RUB' %}5000{% endif %}&categories={{ category.0 }}">
+                <i class="czi-arrow-right-circle mr-2"></i>{{ category.1 }}
+              </a>
+              <span class="font-size-ms text-muted">{{ category.2 }}</span>
+            </li>
+            {% endfor %}
+            <li><hr></li>
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:accessories' %}">
+                <i class="czi-arrow-right-circle mr-2"></i>{% translate 'View all' %}
+              </a>
+              <span class="font-size-ms text-muted">{{ accessories_count }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {# Home Decor #}
+    <div class="col-md-4 col-sm-6 mb-3">
+      <div class="card border-0">
+        <a class="d-block overflow-hidden rounded-lg" href="{% url 'products:home_decor' %}">
+          <img class="d-block w-100" src="{% static 'img/shop/home_decor.jpg' %}" alt="{% translate 'Home Decor' %}">
+        </a>
+        <div class="card-body">
+          <h2 class="h5">{% translate 'Home Decor' %}</h2>
+          <ul class="list-unstyled font-size-sm mb-0">
+            {% for category in homedecor_categories  %}
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:home_decor' %}?min_price=0&max_price={% if user_currency.0 == 'BYN' %}300{% elif user_currency.0 == 'USD' %}100{% elif user_currency.0 == 'EUR' %}100{% elif user_currency.0 == 'RUB' %}5000{% endif %}&categories={{ category.0 }}">
+                <i class="czi-arrow-right-circle mr-2"></i>{{ category.1 }}
+              </a>
+              <span class="font-size-ms text-muted">{{ category.2 }}</span>
+            </li>
+            {% endfor %}
+            <li><hr></li>
+            <li class="d-flex align-items-center justify-content-between">
+              <a class="nav-link-style" href="{% url 'products:home_decor' %}">
+                <i class="czi-arrow-right-circle mr-2"></i>{% translate 'View all' %}
+              </a>
+              <span class="font-size-ms text-muted">{{ home_decor_count }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# Popular brands #}
+  <h2 class="h3 text-center py-4 mt-md-3">{% translate 'Brands' %}</h2>
+  <div class="row">
+    {% for manufacturer in manufacturers %}
+    <div class="col-md-3 col-sm-4 col-6">
+      <a class="d-block bg-white box-shadow-sm rounded-lg py-3 py-sm-4 mb-grid-gutter" href="{{ manufacturer.get_absolute_url }}">
+        <img class="d-block mx-auto" src="{{ manufacturer.logo.url }}" style="width: 150px;" alt="{{ manufacturer.name }}">
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

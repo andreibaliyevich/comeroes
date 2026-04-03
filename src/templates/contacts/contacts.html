@@ -1,0 +1,234 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+
+
+{% block meta_description %}{{ main_store.translated_meta_description }}{% endblock meta_description %}
+{% block meta_keywords %}{{ main_store.translated_meta_keywords }}{% endblock meta_keywords %}
+
+{% block title %}{% translate 'Contacts' %}{% endblock title %}
+
+
+{% block stylesheet %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+{% endblock stylesheet %}
+
+
+{% block content %}
+
+{# Page Title (Light) #}
+<div class="bg-secondary py-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item">
+            <a class="text-nowrap" href="{% url 'main:index' %}">
+              <i class="czi-home"></i>{% translate 'Home' %}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-nowrap active" aria-current="page">{% translate 'Contacts' %}</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h3 mb-0">{% translate 'Contacts' %}</h1>
+    </div>
+  </div>
+</div>
+
+{# Contact detail #}
+<section class="container-fluid pt-grid-gutter">
+  <div class="row">
+    <div class="col-xl-3 col-md-6 mb-grid-gutter">
+      <a class="card" href="#map" data-scroll>
+        <div class="card-body text-center">
+          <i class="czi-location h3 mt-2 mb-4 text-primary"></i>
+          <h3 class="h6 mb-2">{% translate 'Main store address' %}</h3>
+          <p class="font-size-sm text-muted">
+            {{ main_store.translated_address }}
+          </p>
+          <div class="font-size-sm text-primary">
+            {% translate 'Click to see map' %}
+            <i class="czi-arrow-right align-middle ml-1"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-grid-gutter">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="czi-time h3 mt-2 mb-4 text-primary"></i>
+          <h3 class="h6 mb-3">{% translate 'Working hours' %}</h3>
+          <ul class="list-unstyled font-size-sm text-muted mb-0">
+            <li>
+              {% translate 'Mon' %} - {% translate 'Fri' %}:
+              {{ main_store.time_weekdays_start|time:"TIME_FORMAT" }} -
+              {{ main_store.time_weekdays_end|time:"TIME_FORMAT" }}
+            </li>
+            <li class="mb-0">
+              {% translate 'Sat' %} - {% translate 'Sun' %}:
+              {{ main_store.time_weekend_start|time:"TIME_FORMAT" }} -
+              {{ main_store.time_weekend_end|time:"TIME_FORMAT" }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-grid-gutter">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="czi-phone h3 mt-2 mb-4 text-primary"></i>
+          <h3 class="h6 mb-3">{% translate 'Phone numbers' %}</h3>
+          <ul class="list-unstyled font-size-sm mb-0">
+            <li>
+              <span class="text-muted mr-1">{% translate 'For customers' %}:</span>
+              <a class="nav-link-style" href="tel:{{ main_store.customers_phone }}">{{ main_store.customers_phone }}</a>
+            </li>
+            <li class="mb-0">
+              <span class="text-muted mr-1">{% translate 'Tech support' %}:</span>
+              <a class="nav-link-style" href="tel:{{ main_store.support_phone }}">{{ main_store.support_phone }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-grid-gutter">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="czi-mail h3 mt-2 mb-4 text-primary"></i>
+          <h3 class="h6 mb-3">{% translate 'Email addresses' %}</h3>
+          <ul class="list-unstyled font-size-sm mb-0">
+            <li>
+              <span class="text-muted mr-1">{% translate 'For customers' %}:</span>
+              <a class="nav-link-style" href="mailto:{{ main_store.customers_email }}">{{ main_store.customers_email }}</a>
+            </li>
+            <li class="mb-0">
+              <span class="text-muted mr-1">{% translate 'Tech support' %}:</span>
+              <a class="nav-link-style" href="mailto:{{ main_store.support_email }}">{{ main_store.support_email }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Outlet stores #}
+<section class="container pt-4 mt-md-4 mb-5">
+  <h2 class="h3 text-center mb-3">{% translate 'Our Stores' %}</h2>
+  <div class="row pt-4">
+    {% for store in other_stores %}
+    <div class="col-lg-4 col-sm-6 mb-grid-gutter">
+      <div class="card border-0 box-shadow">
+        <a href="{% url 'contacts:store_detail' store.id %}">
+          <img class="card-img-top" src="{{ store.main_image.url }}">
+        </a>
+        <div class="card-body">
+          <h6>
+            {% for city in СITIES %}
+            {% if city.0 == store.city %}
+            {{ city.1 }}
+            {% endif %}
+            {% endfor %}
+          </h6>
+          <ul class="list-unstyled mb-0">
+            <li class="media pb-3 border-bottom">
+              <i class="czi-location font-size-lg mt-2 mb-0 text-primary"></i>
+              <div class="media-body pl-3">
+                <span class="font-size-ms text-muted">{% translate 'Find us' %}</span>
+                <a class="d-block text-heading font-size-sm" href="{% url 'contacts:store_detail' store.id %}#map">
+                  {{ store.translated_address }}
+                </a>
+              </div>
+            </li>
+            <li class="media pt-2 pb-3 border-bottom">
+              <i class="czi-phone font-size-lg mt-2 mb-0 text-primary"></i>
+              <div class="media-body pl-3">
+                <span class="font-size-ms text-muted">{% translate 'Call us' %}</span>
+                <a class="d-block text-heading font-size-sm" href="tel:{{ store.customers_phone }}">{{ store.customers_phone }}</a>
+              </div>
+            </li>
+            <li class="media pt-2">
+              <i class="czi-mail font-size-lg mt-2 mb-0 text-primary"></i>
+              <div class="media-body pl-3">
+                <span class="font-size-ms text-muted">{% translate 'Write us' %}</span>
+                <a class="d-block text-heading font-size-sm" href="mailto:{{ store.customers_email }}">{{ store.customers_email }}</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{# Map + Contact form #}
+<div class="container-fluid px-0">
+  <div class="row no-gutters">
+    <div class="col-lg-6">
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+      <div id="map" style="height: 600px;"></div>
+
+      <script>
+        const latitude = parseFloat("{{ main_store.location.y }}".replace(",","."));
+        const longitude = parseFloat("{{ main_store.location.x }}".replace(",","."));
+
+        var map = L.map('map').setView([latitude, longitude], 15);
+        var marker = L.marker([latitude, longitude]).addTo(map)
+          .bindPopup("{{ main_store.translated_address }}")
+          .openPopup();
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+      </script>
+    </div>
+    <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
+      <h2 class="h4 mb-4">{% translate 'Drop us a line' %}</h2>
+      <form class="needs-validation mb-3" method="post" action="{% url 'contacts:contacts' %}" novalidate>
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cf-name">{% translate 'Your name' %}:&nbsp;<span class="text-danger">*</span></label>
+              <input type="text" name="name" maxlength="250" class="form-control" placeholder="{% translate 'Name' %}" title="" required="" id="id_name">
+              <div class="invalid-feedback">{% translate 'Please fill in you name!' %}</div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cf-email">{% translate 'Your Email' %}:&nbsp;<span class="text-danger">*</span></label>
+              <input type="email" name="email" maxlength="254" class="form-control" placeholder="{% translate 'Email' %}" title="" required="" id="id_email">
+              <div class="invalid-feedback">{% translate 'Please provide valid email address!' %}</div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cf-phone">{% translate 'Your phone' %}:&nbsp;<span class="text-danger">*</span></label>
+              <input type="text" name="phone" maxlength="21" class="form-control" placeholder="{% translate 'Phone' %}" title="" required="" id="id_phone">
+              <div class="invalid-feedback">{% translate 'Please provide valid phone number!' %}</div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cf-subject">{% translate 'Subject' %}:</label>
+              <input type="text" name="subject" maxlength="150" class="form-control" placeholder="{% translate 'Provide short title of your request' %}" title="" id="id_subject">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cf-message">{% translate 'Message' %}:&nbsp;<span class="text-danger">*</span></label>
+          <textarea name="content" cols="40" rows="6" class="form-control" placeholder="{% translate 'Please describe in detail your request' %}" title="" required="" id="id_content"></textarea>
+          <div class="invalid-feedback">{% translate 'Please write a message!' %}</div>
+        </div>
+        <button class="btn btn-primary" type="submit">{% translate 'Send message' %}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

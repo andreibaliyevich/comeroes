@@ -1,0 +1,103 @@
+{% load i18n %}
+{% load static %}
+{% load main_extras %}
+
+
+{% for product in objects_page.object_list %}
+<div class="{{ product_class }}">
+  <div class="card product-card">
+    {% if product.old_price %}
+    <span class="badge badge-danger badge-shadow">{% translate 'Sale' %}</span>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="{% translate 'Add to wishlist' %}" data-action="wish-add" data-id="{{ product.id }}">
+      <i class="czi-heart"></i>
+    </button>
+    {% endif %}
+    <a class="card-img-top d-block overflow-hidden" href="{{ product.get_absolute_url }}">
+      <img src="{{ product.main_image.url }}" alt="{{ product.id }}">
+    </a>
+    <div class="card-body py-2">
+      <a class="product-meta d-block font-size-xs pb-1" href="{{ product.manufacturer.get_absolute_url }}">
+        {{ product.manufacturer.name }}
+      </a>
+      <h3 class="product-title font-size-sm">
+        <a href="{{ product.get_absolute_url }}">
+          {{ product.translated_name }}
+        </a>
+      </h3>
+      <div class="d-flex justify-content-between">
+        <div class="product-price">
+          <span class="text-accent">
+            {% with product_price=product.price|decimal_fractional_currency:user_currency.0 %}
+              {{ user_currency.1 }}{{ product_price.0 }}.<small>{{ product_price.1 }}</small>
+            {% endwith %}
+          </span>
+          {% if product.old_price %}
+          <del class="font-size-sm text-muted">
+            {% with product_old_price=product.old_price|decimal_fractional_currency:user_currency.0 %}
+              {{ user_currency.1 }}{{ product_old_price.0 }}.<small>{{ product_old_price.1 }}</small>
+            {% endwith %}
+          </del>
+          {% endif %}
+        </div>
+        <div class="star-rating">
+          {% if product.rating >= 4.5 %}
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          {% elif product.rating >= 3.5 %}
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star"></i>
+          {% elif product.rating >= 2.5 %}
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          {% elif product.rating >= 1.5 %}
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          {% elif product.rating >= 0.5 %}
+          <i class="sr-star czi-star-filled active"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          {% else %}
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          <i class="sr-star czi-star"></i>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="card-body card-body-hidden">
+      <button class="btn btn-primary btn-sm btn-block mb-2" type="button" data-action="cart-add" data-id="{{ product.id }}" data-url="{{ product.get_absolute_url }}">
+        <i class="czi-cart font-size-sm mr-1"></i>{% translate 'Add to Cart' %}
+      </button>
+    </div>
+  </div>
+  <hr class="d-sm-none">
+</div>
+{% empty %}
+<div class="container py-5 mb-lg-3">
+  <div class="row justify-content-center pt-lg-4 text-center">
+    <div class="col-lg-5 col-md-7 col-sm-9">
+      <img class="d-block mx-auto mb-5" src="{% static 'img/no_products.png' %}" width="340" alt="No products">
+      <h1 class="h3">{% translate 'No products' %}</h1>
+      <h3 class="h5 font-weight-normal mb-4">{% translate 'There are no products for this request!' %}</h3>
+    </div>
+  </div>
+</div>
+{% endfor %}

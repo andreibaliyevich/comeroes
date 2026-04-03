@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load main_extras %}
+
+
+<div class="navbar-tool ml-3">
+  <a id="cart-navbar-icon" class="navbar-tool-icon-box bg-secondary" href="{% url 'cart:cart_detail' %}">
+    <i class="navbar-tool-icon czi-cart"></i>
+    {% if cart_total_items %}
+    <span id="cart-navbar-label" class="navbar-tool-label">{{ cart_total_items }}</span>
+    {% endif %}
+  </a>
+  <a class="navbar-tool-text" href="{% url 'cart:cart_detail' %}">
+    <small>{% translate 'Cart' %}</small>
+    <span id="cart-navbar-total-price">
+      {{ user_currency.1 }}{{ cart_total_price.0 }}.<small>{{ cart_total_price.1 }}</small>
+    </span>
+  </a>
+</div>
